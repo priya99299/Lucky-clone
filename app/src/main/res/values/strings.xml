@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lucky Institute of Professional Study</string>
+    <string name="button_text">Submit</string>
+    <string name="Student_name">Priyanka Gehlot</string>
+    <!-- Strings used for fragments for navigation -->
+   <string name="fess">Fees Detail</string>
+</resources>
