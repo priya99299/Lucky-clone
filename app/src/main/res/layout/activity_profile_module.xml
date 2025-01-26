@@ -6,48 +6,203 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Profile_module">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+<!--        APP BAR LAYOUT FILE-->
+<!--    <include-->
+<!--        layout="@layout/activity_common_appbar"-->
+<!--        android:id="@+id/appBarLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
+<!--    Student detail-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple"
-        app:layout_constraintTop_toTopOf="parent"
-        android:outlineAmbientShadowColor="@color/black">
+        android:id="@+id/profilenav">
 
-        <RelativeLayout
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="160dp"
+            android:background="@color/purple">
+            <ImageView
+                android:id="@+id/backbtn"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/back"/>
 
-            <!-- Logo ImageView -->
+
             <androidx.cardview.widget.CardView
-                android:layout_width="87dp"
-                android:layout_height="55dp"
-                app:cardCornerRadius="1000dp">
+                android:layout_width="355dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                app:cardCornerRadius="16dp">
 
                 <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="51dp"
-                    android:layout_height="52dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="16dp"
-                    app:srcCompat="@drawable/images" />
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profile1"
+                    android:layout_marginStart="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/Student_name" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/Year" />
             </androidx.cardview.widget.CardView>
-
-            <!-- Toolbar Title -->
-
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="133dp"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="7dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/dad"/>
             <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="318dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="94dp"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Father Name :-  "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="55dp"
+                android:textSize="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/father"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"/>
+        </androidx.cardview.widget.CardView>
+<!--       Mother DEtail-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="60dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mom"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mother Name :-  "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="55dp"
+                android:textSize="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mother"
+                android:layout_marginStart="165dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"/>
+        </androidx.cardview.widget.CardView>
+<!--        Contact Detail-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="120dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/location"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address  :-  "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="55dp"
+                android:textSize="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:layout_marginStart="165dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"/>
+        </androidx.cardview.widget.CardView>
+<!--        Address Details-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="175dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/phone"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact No. :-  "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="55dp"
+                android:textSize="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/conta"
+                android:layout_marginStart="165dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"/>
+        </androidx.cardview.widget.CardView>
+<!--        Addmission Number-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginTop="230dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/profile"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student ID :-  "
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="55dp"
+                android:textSize="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/studentID"
+                android:layout_marginStart="165dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"/>
+        </androidx.cardview.widget.CardView>
 
 
-        </RelativeLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    </RelativeLayout>
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,28 @@
     <string name="app_name">Lucky Institute of Professional Study</string>
     <string name="button_text">Submit</string>
     <string name="Student_name">Priyanka Gehlot</string>
+    <string name="Log">Log-Out</string>
     <!-- Strings used for fragments for navigation -->
-   <string name="fess">Fees Detail</string>
+    <string name="fess">Fees Detail</string>
+    <string name="Year">BCA,III YEAR</string>
+    <!--    APP FEATURE NAME-->
+    <string name="Profile">Profile</string>
+    <string name="Attend">Attendence</string>
+    <string name="Notes">Notes</string>
+    <string name="fees">Fees Details</string>
+    <string name="document">Documents</string>
+    <string name="notice">Notice Board</string>
+    <string name="library">Library</string>
+    <string name="timetable">Time Table</string>
+    <string name="contact">Contact-us</string>
+    <string name="result">Result</string>
+
+    <!--    Student DEtail string-->
+    <string name="father">Dinesh Gehlot</string>
+    <string name="mother">Anju Gehlot</string>
+    <string name="address">Pal Road,Jodhpur</string>
+    <string name="conta">8824923604</string>
+    <string name="section">Sectin-A</string>
+
+    <string name="studentID">127836493</string>
 </resources>

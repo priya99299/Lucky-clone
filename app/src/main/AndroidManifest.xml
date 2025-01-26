@@ -13,6 +13,28 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
+            android:name=".TimaTable"
+            android:exported="false" />
+        <activity
+            android:name=".Contact_us"
+            android:exported="false" />
+        <activity
+            android:name=".Document"
+            android:exported="false" />
+        <activity
+            android:name=".fees_Details"
+            android:exported="false" />
+        <activity
+            android:name=".Notes"
+            android:exported="false" />
+        <activity
+            android:name=".Attendence_module"
+            android:exported="false" />
+        <activity
+            android:name=".Common"
+            android:exported="false"
+            android:theme="@style/Theme.LipsClone" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.LipsClone">
