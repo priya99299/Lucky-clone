@@ -28,14 +28,14 @@ public class dashboard extends AppCompatActivity {
 //        IEtem
         CardView profile,Stuattendence,notes,timetabl,address,documen,noticeboard;
         Button btn;
-        notes=findViewById(R.id.Notes);
+//        notes=findViewById(R.id.Notes);
         btn = findViewById(R.id.btm);
         profile = findViewById(R.id. stuProfile);
         Stuattendence =findViewById(R.id.attendence);
-        address=findViewById(R.id.contact);
-        documen=findViewById(R.id.document);
-        noticeboard=findViewById(R.id.Notice);
-        timetabl=findViewById(R.id.timeTable);
+//        address=findViewById(R.id.contact);
+//        documen=findViewById(R.id.document);
+//        noticeboard=findViewById(R.id.Notice);
+//        timetabl=findViewById(R.id.timeTable);
 
 
         // Logout button click listener
@@ -64,14 +64,14 @@ public class dashboard extends AppCompatActivity {
             }
         });
 //        Notes module
-        notes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent notes=new Intent(getApplicationContext(),Notes.class);
-                startActivity(notes);
-
-            }
-        });
+//        notes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent notes=new Intent(getApplicationContext(),Notes.class);
+//                startActivity(notes);
+//
+//            }
+//        });
 //        timeaTable
 //        timetabl.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -81,33 +81,33 @@ public class dashboard extends AppCompatActivity {
 //        });
 
 //        Contact-us
-        address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
-            }
-        });
-//        Document module
-        documen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
-            }
-        });
-//        Notice-Board
-        noticeboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
-            }
-        });
-//        Time-Table
-        timetabl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent timTable=new Intent(getApplicationContext(),TimaTable.class);
-            }
-        });
+//        address.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
+//            }
+//        });
+////        Document module
+//        documen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
+//            }
+//        });
+////        Notice-Board
+//        noticeboard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
+//            }
+//        });
+////        Time-Table
+//        timetabl.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent timTable=new Intent(getApplicationContext(),TimaTable.class);
+//            }
+//        });
 
 
 
