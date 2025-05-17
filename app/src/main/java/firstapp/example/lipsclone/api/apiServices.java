@@ -16,6 +16,6 @@ public interface apiServices {
 
 
 
-    @POST("index.php")
+    @POST("api/index.php")
     Call<AppConfigResponse> getAppConfig(@Body AppConfigRequest request);
 }

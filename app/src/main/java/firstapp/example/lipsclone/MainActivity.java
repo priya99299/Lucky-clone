@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendPhoneForVerification(String mobile) {
         // Assuming LoginRequest takes mobile number and session ID
-        LoginRequest loginRequest = new LoginRequest(mobile, "gdcol1");
+            LoginRequest loginRequest = new LoginRequest(mobile);
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         api.loginStudent(loginRequest).enqueue(new Callback<LoginReponse>() {

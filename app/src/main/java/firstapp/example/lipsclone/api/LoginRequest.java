@@ -1,32 +1,22 @@
 package firstapp.example.lipsclone.api;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginRequest {
+
+    @SerializedName("action")
+    private final String action = "api";
+
+    @SerializedName("page")
+    private final String page = "login_student";
+
+    @SerializedName("mobile")
     private String mobile;
-    private String session;
-    private String college;
 
-    // Constructor
-    public LoginRequest(String mobile, String session) {
-        this.mobile = mobile;
-        this.session = session;
-        }
-
-    // Getter and setter methods
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
+    public LoginRequest(String mobile) {
         this.mobile = mobile;
     }
 
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
-    }
+    public String getMobile() { return mobile; }
+    public void setMobile(String mobile) { this.mobile = mobile; }
 }
-
-
