@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,10 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.bumptech.glide.Glide;
+
+import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 
 public class dashboard extends AppCompatActivity {
 
@@ -25,17 +31,27 @@ public class dashboard extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-//        IEtem
+        ImageView ProfilePic;
+        TextView name,Session;
         CardView profile,Stuattendence,notes,timetabl,address,documen,noticeboard;
         Button btn;
-//        notes=findViewById(R.id.Notes);
+
+        name=findViewById(R.id.studentName);
+        Session=findViewById(R.id.Section);
+        ProfilePic=findViewById(R.id.studentImage);
+
+
         btn = findViewById(R.id.btm);
         profile = findViewById(R.id. stuProfile);
         Stuattendence =findViewById(R.id.attendence);
-//        address=findViewById(R.id.contact);
-//        documen=findViewById(R.id.document);
-//        noticeboard=findViewById(R.id.Notice);
-//        timetabl=findViewById(R.id.timeTable);
+
+
+        String Studentdetails=getIntent().getStringExtra("name");
+        String  class_name=getIntent().getStringExtra("class_name");
+        //sset ttxton dasboard
+         name.setText(Studentdetails);
+         Session.setText(class_name);
+
 
 
         // Logout button click listener
@@ -51,8 +67,8 @@ public class dashboard extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(getApplicationContext(),Profile_module.class);
-                startActivity(profileIntent);
+                Intent students=new Intent(dashboard.this,Profile_module.class);
+                startActivity(students);
             }
         });
 //        attendence module
@@ -63,51 +79,10 @@ public class dashboard extends AppCompatActivity {
                 startActivity(attedence);
             }
         });
-//        Notes module
-//        notes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent notes=new Intent(getApplicationContext(),Notes.class);
-//                startActivity(notes);
-//
-//            }
-//        });
-//        timeaTable
-//        timetabl.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent timetable= new Intent(getApplicationContext(),tim)
-//            }
-//        });
 
-//        Contact-us
-//        address.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
-//            }
-//        });
-////        Document module
-//        documen.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
-//            }
-//        });
-////        Notice-Board
-//        noticeboard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent contact=new Intent(getApplicationContext(),Contact_us.class);
-//            }
-//        });
-////        Time-Table
-//        timetabl.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent timTable=new Intent(getApplicationContext(),TimaTable.class);
-//            }
-//        });
+
+
+
 
 
 

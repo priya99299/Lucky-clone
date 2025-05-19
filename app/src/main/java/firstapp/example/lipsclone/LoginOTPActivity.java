@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import firstapp.example.lipsclone.api.LoginReponse;
 import firstapp.example.lipsclone.api.Models.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
@@ -53,10 +54,18 @@ public class LoginOTPActivity extends AppCompatActivity {
                 public void onResponse(Call<AppConfigResponse> call, Response<AppConfigResponse> response) {
                     if (response.isSuccessful() && response.body() != null && response.body().success) {
                         Toast.makeText(LoginOTPActivity.this, "OTP Verified", Toast.LENGTH_SHORT).show();
+                        // Extract name and class_name from response
+                        String name = response.body().response.name;
+                        String className = response.body().response.class_name;
+
+
+                        // Send to dashboard
                         Intent intent = new Intent(LoginOTPActivity.this, dashboard.class);
-                        intent.putExtra("mobile", mobile);
+                        intent.putExtra("name", name);
+                        intent.putExtra("class_name", className);
                         startActivity(intent);
                         finish();
+
                     } else {
                         Toast.makeText(LoginOTPActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
                     }
