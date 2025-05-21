@@ -1,11 +1,13 @@
 package firstapp.example.lipsclone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
+import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
+import firstapp.example.lipsclone.api.apiServices;
+import firstapp.example.lipsclone.api.apiclient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class dashboard extends AppCompatActivity {
 
@@ -31,62 +39,70 @@ public class dashboard extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // UI Components
         ImageView ProfilePic;
-        TextView name,Session;
-        CardView profile,Stuattendence,notes,timetabl,address,documen,noticeboard;
+        TextView name, Session;
+        CardView profile, Stuattendence;
         Button btn;
 
-        name=findViewById(R.id.studentName);
-        Session=findViewById(R.id.Section);
-        ProfilePic=findViewById(R.id.studentImage);
-
+        name = findViewById(R.id.studentName);
+        Session = findViewById(R.id.Section);
+        ProfilePic = findViewById(R.id.studentImage);
 
         btn = findViewById(R.id.btm);
-        profile = findViewById(R.id. stuProfile);
-        Stuattendence =findViewById(R.id.attendence);
+        profile = findViewById(R.id.stuProfile);
+        Stuattendence = findViewById(R.id.attendence);
 
+        // Dashboard Data from Intent
+        String Studentdetails = getIntent().getStringExtra("name");
+        String class_name = getIntent().getStringExtra("class_name");
+        String ImageUrl = getIntent().getStringExtra("image_url");
+        String fname=getIntent().getStringExtra("fname");
+        String admno=getIntent().getStringExtra("admno");
+        String   mname =getIntent().getStringExtra("mname");
+        String Fname = getIntent().getStringExtra("fname");
+        String address2=getIntent().getStringExtra("address2");
+        String mobile1=getIntent().getStringExtra("mobile1");
+        name.setText(Studentdetails);
+        Session.setText(class_name);
 
-        String Studentdetails=getIntent().getStringExtra("name");
-        String  class_name=getIntent().getStringExtra("class_name");
-        //sset ttxton dasboard
-         name.setText(Studentdetails);
-         Session.setText(class_name);
+        if (ImageUrl != null && !ImageUrl.isEmpty()) {
+            Glide.with(this).load(ImageUrl).into(ProfilePic);
+        } else {
+            ProfilePic.setImageResource(R.drawable.profile1);
+        }
 
+        btn.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
 
-
-        // Logout button click listener
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent logout = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(logout);
-            }
-        });
-
-        // Profile card click listener
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent students=new Intent(dashboard.this,Profile_module.class);
-                startActivity(students);
-            }
-        });
-//        attendence module
-        Stuattendence.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent attedence= new Intent(getApplicationContext(),Attendence_module.class);
-                startActivity(attedence);
-            }
+            Intent logout = new Intent(dashboard.this, MainActivity.class);
+            startActivity(logout);
+            finish();
         });
 
 
+        // Profile Card Click
+        profile.setOnClickListener(v -> {
+            // Pass already available data to Profile_module
+            Intent students = new Intent(dashboard.this, Profile_module.class);
 
+            students.putExtra("name", Studentdetails);           // Already received from getIntent()
+            students.putExtra("class_name", class_name);
+            students.putExtra("image_url", ImageUrl);
 
+            // If these are available from previous API response, pass them too
+            students.putExtra("admno", admno);
+            students.putExtra("fname",fname);
+            students.putExtra("mname", mname);
+            students.putExtra("mobile1", mobile1);
+            students.putExtra("address2", address2);
 
-
-
+            startActivity(students);
+        });
 
     }
-
 }

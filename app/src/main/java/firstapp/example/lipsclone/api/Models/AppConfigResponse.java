@@ -5,8 +5,9 @@ public class AppConfigResponse {
     public boolean error;
     public String name;
     public String class_name;
-    public String pic;
+
     public ResponseData response;
+
 
     public class ResponseData {
         public String otp;
@@ -15,5 +16,11 @@ public class AppConfigResponse {
         public String college;
         public String name;
         public String class_name;
+        public String pic;
+        public String admno;
+        public String fname;
+        public String  mname;
+        public String mobile1;
+        public String   address2;
     }
 }

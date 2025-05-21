@@ -1,6 +1,7 @@
 package firstapp.example.lipsclone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -57,12 +58,38 @@ public class LoginOTPActivity extends AppCompatActivity {
                         // Extract name and class_name from response
                         String name = response.body().response.name;
                         String className = response.body().response.class_name;
+                        String imageUrl=response.body().response.pic;
+                        String StudentAdmissionno=response.body().response.admno;
+                        String fname=response.body().response.fname;
+                        String mname=response.body().response.mname;
+                        String mobile1=response.body().response.mobile1;
+                        String address2 =response.body().response.address2;
 
+                        // Save data in SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("name", name);
+                        editor.putString("class_name", className);
+                        editor.putString("image_url", imageUrl);
+                        editor.putString("admno", StudentAdmissionno);
+                        editor.putString("fname", fname);
+                        editor.putString("mname", mname);
+                        editor.putString("mobile1", mobile1);
+                        editor.putString("address2", address2);
+
+                        editor.apply();
                         // Send to dashboard
                         Intent intent = new Intent(LoginOTPActivity.this, dashboard.class);
                         intent.putExtra("name", name);
                         intent.putExtra("class_name", className);
+                        intent.putExtra("image_url", imageUrl);
+                        intent.putExtra("admno",StudentAdmissionno);
+                        intent.putExtra("fname",fname);
+                        intent.putExtra("mname",mname);
+                        intent.putExtra("mobile1",mobile1);
+                        intent.putExtra("address2",address2);
                         startActivity(intent);
                         finish();
 
