@@ -32,4 +32,13 @@
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
     <string name="Attend"> Attendence</string>
+
+    <string name="documents">Documents</string>
+    <string name="note_title">Note Title</string> <!-- Placeholder, replace with dynamic data -->
+    <string name="back">Back</string>
+    <string name="visibility">Visibility</string>
+
+    <string name="document_title">Document Title</string>
+    <string name="document_content_placeholder">Document content goes here...</string>
+
 </resources>

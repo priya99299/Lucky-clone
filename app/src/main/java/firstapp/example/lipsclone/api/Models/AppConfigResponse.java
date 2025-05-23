@@ -1,5 +1,7 @@
 package firstapp.example.lipsclone.api.Models;
 
+import java.util.List;
+
 public class AppConfigResponse {
     public boolean success;
     public boolean error;
@@ -7,6 +9,8 @@ public class AppConfigResponse {
     public String class_name;
 
     public ResponseData response;
+    public String file;
+    public String docname;
 
 
     public class ResponseData {
@@ -22,5 +26,8 @@ public class AppConfigResponse {
         public String  mname;
         public String mobile1;
         public String   address2;
+        public String file;
+        public String docname;
+
     }
 }

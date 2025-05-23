@@ -22,6 +22,7 @@
         app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
         app:titleTextColor="@color/white" />
 
+
     <!-- Compact CardView for Details -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/profile_card"

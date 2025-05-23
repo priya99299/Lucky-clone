@@ -18,7 +18,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
+import firstapp.example.lipsclone.api.Models.DocumentModel;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import firstapp.example.lipsclone.api.apiServices;
 import firstapp.example.lipsclone.api.apiclient;
@@ -43,9 +46,10 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence;
+        CardView profile, Stuattendence,document;
         Button btn;
 
+        document=findViewById(R.id.document);
         name = findViewById(R.id.studentName);
         Session = findViewById(R.id.Section);
         ProfilePic = findViewById(R.id.studentImage);
@@ -64,6 +68,14 @@ public class dashboard extends AppCompatActivity {
         String Fname = getIntent().getStringExtra("fname");
         String address2=getIntent().getStringExtra("address2");
         String mobile1=getIntent().getStringExtra("mobile1");
+        String studentId = getIntent().getStringExtra("s_id");
+        String sessionId = getIntent().getStringExtra("session");
+        String collegeId = getIntent().getStringExtra("college");
+
+        ;  // Pass this from dashboard
+
+
+
         name.setText(Studentdetails);
         Session.setText(class_name);
 
@@ -83,6 +95,14 @@ public class dashboard extends AppCompatActivity {
             startActivity(logout);
             finish();
         });
+        document.setOnClickListener(v -> {
+            Intent intent = new Intent(dashboard.this, Document.class);
+            intent.putExtra("s_id", studentId);
+            intent.putExtra("session", sessionId);
+            intent.putExtra("college", collegeId);
+            startActivity(intent);
+        });
+
 
 
         // Profile Card Click
@@ -100,6 +120,7 @@ public class dashboard extends AppCompatActivity {
             students.putExtra("mname", mname);
             students.putExtra("mobile1", mobile1);
             students.putExtra("address2", address2);
+
 
             startActivity(students);
         });

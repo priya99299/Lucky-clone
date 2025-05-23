@@ -64,6 +64,9 @@ public class LoginOTPActivity extends AppCompatActivity {
                         String mname=response.body().response.mname;
                         String mobile1=response.body().response.mobile1;
                         String address2 =response.body().response.address2;
+                        String file = response.body().response.file;
+                        String filename=response.body().response.docname;
+
 
                         // Save data in SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
@@ -90,6 +93,12 @@ public class LoginOTPActivity extends AppCompatActivity {
                         intent.putExtra("mname",mname);
                         intent.putExtra("mobile1",mobile1);
                         intent.putExtra("address2",address2);
+                        intent.putExtra("file", file);
+                        intent.putExtra("docname", filename);
+                        intent.putExtra("s_id", s_id);        // <-- add this
+                        intent.putExtra("session", session);  // <-- add this
+                        intent.putExtra("college", college);
+
                         startActivity(intent);
                         finish();
 
