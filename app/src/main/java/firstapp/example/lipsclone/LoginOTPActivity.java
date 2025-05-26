@@ -94,7 +94,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                         intent.putExtra("mobile1",mobile1);
                         intent.putExtra("address2",address2);
                         intent.putExtra("file", file);
-                        intent.putExtra("docname", filename);
+                        intent.putExtra("filename", filename);
                         intent.putExtra("s_id", s_id);        // <-- add this
                         intent.putExtra("session", session);  // <-- add this
                         intent.putExtra("college", college);
