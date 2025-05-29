@@ -38,6 +38,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
     public void onBindViewHolder(@NonNull DocumentViewHolder holder, int position) {
         DocumentModel document = documentList.get(position);
         holder.documentTitle.setText(document.getDocname());
+        holder.documentType.setText(document.getType());
+        holder.documentStatus.setText( document.getStatus());
 
         holder.showDocumentButton.setOnClickListener(v -> {
             String fileUrl = document.getFile();
@@ -54,12 +56,14 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
     }
 
     public static class DocumentViewHolder extends RecyclerView.ViewHolder {
-        TextView documentTitle;
+        TextView documentTitle,documentType,documentStatus;
         ImageButton showDocumentButton;
 
         public DocumentViewHolder(@NonNull View itemView) {
             super(itemView);
             documentTitle = itemView.findViewById(R.id.documentTitle);
+            documentType = itemView.findViewById(R.id.documentType);
+            documentStatus = itemView.findViewById(R.id.statusTextView);
             showDocumentButton = itemView.findViewById(R.id.showDocumentButton);
         }
     }
