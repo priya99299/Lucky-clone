@@ -1,10 +1,11 @@
-<!-- ek baar phir se for reference -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -13,73 +14,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/backbtn"-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:src="@drawable/back"-->
-<!--            android:padding="12dp"-->
-<!--           -->
-<!--            android:background="?attr/selectableItemBackgroundBorderless" />-->
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Documents"
+            android:text="Document Details"
             android:textSize="20sp"
-            android:textColor="@color/white"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginStart="16dp" />
+            android:textColor="@android:color/white"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-medium" />
     </androidx.appcompat.widget.Toolbar>
-    <TextView
-        android:id="@+id/apiResponseTextView"
 
-        android:layout_width="match_parent"
+    <!-- Rounded Card Info Message -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/infoCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-
-        android:textSize="16sp"
-        android:textColor="#000000"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="6dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"/>
-    <TextView
-        android:id="@+id/Session"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:textSize="16sp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-<!--    <TextView-->
-<!--        android:id="@+id/"-->
+        app:layout_constraintEnd_toEndOf="parent">
 
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Download a scan copy of all your deposited document(s) to college campus at time of admission."
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif" />
+    </androidx.cardview.widget.CardView>
 
-<!--        android:textSize="16sp"-->
-<!--        android:textColor="#000000"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/toolbar"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
-
-
-    <!--    <ListView-->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/infoCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
