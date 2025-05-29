@@ -3,6 +3,7 @@ package firstapp.example.lipsclone;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,9 +80,12 @@ public class dashboard extends AppCompatActivity {
 //        String filename=getIntent().getStringExtra("filename");
 //        String file =getIntent().getStringExtra("file");
 
-        ;  // Pass this from dashboard
-
-
+        ;
+//        StudentDocument request = new StudentDocument("api", "student_document", s_id, sessionId, college);
+//        // Convert to JSON and log it
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        String jsonPayload = gson.toJson(request);
+//        Log.d("API_PAYLOAD", jsonPayload);
 
         name.setText(Studentdetails);
         Session.setText(class_name);
@@ -101,15 +107,13 @@ public class dashboard extends AppCompatActivity {
             finish();
         });
         document.setOnClickListener(v -> {
-            Intent intent = new Intent(dashboard.this, Document.class);
-//            intent.putExtra("file", file);
-//            intent.putExtra("filename", filename);
+
+                Intent intent = new Intent(dashboard.this, Document.class);
+
+            intent.putExtra("s_id", studentId);
+            intent.putExtra("session", sessionId);
             startActivity(intent);
-        });
-
-
-
-
+            });
 
 
         // Profile Card Click
@@ -121,7 +125,7 @@ public class dashboard extends AppCompatActivity {
             students.putExtra("class_name", class_name);
             students.putExtra("image_url", ImageUrl);
 
-            // If these are available from previous API response, pass them too
+
             students.putExtra("admno", admno);
             students.putExtra("fname",fname);
             students.putExtra("mname", mname);

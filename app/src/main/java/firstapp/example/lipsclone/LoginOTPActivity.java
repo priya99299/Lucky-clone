@@ -56,6 +56,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null && response.body().success) {
                         Toast.makeText(LoginOTPActivity.this, "OTP Verified", Toast.LENGTH_SHORT).show();
                         // Extract name and class_name from response
+                        String s_id=response.body().response.s_id;
                         String name = response.body().response.name;
                         String className = response.body().response.class_name;
                         String imageUrl=response.body().response.pic;
@@ -66,6 +67,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                         String address2 =response.body().response.address2;
                         String file = response.body().response.file;
                         String filename=response.body().response.docname;
+                        String session=response.body().response.session;
 
 
                         // Save data in SharedPreferences

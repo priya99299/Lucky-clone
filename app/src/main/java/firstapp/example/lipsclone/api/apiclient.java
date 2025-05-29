@@ -12,9 +12,13 @@ public class apiclient {
     private static Retrofit retrofit=null;
 
     public static Retrofit getClient() {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // BODY level logs request/response body
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
+
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl("https://erp.luckyinstitute.org/")

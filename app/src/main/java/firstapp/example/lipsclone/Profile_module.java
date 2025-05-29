@@ -39,7 +39,7 @@ public class Profile_module extends AppCompatActivity {
         // Get Intent Data
         String Studentdetails = getIntent().getStringExtra("name");
         String admisionno = getIntent().getStringExtra("admno");
-        String Section = getIntent().getStringExtra("class_name"); // ✅ correct key
+        String Section = getIntent().getStringExtra("class_name");
         String fname1 = getIntent().getStringExtra("fname");
         String Mothername = getIntent().getStringExtra("mname");
         String Mobile = getIntent().getStringExtra("mobile1");

@@ -1,14 +1,22 @@
 package firstapp.example.lipsclone;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import firstapp.example.lipsclone.adapters.DocumentAdapter;
 import firstapp.example.lipsclone.api.Models.DocumentModel;
+import firstapp.example.lipsclone.api.Models.StudentDocument;
 import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
 import firstapp.example.lipsclone.api.apiServices;
 import firstapp.example.lipsclone.api.apiclient;
@@ -18,65 +26,85 @@ import retrofit2.Response;
 
 public class Document extends AppCompatActivity {
 
-    ListView listView;
+    private static final String TAG = "DocumentActivity";
+
+    private TextView studentIdText, session1;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Add this to catch any uncaught exceptions anywhere in this thread (main UI thread)
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable e) {
+                Log.e(TAG, "Uncaught exception: ", e);
+            }
+        });
+
+        Log.d(TAG, "onCreate started");
         setContentView(R.layout.activity_document);
 
-        listView = findViewById(R.id.documentsListView);
+//        studentIdText = findViewById(R.id.apiResponseTextView);
+//        session1 = findViewById(R.id.Session);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        String s_id = getIntent().getStringExtra("s_id");
+        String sessionId = getIntent().getStringExtra("session");
+        String college = "gdcol1";
+
+        Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId);
+
+//        studentIdText.setText("Student ID: " + s_id);
+//        session1.setText("Session: " + sessionId);
+
+        StudentDocument request = new StudentDocument("api", "student_document", s_id, sessionId, college);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String requestJson = gson.toJson(request);
+        Log.d(TAG, "Request JSON: " + requestJson);
 
         apiServices api = apiclient.getClient().create(apiServices.class);
-
-        Call<StudentDocumentResponse> call = api.getDocuments(
-                "api",
-                "student_document",
-                "5552",
-                "2024_25",
-                "gdcol1"
-        );
-
+        Call<StudentDocumentResponse> call = api.getDocuments(request);
 
         call.enqueue(new Callback<StudentDocumentResponse>() {
             @Override
             public void onResponse(Call<StudentDocumentResponse> call, Response<StudentDocumentResponse> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
-                        Log.e("API_ERROR", "Code: " + response.code() + ", Error Body: " + errorBody);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return;
-                }
-
                 try {
-                    // Log raw JSON response as string before parsing
-                    String rawJson = response.raw().toString();  // Not the best, use response.body() with converter disabled
-                    Log.d("API_RESPONSE_RAW", rawJson);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    if (response.isSuccessful() && response.body() != null) {
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        String jsonResponse = gson.toJson(response.body());
+                        Log.d(TAG, jsonResponse);
 
-                StudentDocumentResponse docResponse = response.body();
-                if (docResponse != null && docResponse.isSuccess() && !docResponse.isError()) {
-                    List<DocumentModel> documents = docResponse.getResponse();
-                    if (documents != null && !documents.isEmpty()) {
-                        DocumentsAdapter adapter = new DocumentsAdapter(Document.this, documents);
-                        listView.setAdapter(adapter);
+                        List<DocumentModel> documents = response.body().getResponse();
+                        Log.d(TAG, "Documents count: " + documents.size());
+
+                        for (DocumentModel doc : documents) {
+                            Log.d(TAG, "DocName: " + doc.getDocname() + ", FileURL: " + doc.getFile());
+                        }
+
+                        DocumentAdapter adapter = new DocumentAdapter(documents, Document.this);
+                        recyclerView.setAdapter(adapter);
                     } else {
-                        Log.e("API_ERROR", "Document list is empty");
+                        Log.e(TAG, "Request failed. Code: " + response.code());
+                        if (response.errorBody() != null) {
+                            Log.e(TAG, "Error body: " + response.errorBody().string());
+                        }
                     }
-                } else {
-                    Log.e("API_ERROR", "API returned success=false or error=true");
+                } catch (Exception e) {
+                    Log.e(TAG, "Exception in onResponse: " + e.getMessage(), e);
                 }
             }
 
             @Override
             public void onFailure(Call<StudentDocumentResponse> call, Throwable t) {
-                Log.e("API_FAIL", "Error: " + t.getMessage());
+                Log.e(TAG, "Network failure or error: " + t.getMessage(), t);
             }
         });
+
+
+        Log.d(TAG, "onCreate finished");
     }
 }

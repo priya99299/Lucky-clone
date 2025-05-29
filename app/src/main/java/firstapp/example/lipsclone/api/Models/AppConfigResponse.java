@@ -18,6 +18,7 @@ public class AppConfigResponse {
         public String msg;
         public String session;
         public String college;
+        public String s_id;
         public String name;
         public String class_name;
         public String pic;

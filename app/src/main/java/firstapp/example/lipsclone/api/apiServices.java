@@ -8,6 +8,8 @@ import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -22,14 +24,11 @@ public interface apiServices {
 
     @POST("api/index.php")
     Call<AppConfigResponse> verifyStudent(@Body StudentVerifyRequest request);
-    @GET("api/index.php")
-    Call<StudentDocumentResponse> getDocuments(
-            @Query("action") String action,
-            @Query("page") String page,
-            @Query("s_id") String studentId,
-            @Query("session") String session,
-            @Query("college") String college
-    );
+    @POST("api/index.php")
+    Call<StudentDocumentResponse> getDocuments(@Body StudentDocument request);
+
+
+
 
 
 
