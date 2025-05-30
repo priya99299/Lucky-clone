@@ -10,72 +10,111 @@
     android:background="@android:color/white"
     android:elevation="4dp"
     android:padding="12dp">
-
-    <!-- Document Name -->
-    <TextView
-        android:id="@+id/documentTitle"
-        android:layout_width="0dp"
+    <!-- Header Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Document Name"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#1A1A1A"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/documentType"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.35" />
+        android:orientation="horizontal"
+        android:background="#3F51B5"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
 
-    <!-- Document Type -->
-    <TextView
-        android:id="@+id/documentType"
-        android:layout_width="0dp"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:text="NAME"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="TYPE"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="STATUS"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium" />
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE" />
+
+    <!-- Data Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type"
-        android:textSize="14sp"
-        android:textColor="#666666"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:fontFamily="sans-serif"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/documentTitle"
-        app:layout_constraintEnd_toStartOf="@id/statusTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.20" />
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
 
-    <!-- Document Status -->
-    <TextView
-        android:id="@+id/statusTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Status"
-        android:textSize="14sp"
-        android:textColor="#D32F2F"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:fontFamily="sans-serif"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/documentType"
-        app:layout_constraintEnd_toStartOf="@id/showDocumentButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.20" />
+        <TextView
+            android:id="@+id/documentTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:text="Document Name"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="sans-serif-medium" />
 
-    <!-- Action Button -->
-    <ImageButton
-        android:id="@+id/showDocumentButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/visible"
-        android:contentDescription="@string/visibility"
-        android:scaleType="centerInside"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="10dp"
-        android:tint="#3F51B5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/documentType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="Type"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="Status"
+            android:textSize="10sp"
+            android:textColor="#000000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="sans-serif" />
+
+        <ImageButton
+            android:id="@+id/showDocumentButton"
+            android:layout_width="29dp"
+            android:layout_height="40dp"
+            android:src="@drawable/visible"
+            android:contentDescription="@string/visibility"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+           />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
