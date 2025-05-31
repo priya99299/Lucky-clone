@@ -52,17 +52,20 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence,document;
+        CardView profile, Stuattendence,document,notes,canteenn,feesDetails;
         Button btn;
 
         document=findViewById(R.id.document);
         name = findViewById(R.id.studentName);
         Session = findViewById(R.id.Section);
         ProfilePic = findViewById(R.id.studentImage);
+        notes =findViewById(R.id.notes);
+        canteenn=findViewById(R.id.canteen);
 
         btn = findViewById(R.id.btm);
         profile = findViewById(R.id.stuProfile);
         Stuattendence = findViewById(R.id.attendence);
+        feesDetails=findViewById(R.id.fees);
 
         // Dashboard Data from Intent
         String Studentdetails = getIntent().getStringExtra("name");
@@ -134,6 +137,28 @@ public class dashboard extends AppCompatActivity {
 
 
             startActivity(students);
+        });
+        notes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent notes = new Intent(dashboard.this,Downloads.class);
+                startActivity(notes);
+//                finish();
+            }
+        });
+        canteenn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent canteenn = new Intent(dashboard.this,Canteen.class);
+                startActivity(canteenn);
+            }
+        });
+        feesDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent feess=new Intent(dashboard.this, fees_Details.class);
+                    startActivity(feess);
+            }
         });
 
     }

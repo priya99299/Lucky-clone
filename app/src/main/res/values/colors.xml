@@ -26,5 +26,10 @@
 
     <color name="primary_dark">#303F9F</color>
 
+    <color name="background_purple">#E6E6FA</color>
+    <color name="purple_700">#6A5ACD</color>
+
+    <color name="gray_600">#666666</color>
+
 
 </resources>

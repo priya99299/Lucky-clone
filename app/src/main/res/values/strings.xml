@@ -3,11 +3,11 @@
     <string name="button_text">Submit</string>
     <string name="Student_name">Priyanka Gehlot</string>
     <string name="Year">Year</string>
-    <string name="profile_image_desc">Profile Image</string>
-    <string name="college_logo_desc">College Logo</string>
-    <string name="college_name">Lucky Inistute of Professional Study</string>
-    <string name="search_hint">Search</string>
-    <string name="timetable">Time Table</string>
+    <!--    <string name="profile_image_desc">Profile Image</string>-->
+    <!--    <string name="college_logo_desc">College Logo</string>-->
+    <!--    <string name="college_name">Lucky Inistute of Professional Study</string>-->
+    <!--    <string name="search_hint">Search</string>-->
+    <!--    <string name="timetable">Time Table</string>-->
     <string name="document">Documents</string>
     <string name="fees">Fees</string>
     <string name="Profile"> Profile</string>
@@ -40,5 +40,36 @@
 
     <string name="document_title">Document Title</string>
     <string name="document_content_placeholder">Document content goes here...</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="profile">Profile</string>
+
+    <string name="attendance">Attendance</string>
+    <string name="notes">Notes</string>
+    <string name="academic_calendar">Academic Calendar</string>
+
+    <string name="canteen">Canteen</string>
+    <string name="complaint">Complaint</string>
+    <string name="lecture_performa">Lecture Performa</string>
+    <string name="quiz">Quiz</string>
+    <string name="message_to_college">Message to College</string>
+    <string name="timetable">Time Table</string>
+    <string name="college_logo_desc">College Logo</string>
+    <string name="profile_image_desc">Profile Image</string>
+    <string name="college_name">Lucky Institute of Professional Study</string>
+
+    <string name="fees_structure">Fees</string>
+    <string name="back_button">Back</string>
+    <string name="total_fees">Total Fees</string>
+    <string name="due_date">Due Date: %s</string>
+    <string name="fee_breakdown">Fee Breakdown</string>
+    <string name="fee_name">Fee Name</string>
+    <string name="fees_due">Fees Due</string>
+    <string name="pay_in">Pay In</string>
+    <string name="pay_now">Pay Now</string>
 
 </resources>

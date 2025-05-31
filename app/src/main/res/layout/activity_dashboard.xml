@@ -17,7 +17,6 @@
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- First Row: College Logo and Name -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +26,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- College Logo -->
             <ImageView
                 android:id="@+id/college_logo"
                 android:layout_width="64dp"
@@ -37,14 +35,13 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/lips" />
 
-            <!-- College Name -->
             <TextView
                 android:id="@+id/college_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="18dp"
-                android:text="@string/college_name"
+                android:text="@string/app_name"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 android:textColor="@color/white" />
         </LinearLayout>
@@ -59,7 +56,6 @@
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/header_first_row">
 
-        <!-- Second Row: Student Details and Profile Image -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,7 +65,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- Student Details -->
             <LinearLayout
                 android:id="@+id/studentName1"
                 android:layout_width="0dp"
@@ -81,23 +76,18 @@
                     android:id="@+id/studentName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                     android:textColor="@color/blue" />
-
-
 
                 <TextView
                     android:id="@+id/Section"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="@color/blue" />
             </LinearLayout>
 
-            <!-- Profile Image -->
             <ImageView
                 android:id="@+id/studentImage"
                 android:layout_width="48dp"
@@ -159,12 +149,10 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -201,12 +189,11 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
-                    android:layout_width="95dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -242,7 +229,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -283,7 +269,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -313,7 +298,6 @@
             <!-- Attendance Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/attendence"
-
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -325,12 +309,10 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -347,7 +329,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Attendence"
+                        android:text="@string/attendance"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -355,7 +337,7 @@
 
             <!-- Notes Card -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/ask_doubt"
+                android:id="@+id/notes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -367,7 +349,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -388,7 +369,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Notes"
+                        android:text="@string/notes"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -408,7 +389,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -427,9 +407,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Academic_calendar"
+                        android:text="Academis Calender"
+                        android:textSize="10dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -449,7 +430,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -463,14 +443,14 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/result" />
+                        android:src="@drawable/timetable" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="@string/results"
+                        android:text="@string/timetable"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -490,7 +470,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -519,7 +498,7 @@
 
             <!-- Canteen Card -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/events"
+                android:id="@+id/canteen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -531,7 +510,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -552,7 +530,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="canteen"
+                        android:text="Canteen"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -572,7 +550,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -593,7 +570,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="complaint"
+                        android:text="@string/complaint"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -613,7 +590,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -632,9 +608,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="lecture_performa"
+                        android:text="@string/lecture_performa"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -654,7 +630,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -675,7 +650,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="quiz"
+                        android:text="@string/quiz"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -695,7 +670,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -716,7 +690,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="message_to_college"
+                        android:text="@string/message_to_college"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -736,7 +710,6 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-
                 app:strokeColor="@color/very_light_grey"
                 app:strokeWidth="0.5dp">
 
@@ -750,14 +723,14 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/timetable" />
+                        android:src="@drawable/result" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="@string/timetable"
+                        android:text="@string/results"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
