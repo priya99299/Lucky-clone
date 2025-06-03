@@ -3,6 +3,8 @@ package firstapp.example.lipsclone.api;
 import firstapp.example.lipsclone.api.Models.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.DocumentModel;
+import firstapp.example.lipsclone.api.Models.NoticeRequest;
+import firstapp.example.lipsclone.api.Models.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.StudentDocument;
 import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
@@ -26,6 +28,9 @@ public interface apiServices {
     Call<AppConfigResponse> verifyStudent(@Body StudentVerifyRequest request);
     @POST("api/index.php")
     Call<StudentDocumentResponse> getDocuments(@Body StudentDocument request);
+    @POST("api/index.php")
+    Call<Notice_Reponse> getNotices(@Body NoticeRequest request);
+
 
 
 

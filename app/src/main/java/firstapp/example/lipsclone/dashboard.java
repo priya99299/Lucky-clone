@@ -52,7 +52,7 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence,document,notes,canteenn,feesDetails;
+        CardView profile, Stuattendence,document,notes,canteenn,feesDetails,Notice;
         Button btn;
 
         document=findViewById(R.id.document);
@@ -61,6 +61,7 @@ public class dashboard extends AppCompatActivity {
         ProfilePic = findViewById(R.id.studentImage);
         notes =findViewById(R.id.notes);
         canteenn=findViewById(R.id.canteen);
+        Notice=findViewById(R.id.Notice);
 
         btn = findViewById(R.id.btm);
         profile = findViewById(R.id.stuProfile);
@@ -158,6 +159,13 @@ public class dashboard extends AppCompatActivity {
             public void onClick(View v) {
                     Intent feess=new Intent(dashboard.this, fees_Details.class);
                     startActivity(feess);
+            }
+        });
+        Notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent noticee=new Intent(dashboard.this,Notice_Section.class);
+                startActivity(noticee);
             }
         });
 
