@@ -8,24 +8,18 @@
     android:background="#F8FAFB"
     tools:context=".Canteen">
 
-    <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#3F51B5"
+        android:background="@color/Purple"
+        android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" College Canteen"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-medium" />
-    </androidx.appcompat.widget.Toolbar>
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:navigationIconTint="@color/white"
+        app:title="College-Canteen"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+        app:titleTextColor="@color/white" />
 
     <!-- Menu Section -->
     <androidx.core.widget.NestedScrollView
