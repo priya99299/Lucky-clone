@@ -112,7 +112,7 @@ public class dashboard extends AppCompatActivity {
         });
         document.setOnClickListener(v -> {
 
-            Intent noticee = new Intent(dashboard.this, Notice_Section.class);
+            Intent noticee = new Intent(dashboard.this, Document.class);
             noticee.putExtra("s_id", studentId);
             noticee.putExtra("session", sessionId);
             startActivity(noticee);
