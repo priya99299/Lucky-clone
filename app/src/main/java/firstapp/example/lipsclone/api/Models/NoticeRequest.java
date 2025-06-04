@@ -2,8 +2,8 @@ package firstapp.example.lipsclone.api.Models;
 
 
 public class NoticeRequest {
-    private String action;
-    private String page;
+    private String action="api";
+    private String page="student_notice";
     private String sid;
     private String session;
     private String college;

@@ -112,11 +112,10 @@ public class dashboard extends AppCompatActivity {
         });
         document.setOnClickListener(v -> {
 
-                Intent intent = new Intent(dashboard.this, Document.class);
-
-            intent.putExtra("s_id", studentId);
-            intent.putExtra("session", sessionId);
-            startActivity(intent);
+            Intent noticee = new Intent(dashboard.this, Notice_Section.class);
+            noticee.putExtra("s_id", studentId);
+            noticee.putExtra("session", sessionId);
+            startActivity(noticee);
             });
 
 
@@ -143,6 +142,8 @@ public class dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent notes = new Intent(dashboard.this,Downloads.class);
+
+
                 startActivity(notes);
 //                finish();
             }
@@ -165,6 +166,8 @@ public class dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent noticee=new Intent(dashboard.this,Notice_Section.class);
+                noticee.putExtra("s_id", studentId);
+                noticee.putExtra("session", sessionId);
                 startActivity(noticee);
             }
         });

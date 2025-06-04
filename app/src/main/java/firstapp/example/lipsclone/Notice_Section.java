@@ -1,7 +1,10 @@
 package firstapp.example.lipsclone;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +18,10 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import firstapp.example.lipsclone.api.Models.Notice;
 import firstapp.example.lipsclone.api.Models.NoticeRequest;
 import firstapp.example.lipsclone.api.Models.Notice_Reponse;
-import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
 import firstapp.example.lipsclone.api.apiServices;
 import firstapp.example.lipsclone.api.apiclient;
 import retrofit2.Call;
@@ -29,65 +29,69 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Notice_Section extends AppCompatActivity {
+
+    private static final String TAG = "NoticeSection";
     private RecyclerView recyclerView;
-//    private NoticeAdapter adapter;
-private static final String TAG = "NoticeSecFtion";
+    private Gson gson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_notice_section);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns
-//        recyclerView.setAdapter(new notice_section(item_notice_card));
+        recyclerView = findViewById(R.id.recyclerView); // <-- make sure RecyclerView exists in your layout
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        gson = new GsonBuilder().setPrettyPrinting().create();
+
+        // Intent data
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
-        String college = "gdcol1";
+        String college = getIntent().getStringExtra("college");
+        if (college == null) college = "gdcol1";
 
-        NoticeRequest request = new NoticeRequest("api", "student_notice", s_id, sessionId, "gdcol1");
+        Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college);
 
-
-
-
-        // Log payload JSON
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        NoticeRequest request = new NoticeRequest("api", "student_notice", s_id, sessionId, college);
         Log.d(TAG, "Request JSON:\n" + gson.toJson(request));
 
-        // API call
+        // API Call
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<Notice_Reponse> call = api.getNotices(request);
 
         call.enqueue(new Callback<Notice_Reponse>() {
             @Override
             public void onResponse(Call<Notice_Reponse> call, Response<Notice_Reponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    String jsonResponse = gson.toJson(response.body());
-                    Log.d(TAG, "Response JSON:\n" + jsonResponse);
-
-                    if (response.body().response != null) {
-                        for (Notice_Reponse.Notice notice : response.body().response) {
-                            Log.d(TAG, "Title: " + notice.title
-                                    + " | Date: " + notice.noticeDate
-                                    + " | Description: " + notice.description);
-                        }
-                    }
+                if (response.isSuccessful() && response.body() != null && response.body().response != null) {
+                    List<Notice_Reponse.Notice> notices = response.body().response;
+                    recyclerView.setAdapter(new NoticeAdapter(Notice_Section.this, notices));
+                    Log.d(TAG, "Response JSON:\n" + gson.toJson(response.body()));
                 } else {
-                    Log.e(TAG, "API call failed with code: " + response.code());
+                    Log.e(TAG, "API error - Code: " + response.code());
+                    try {
+                        if (response.errorBody() != null)
+                            Log.e(TAG, "Error body: " + response.errorBody().string());
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error reading errorBody", e);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Notice_Reponse> call, Throwable t) {
-                Log.e(TAG, "API call error: " + t.getMessage());
+                Log.e(TAG, "API call failure: " + t.getMessage(), t);
+                Toast.makeText(Notice_Section.this, "Failed to load notices", Toast.LENGTH_SHORT).show();
             }
         });
-   }
+    }
 }
