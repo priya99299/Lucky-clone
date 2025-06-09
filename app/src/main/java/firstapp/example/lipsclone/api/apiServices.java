@@ -3,6 +3,8 @@ package firstapp.example.lipsclone.api;
 import firstapp.example.lipsclone.api.Models.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.DocumentModel;
+import firstapp.example.lipsclone.api.Models.FeeRequest;
+import firstapp.example.lipsclone.api.Models.FeeResponse;
 import firstapp.example.lipsclone.api.Models.NoticeRequest;
 import firstapp.example.lipsclone.api.Models.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.StudentDocument;
@@ -30,6 +32,9 @@ public interface apiServices {
     Call<StudentDocumentResponse> getDocuments(@Body StudentDocument request);
     @POST("api/index.php")
     Call<Notice_Reponse> getNotices(@Body NoticeRequest request);
+    @POST("api/index.php")
+    Call<FeeResponse> getFeeDetails(@Body FeeRequest request);
+
 
 
 

@@ -1,8 +1,7 @@
 package firstapp.example.lipsclone;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -10,38 +9,103 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.gson.Gson;
+
+import firstapp.example.lipsclone.api.Models.FeeData;
+import firstapp.example.lipsclone.api.Models.FeeRequest;
+import firstapp.example.lipsclone.api.Models.FeeResponse;
+import firstapp.example.lipsclone.api.apiServices;
+import firstapp.example.lipsclone.api.apiclient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class fees_Details extends AppCompatActivity {
 
-    String[][] feeData = {
-            {"Tuition Fee", "1000.00", "500.00"},
-            {"Library Fee", "50.00", "25.00"},
-            {"Lab Fee", "75.00", "37.50"},
-            {"Activity Fee", "25.00", "12.50"}
-    };
+    private TextView totalAmountTextView, dueDateTextView;
+    private RecyclerView feeContainer;
+
+    private static final String TAG = "Fee_API";
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fees_details);
+
+        Log.d(TAG, "fees_Details Activity started");
+
+        // Toolbar setup
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        RecyclerView container = findViewById(R.id.fee_container);
-        LayoutInflater inflater = LayoutInflater.from(this);
+        // UI init
+        totalAmountTextView = findViewById(R.id.total_amount);
+        dueDateTextView = findViewById(R.id.due_date);
+        feeContainer = findViewById(R.id.fee_container);
 
-        for (String[] fee : feeData) {
-            View cardView = inflater.inflate(R.layout.item_fee, container, false);
+        gson = new Gson();
 
-            TextView name = cardView.findViewById(R.id.fee_name);
-            TextView amount = cardView.findViewById(R.id.fee_amount);
-            TextView paid = cardView.findViewById(R.id.pay_in);
+        try {
+            // Get data from intent
+            String s_id = getIntent().getStringExtra("s_id");
+            String sessionId = getIntent().getStringExtra("session");
+            String college = getIntent().getStringExtra("college");
+            String F_id = getIntent().getStringExtra("f_id");
 
-            name.setText(fee[0]);
-            amount.setText("$" + fee[1]);
-            paid.setText("$" + fee[2]);
+            if (college == null) college = "gdcol1";
 
-            container.addView(cardView);
+            // Validate intent values
+            if (s_id == null || sessionId == null || F_id == null) {
+                Log.e(TAG, "Intent data missing. s_id: " + s_id + ", session: " + sessionId + ", f_id: " + F_id);
+                return;
+            }
+
+            Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college + ", f_id: " + F_id);
+
+            // Create request
+            FeeRequest request = new FeeRequest("api","student_fee",s_id, F_id, sessionId, college);
+            Log.d(TAG, "Request Payload: " + gson.toJson(request));
+
+            // API call
+            apiServices api = apiclient.getClient().create(apiServices.class);
+            Call<FeeResponse> call = api.getFeeDetails(request);
+
+            call.enqueue(new Callback<FeeResponse>() {
+                @Override
+                public void onResponse(Call<FeeResponse> call, Response<FeeResponse> response) {
+                    Log.d(TAG, "API onResponse called");
+                    if (response.isSuccessful() && response.body() != null) {
+                        String responseJson = gson.toJson(response.body());
+                        Log.d(TAG, "Response Body: " + responseJson);
+
+                        FeeData data = response.body().getResponse();
+
+                        if (data != null) {
+                            totalAmountTextView.setText("₹" + data.getTotalDeposite());
+                            dueDateTextView.setText("Due Date: " + data.getNextDueDate());
+                            Log.d(TAG, "Data shown on UI");
+                        } else {
+                            Log.e(TAG, "FeeData in response is null");
+                        }
+                    } else {
+                        try {
+                            String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
+                            Log.e(TAG, "Response Error: " + errorBody);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error reading errorBody", e);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<FeeResponse> call, Throwable t) {
+                    Log.e(TAG, "API Failure: " + t.getMessage(), t);
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in onCreate", e);
         }
     }
 }
