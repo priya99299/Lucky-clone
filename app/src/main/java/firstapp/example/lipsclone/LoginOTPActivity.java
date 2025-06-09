@@ -70,7 +70,6 @@ public class LoginOTPActivity extends AppCompatActivity {
                         String session=response.body().response.session;
 
 
-                        // Save data in SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -83,8 +82,14 @@ public class LoginOTPActivity extends AppCompatActivity {
                         editor.putString("mname", mname);
                         editor.putString("mobile1", mobile1);
                         editor.putString("address2", address2);
+                        editor.putString("college", college);
+                        editor.putString("s_id", s_id);
+                        editor.putString("session", session);
+
+//                        editor.apply();
 
                         editor.apply();
+
                         // Send to dashboard
                         Intent intent = new Intent(LoginOTPActivity.this, dashboard.class);
                         intent.putExtra("name", name);

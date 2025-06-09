@@ -3,7 +3,6 @@ package firstapp.example.lipsclone;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,22 +17,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import firstapp.example.lipsclone.api.Models.AppConfigResponse;
-import firstapp.example.lipsclone.api.Models.DocumentModel;
-import firstapp.example.lipsclone.api.Models.StudentDocument;
-import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
-import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
-import firstapp.example.lipsclone.api.apiServices;
-import firstapp.example.lipsclone.api.apiclient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class dashboard extends AppCompatActivity {
 
@@ -52,45 +35,47 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence,document,notes,canteenn,feesDetails,Notice;
+        CardView profile, Stuattendence, document, notes, canteenn, feesDetails, Notice;
         Button btn;
 
-        document=findViewById(R.id.document);
+        document = findViewById(R.id.document);
         name = findViewById(R.id.studentName);
         Session = findViewById(R.id.Section);
         ProfilePic = findViewById(R.id.studentImage);
-        notes =findViewById(R.id.notes);
-        canteenn=findViewById(R.id.canteen);
-        Notice=findViewById(R.id.Notice);
-
+        notes = findViewById(R.id.notes);
+        canteenn = findViewById(R.id.canteen);
+        Notice = findViewById(R.id.Notice);
         btn = findViewById(R.id.btm);
         profile = findViewById(R.id.stuProfile);
         Stuattendence = findViewById(R.id.attendence);
-        feesDetails=findViewById(R.id.fees);
+        feesDetails = findViewById(R.id.fees);
 
-        // Dashboard Data from Intent
-        String Studentdetails = getIntent().getStringExtra("name");
-        String class_name = getIntent().getStringExtra("class_name");
-        String ImageUrl = getIntent().getStringExtra("image_url");
-        String fname=getIntent().getStringExtra("fname");
-        String admno=getIntent().getStringExtra("admno");
-        String   mname =getIntent().getStringExtra("mname");
-        String Fname = getIntent().getStringExtra("fname");
-        String address2=getIntent().getStringExtra("address2");
-        String mobile1=getIntent().getStringExtra("mobile1");
-        String studentId = getIntent().getStringExtra("s_id");
-        String sessionId = getIntent().getStringExtra("session");
-        String collegeId = getIntent().getStringExtra("college");
-//        String filename=getIntent().getStringExtra("filename");
-//        String file =getIntent().getStringExtra("file");
+        // SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
-        ;
-//        StudentDocument request = new StudentDocument("api", "student_document", s_id, sessionId, college);
-//        // Convert to JSON and log it
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        String jsonPayload = gson.toJson(request);
-//        Log.d("API_PAYLOAD", jsonPayload);
+        // Check if user is logged in
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        if (!isLoggedIn) {
+            Intent intent = new Intent(dashboard.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
 
+        // Fetch data from SharedPreferences
+        String Studentdetails = sharedPreferences.getString("name", "No Name");
+        String class_name = sharedPreferences.getString("class_name", "Unknown Class");
+        String ImageUrl = sharedPreferences.getString("image_url", "");
+        String fname = sharedPreferences.getString("fname", "");
+        String admno = sharedPreferences.getString("admno", "");
+        String mname = sharedPreferences.getString("mname", "");
+        String address2 = sharedPreferences.getString("address2", "");
+        String mobile1 = sharedPreferences.getString("mobile1", "");
+        String studentId = sharedPreferences.getString("s_id", "");
+        String sessionId = sharedPreferences.getString("session", "");
+        String collegeId = sharedPreferences.getString("college", "");
+
+        // Update UI
         name.setText(Studentdetails);
         Session.setText(class_name);
 
@@ -100,8 +85,8 @@ public class dashboard extends AppCompatActivity {
             ProfilePic.setImageResource(R.drawable.profile1);
         }
 
+        // Logout button click: clear session and go to login
         btn.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
@@ -110,67 +95,53 @@ public class dashboard extends AppCompatActivity {
             startActivity(logout);
             finish();
         });
+
+        // Document click - pass s_id and session from SharedPreferences
         document.setOnClickListener(v -> {
+            Intent docIntent = new Intent(dashboard.this, Document.class);
+            docIntent.putExtra("s_id", studentId);
+            docIntent.putExtra("session", sessionId);
+            startActivity(docIntent);
+        });
 
-            Intent noticee = new Intent(dashboard.this, Document.class);
-            noticee.putExtra("s_id", studentId);
-            noticee.putExtra("session", sessionId);
-            startActivity(noticee);
-            });
-
-
-        // Profile Card Click
+        // Profile click - pass all details to Profile_module
         profile.setOnClickListener(v -> {
-            // Pass already available data to Profile_module
-            Intent students = new Intent(dashboard.this, Profile_module.class);
-
-            students.putExtra("name", Studentdetails);           // Already received from getIntent()
-            students.putExtra("class_name", class_name);
-            students.putExtra("image_url", ImageUrl);
-
-
-            students.putExtra("admno", admno);
-            students.putExtra("fname",fname);
-            students.putExtra("mname", mname);
-            students.putExtra("mobile1", mobile1);
-            students.putExtra("address2", address2);
-
-
-            startActivity(students);
-        });
-        notes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent notes = new Intent(dashboard.this,Downloads.class);
-
-
-                startActivity(notes);
-//                finish();
-            }
-        });
-        canteenn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent canteenn = new Intent(dashboard.this,Canteen.class);
-                startActivity(canteenn);
-            }
-        });
-        feesDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    Intent feess=new Intent(dashboard.this, fees_Details.class);
-                    startActivity(feess);
-            }
-        });
-        Notice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent noticee=new Intent(dashboard.this,Notice_Section.class);
-                noticee.putExtra("s_id", studentId);
-                noticee.putExtra("session", sessionId);
-                startActivity(noticee);
-            }
+            Intent profileIntent = new Intent(dashboard.this, Profile_module.class);
+            profileIntent.putExtra("name", Studentdetails);
+            profileIntent.putExtra("class_name", class_name);
+            profileIntent.putExtra("image_url", ImageUrl);
+            profileIntent.putExtra("admno", admno);
+            profileIntent.putExtra("fname", fname);
+            profileIntent.putExtra("mname", mname);
+            profileIntent.putExtra("mobile1", mobile1);
+            profileIntent.putExtra("address2", address2);
+            startActivity(profileIntent);
         });
 
+        // Notes click
+        notes.setOnClickListener(v -> {
+            Intent notesIntent = new Intent(dashboard.this, Downloads.class);
+            startActivity(notesIntent);
+        });
+
+        // Canteen click
+        canteenn.setOnClickListener(v -> {
+            Intent canteenIntent = new Intent(dashboard.this, Canteen.class);
+            startActivity(canteenIntent);
+        });
+
+        // Fees details click
+        feesDetails.setOnClickListener(v -> {
+            Intent feesIntent = new Intent(dashboard.this, fees_Details.class);
+            startActivity(feesIntent);
+        });
+
+        // Notice section click - pass s_id and session
+        Notice.setOnClickListener(v -> {
+            Intent noticeIntent = new Intent(dashboard.this, Notice_Section.class);
+            noticeIntent.putExtra("s_id", studentId);
+            noticeIntent.putExtra("session", sessionId);
+            startActivity(noticeIntent);
+        });
     }
 }
