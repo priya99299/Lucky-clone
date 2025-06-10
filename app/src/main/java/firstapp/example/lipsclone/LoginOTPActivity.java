@@ -30,6 +30,7 @@ public class LoginOTPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_otpactivity);
 
+
         otpInput = findViewById(R.id.otpInput);
         submitButton = findViewById(R.id.submit_button);
 
@@ -46,79 +47,86 @@ public class LoginOTPActivity extends AppCompatActivity {
                 Toast.makeText(LoginOTPActivity.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
                 return;
             }
-
-            StudentVerifyRequest request = new StudentVerifyRequest(session, college, mobile, enteredOtp);
-            apiServices api = apiclient.getClient().create(apiServices.class);
-
-            api.verifyStudent(request).enqueue(new Callback<AppConfigResponse>() {
-                @Override
-                public void onResponse(Call<AppConfigResponse> call, Response<AppConfigResponse> response) {
-                    if (response.isSuccessful() && response.body() != null && response.body().success) {
-                        Toast.makeText(LoginOTPActivity.this, "OTP Verified", Toast.LENGTH_SHORT).show();
-                        // Extract name and class_name from response
-                        String s_id=response.body().response.s_id;
-                        String name = response.body().response.name;
-                        String className = response.body().response.class_name;
-                        String imageUrl=response.body().response.pic;
-                        String StudentAdmissionno=response.body().response.admno;
-                        String fname=response.body().response.fname;
-                        String mname=response.body().response.mname;
-                        String mobile1=response.body().response.mobile1;
-                        String address2 =response.body().response.address2;
-                        String file = response.body().response.file;
-                        String filename=response.body().response.docname;
-                        String session=response.body().response.session;
+            // 🚨 Bypass verification for default OTP
 
 
-                        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                        editor.putBoolean("isLoggedIn", true);
-                        editor.putString("name", name);
-                        editor.putString("class_name", className);
-                        editor.putString("image_url", imageUrl);
-                        editor.putString("admno", StudentAdmissionno);
-                        editor.putString("fname", fname);
-                        editor.putString("mname", mname);
-                        editor.putString("mobile1", mobile1);
-                        editor.putString("address2", address2);
-                        editor.putString("college", college);
-                        editor.putString("s_id", s_id);
-                        editor.putString("session", session);
+            if (enteredOtp.equals("12345")) {
+                StudentVerifyRequest request = new StudentVerifyRequest(session, college, mobile, enteredOtp);
+                apiServices api = apiclient.getClient().create(apiServices.class);
+
+                api.verifyStudent(request).enqueue(new Callback<AppConfigResponse>() {
+                    @Override
+                    public void onResponse(Call<AppConfigResponse> call, Response<AppConfigResponse> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().success) {
+                            Toast.makeText(LoginOTPActivity.this, "OTP Verified", Toast.LENGTH_SHORT).show();
+                            // Extract name and class_name from response
+                            String s_id = response.body().response.s_id;
+                            String name = response.body().response.name;
+                            String className = response.body().response.class_name;
+                            String imageUrl = response.body().response.pic;
+                            String StudentAdmissionno = response.body().response.admno;
+                            String fname = response.body().response.fname;
+                            String mname = response.body().response.mname;
+                            String mobile1 = response.body().response.mobile1;
+                            String address2 = response.body().response.address2;
+                            String file = response.body().response.file;
+                            String filename = response.body().response.docname;
+                            String session = response.body().response.session;
+                            String F_id = response.body().response.F_id;
+
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.putString("name", name);
+                            editor.putString("class_name", className);
+                            editor.putString("image_url", imageUrl);
+                            editor.putString("admno", StudentAdmissionno);
+                            editor.putString("fname", fname);
+                            editor.putString("mname", mname);
+                            editor.putString("mobile1", mobile1);
+                            editor.putString("address2", address2);
+                            editor.putString("college", college);
+                            editor.putString("s_id", s_id);
+                            editor.putString("session", session);
 
 //                        editor.apply();
 
-                        editor.apply();
+                            editor.apply();
 
-                        // Send to dashboard
-                        Intent intent = new Intent(LoginOTPActivity.this, dashboard.class);
-                        intent.putExtra("name", name);
-                        intent.putExtra("class_name", className);
-                        intent.putExtra("image_url", imageUrl);
-                        intent.putExtra("admno",StudentAdmissionno);
-                        intent.putExtra("fname",fname);
-                        intent.putExtra("mname",mname);
-                        intent.putExtra("mobile1",mobile1);
-                        intent.putExtra("address2",address2);
-                        intent.putExtra("file", file);
-                        intent.putExtra("filename", filename);
-                        intent.putExtra("s_id", s_id);        // <-- add this
-                        intent.putExtra("session", session);  // <-- add this
-                        intent.putExtra("college", college);
+                            // Send to dashboard
+                            Intent intent = new Intent(LoginOTPActivity.this, dashboard.class);
+                            intent.putExtra("name", name);
+                            intent.putExtra("class_name", className);
+                            intent.putExtra("image_url", imageUrl);
+                            intent.putExtra("admno", StudentAdmissionno);
+                            intent.putExtra("fname", fname);
+                            intent.putExtra("mname", mname);
+                            intent.putExtra("mobile1", mobile1);
+                            intent.putExtra("address2", address2);
+                            intent.putExtra("file", file);
+                            intent.putExtra("filename", filename);
+                            intent.putExtra("s_id", s_id);        // <-- add this
+                            intent.putExtra("session", session);  // <-- add this
+                            intent.putExtra("college", college);
 
-                        startActivity(intent);
-                        finish();
+                            startActivity(intent);
+                            finish();
 
-                    } else {
-                        Toast.makeText(LoginOTPActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(LoginOTPActivity.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<AppConfigResponse> call, Throwable t) {
-                    Toast.makeText(LoginOTPActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<AppConfigResponse> call, Throwable t) {
+                        Toast.makeText(LoginOTPActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         });
     }
 }

@@ -74,6 +74,7 @@ public class dashboard extends AppCompatActivity {
         String studentId = sharedPreferences.getString("s_id", "");
         String sessionId = sharedPreferences.getString("session", "");
         String collegeId = sharedPreferences.getString("college", "");
+        String F_id = sharedPreferences.getString("f_id" ,"");
 
         // Update UI
         name.setText(Studentdetails);
@@ -133,6 +134,12 @@ public class dashboard extends AppCompatActivity {
         // Fees details click
         feesDetails.setOnClickListener(v -> {
             Intent feesIntent = new Intent(dashboard.this, fees_Details.class);
+
+            feesIntent.putExtra("s_id", studentId);
+            feesIntent.putExtra("session", sessionId);
+            feesIntent.putExtra("college", collegeId);
+            feesIntent.putExtra("f_id", F_id);
+
             startActivity(feesIntent);
         });
 

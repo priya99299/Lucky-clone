@@ -55,11 +55,11 @@ public class fees_Details extends AppCompatActivity {
 
             if (college == null) college = "gdcol1";
 
-            // Validate intent values
-            if (s_id == null || sessionId == null || F_id == null) {
-                Log.e(TAG, "Intent data missing. s_id: " + s_id + ", session: " + sessionId + ", f_id: " + F_id);
-                return;
-            }
+//            // Validate intent values
+//            if (s_id == null || sessionId == null || F_id == null) {
+//                Log.e(TAG, "Intent data missing. s_id: " + s_id + ", session: " + sessionId + ", f_id: " + F_id);
+//                return;
+//            }
 
             Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college + ", f_id: " + F_id);
 
