@@ -68,8 +68,8 @@
     <string name="due_date">Due Date: %s</string>
     <string name="fee_breakdown">Fee Breakdown</string>
     <string name="fee_name">Fee Name</string>
-    <string name="fees_due">Fees Due</string>
-    <string name="pay_in">Pay In</string>
+    <string name="fees_due">Fees Deposit</string>
+    <string name="pay_in">Fees Due</string>
     <string name="pay_now">Pay Now</string>
 
 </resources>

@@ -11,9 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import firstapp.example.lipsclone.api.Models.FeeData;
 import firstapp.example.lipsclone.api.Models.FeeRequest;
 import firstapp.example.lipsclone.api.Models.FeeResponse;
+import firstapp.example.lipsclone.api.Models.FeeTransactionItem;
+import firstapp.example.lipsclone.api.Models.FeeTransactionRequest;
+import firstapp.example.lipsclone.api.Models.FeeTransactionResponse;
 import firstapp.example.lipsclone.api.apiServices;
 import firstapp.example.lipsclone.api.apiclient;
 import retrofit2.Call;
@@ -32,6 +38,7 @@ public class fees_Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fees_details);
+
 
         Log.d(TAG, "fees_Details Activity started");
 
@@ -107,5 +114,39 @@ public class fees_Details extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, "Exception in onCreate", e);
         }
+
+        // Now these variables are in scope
+        String s_id = getIntent().getStringExtra("s_id");
+        String sessionId = getIntent().getStringExtra("session");
+        String college = getIntent().getStringExtra("college");
+        String F_id = getIntent().getStringExtra("f_id");
+        FeeTransactionRequest transactionRequest = new FeeTransactionRequest("api", "student_fee_transaction", s_id, F_id, sessionId, college);
+        apiServices api = apiclient.getClient().create(apiServices.class);
+        Call<FeeTransactionResponse> call2 = api.getFeeTransaction(transactionRequest);
+
+        call2.enqueue(new Callback<FeeTransactionResponse>() {
+            @Override
+            public void onResponse(Call<FeeTransactionResponse> call, Response<FeeTransactionResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<FeeTransactionItem> items = response.body().getResponse();
+
+                    List<FeeTransactionItem> filtered = new ArrayList<>();
+                    for (FeeTransactionItem item : items) {
+                        if (item.getTransactionId() != null) {
+                            filtered.add(item);
+                        }
+                    }
+
+                    FeeTransactionAdapter adapter = new FeeTransactionAdapter(filtered);
+                    feeContainer.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FeeTransactionResponse> call, Throwable t) {
+                Log.e(TAG, "FeeTransaction API Failure: " + t.getMessage());
+            }
+        });
+
     }
 }

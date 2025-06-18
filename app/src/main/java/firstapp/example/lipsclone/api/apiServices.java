@@ -2,23 +2,20 @@ package firstapp.example.lipsclone.api;
 
 import firstapp.example.lipsclone.api.Models.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
-import firstapp.example.lipsclone.api.Models.DocumentModel;
 import firstapp.example.lipsclone.api.Models.FeeRequest;
 import firstapp.example.lipsclone.api.Models.FeeResponse;
+import firstapp.example.lipsclone.api.Models.FeeTransactionResponse;
 import firstapp.example.lipsclone.api.Models.NoticeRequest;
 import firstapp.example.lipsclone.api.Models.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.StudentDocument;
 import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
 import firstapp.example.lipsclone.api.Models.StudentDownloadRequest;
 import firstapp.example.lipsclone.api.Models.StudentDownloadResponse;
+import firstapp.example.lipsclone.api.Models.FeeTransactionRequest;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface apiServices {
     @POST("api/index.php")
@@ -38,7 +35,8 @@ public interface apiServices {
     Call<FeeResponse> getFeeDetails(@Body FeeRequest request);
     @POST("api/index.php")
     Call<StudentDownloadResponse> getStudentDownloads(@Body StudentDownloadRequest request);
-
+    @POST("api/index.php")
+    Call<FeeTransactionResponse> getFeeTransaction(@Body FeeTransactionRequest request);
 
 
 
