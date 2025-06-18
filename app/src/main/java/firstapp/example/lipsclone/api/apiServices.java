@@ -1,19 +1,21 @@
 package firstapp.example.lipsclone.api;
 
-import java.util.Map;
-
 import firstapp.example.lipsclone.api.Models.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
-import firstapp.example.lipsclone.api.Models.DocumentResponse;
-import firstapp.example.lipsclone.api.Models.StudentDocumentRequest;
+import firstapp.example.lipsclone.api.Models.FeeRequest;
+import firstapp.example.lipsclone.api.Models.FeeResponse;
+import firstapp.example.lipsclone.api.Models.FeeTransactionResponse;
+import firstapp.example.lipsclone.api.Models.NoticeRequest;
+import firstapp.example.lipsclone.api.Models.Notice_Reponse;
+import firstapp.example.lipsclone.api.Models.StudentDocument;
+import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
+import firstapp.example.lipsclone.api.Models.StudentDownloadRequest;
+import firstapp.example.lipsclone.api.Models.StudentDownloadResponse;
+import firstapp.example.lipsclone.api.Models.FeeTransactionRequest;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FieldMap;
 import retrofit2.http.POST;
-
-import firstapp.example.lipsclone.api.Models.AppConfigRequest;
-import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 
 public interface apiServices {
     @POST("api/index.php")
@@ -26,7 +28,22 @@ public interface apiServices {
     @POST("api/index.php")
     Call<AppConfigResponse> verifyStudent(@Body StudentVerifyRequest request);
     @POST("api/index.php")
-    Call<DocumentResponse> getDocuments(@Body StudentDocumentRequest request);
+    Call<StudentDocumentResponse> getDocuments(@Body StudentDocument request);
+    @POST("api/index.php")
+    Call<Notice_Reponse> getNotices(@Body NoticeRequest request);
+    @POST("api/index.php")
+    Call<FeeResponse> getFeeDetails(@Body FeeRequest request);
+    @POST("api/index.php")
+    Call<StudentDownloadResponse> getStudentDownloads(@Body StudentDownloadRequest request);
+    @POST("api/index.php")
+    Call<FeeTransactionResponse> getFeeTransaction(@Body FeeTransactionRequest request);
+
+
+
+
+
+
+
 
 
 

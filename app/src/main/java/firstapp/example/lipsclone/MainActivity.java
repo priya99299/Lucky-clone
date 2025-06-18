@@ -1,6 +1,7 @@
 package firstapp.example.lipsclone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        // ✅ Login session check: if already logged in, go to dashboard directly
+        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            Intent intent = new Intent(MainActivity.this, dashboard.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -66,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendPhoneForVerification(String mobile) {
         // Assuming LoginRequest takes mobile number and session ID
-            LoginRequest loginRequest = new LoginRequest(mobile);
+        LoginRequest loginRequest = new LoginRequest(mobile);
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         api.loginStudent(loginRequest).enqueue(new Callback<LoginReponse>() {
