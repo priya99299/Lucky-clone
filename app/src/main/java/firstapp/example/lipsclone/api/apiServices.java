@@ -9,6 +9,8 @@ import firstapp.example.lipsclone.api.Models.NoticeRequest;
 import firstapp.example.lipsclone.api.Models.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.StudentDocument;
 import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
+import firstapp.example.lipsclone.api.Models.StudentDownloadRequest;
+import firstapp.example.lipsclone.api.Models.StudentDownloadResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -34,6 +36,9 @@ public interface apiServices {
     Call<Notice_Reponse> getNotices(@Body NoticeRequest request);
     @POST("api/index.php")
     Call<FeeResponse> getFeeDetails(@Body FeeRequest request);
+    @POST("api/index.php")
+    Call<StudentDownloadResponse> getStudentDownloads(@Body StudentDownloadRequest request);
+
 
 
 

@@ -122,6 +122,11 @@ public class dashboard extends AppCompatActivity {
         // Notes click
         notes.setOnClickListener(v -> {
             Intent notesIntent = new Intent(dashboard.this, Downloads.class);
+            notesIntent.putExtra("s_id", studentId);
+            notesIntent.putExtra("session", sessionId);
+            notesIntent.putExtra("college", collegeId);
+            notesIntent.putExtra("f_id", F_id);
+
             startActivity(notesIntent);
         });
 

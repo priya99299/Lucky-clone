@@ -51,7 +51,7 @@ public class LoginOTPActivity extends AppCompatActivity {
 
 
 
-            if (enteredOtp.equals("12345")) {
+
                 StudentVerifyRequest request = new StudentVerifyRequest(session, college, mobile, enteredOtp);
                 apiServices api = apiclient.getClient().create(apiServices.class);
 
@@ -126,7 +126,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                         Toast.makeText(LoginOTPActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-            }
+
         });
     }
 }
