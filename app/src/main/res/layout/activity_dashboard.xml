@@ -402,14 +402,14 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/calendar" />
+                        android:src="@drawable/time" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="Academis Calender"
+                        android:text="Time Table "
                         android:textSize="10dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
@@ -443,14 +443,14 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/timetable" />
+                        android:src="@drawable/Library" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="@string/timetable"
+                        android:text="Library"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -483,14 +483,15 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/timetable" />
+                        android:src="@drawable/training" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="@string/library"
+                        android:textSize="9dp"
+                        android:text="@string/lecture_performa"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
@@ -603,14 +604,14 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/training" />
+                        android:src="@drawable/contact" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="@string/lecture_performa"
+                        android:text="contact-us"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="@color/dark_grey" />
                 </LinearLayout>
