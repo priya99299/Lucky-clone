@@ -14,6 +14,7 @@ public class DocumentModel {
     @SerializedName("file")
     private String file;
 
+
     @SerializedName("status")
     private String status;
 

@@ -12,6 +12,12 @@ public class StudentDocumentRequest {
 
     @SerializedName("s_id")
     private String s_id;
+    @SerializedName("docname")
+    private String docname;
+
+    @SerializedName("file")
+    private String file;
+
 
     @SerializedName("session")
     private String session;
@@ -19,10 +25,11 @@ public class StudentDocumentRequest {
     @SerializedName("college")
     private String college;
 
-    public StudentDocumentRequest(String s_id, String session, String college) {
+    public StudentDocumentRequest(String s_id, String file, String docname) {
         this.s_id = s_id;
         this.session = session;
-        this.college = college;
+        this.docname=docname;
+        this.file=file;
     }
 
 }

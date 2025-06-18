@@ -1,19 +1,29 @@
 package firstapp.example.lipsclone;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.DocumentModel;
 import firstapp.example.lipsclone.api.Models.DocumentResponse;
 import firstapp.example.lipsclone.api.Models.StudentDocumentRequest;
+import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import firstapp.example.lipsclone.api.apiServices;
 import firstapp.example.lipsclone.api.apiclient;
 import retrofit2.Call;
@@ -21,63 +31,49 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Document extends AppCompatActivity {
-    RecyclerView recyclerView;
-    DocumentAdapter adapter;
-    List<DocumentModel> documentList = new ArrayList<>();
+
+    TextView documentTitle;
+    ImageButton showDocumentButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        documentTitle = findViewById(R.id.documentTitle);
+        showDocumentButton = findViewById(R.id.showDocumentButton);
 
-        adapter = new DocumentAdapter(this, documentList);
-        recyclerView.setAdapter(adapter);
+        // Get data from intent
 
-        // Receive student details from intent
-        String s_id = getIntent().getStringExtra("s_id");
-        String session = getIntent().getStringExtra("session");
-        String college = getIntent().getStringExtra("college");
+        String docname = getIntent().getStringExtra("docname");
+        String file = getIntent().getStringExtra("file");
 
-        if (s_id == null || session == null || college == null) {
-            Toast.makeText(this, "Missing student information", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+//        if ( docname == null || file == null) {
+//            Toast.makeText(this, "Missing document info", Toast.LENGTH_SHORT).show();
+//            finish();
+//            return;
+//        }
 
-        fetchDocuments(s_id, session, college);
+//        // Display the document name
+//        documentTitle.setText(docname);
+//
+//        // Open the document file when button is clicked
+//        showDocumentButton.setOnClickListener(v -> {
+//            try {
+//                String finalFile = file;
+//                if (!finalFile.startsWith("http")) {
+//                    finalFile = "https://lips-root.s3.ap-south-1.amazonaws.com/assets/document/LIPS/97279.pdf" + finalFile;
+//                }
+//
+//                Uri documentUri = Uri.parse(finalFile);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, documentUri);
+//                startActivity(intent);
+//            } catch (Exception e) {
+//                Toast.makeText(this, "Cannot open document", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
     }
-
-    private void fetchDocuments(String s_id, String session, String college) {
-        Log.d("Document", "Fetching documents for s_id: " + s_id + ", session: " + session + ", college: " + college);
-
-        apiServices api = apiclient.getClient().create(apiServices.class);
-        StudentDocumentRequest request = new StudentDocumentRequest(s_id, session, college);
-
-        Call<DocumentResponse> call = api.getDocuments(request);
-        call.enqueue(new Callback<DocumentResponse>() {
-            @Override
-            public void onResponse(Call<DocumentResponse> call, Response<DocumentResponse> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().success) {
-                    Log.d("Document", "Documents fetched: " + response.body().response.size());
-                    documentList.clear();
-                    documentList.addAll(response.body().response);
-                    adapter.notifyDataSetChanged();
-                } else {
-                    Log.d("Document", "Failed to fetch documents or empty response");
-                    Toast.makeText(Document.this, "No documents or error", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DocumentResponse> call, Throwable t) {
-                Log.e("Document", "API failure: " + t.getMessage());
-                Toast.makeText(Document.this, "Failed: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
 }
+
 

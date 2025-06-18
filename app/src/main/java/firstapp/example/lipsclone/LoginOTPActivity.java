@@ -65,7 +65,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                         String mobile1=response.body().response.mobile1;
                         String address2 =response.body().response.address2;
                         String file = response.body().response.file;
-                        String filename=response.body().response.docname;
+                        String docname=response.body().response.docname;
 
 
                         // Save data in SharedPreferences
@@ -82,6 +82,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                         editor.putString("mobile1", mobile1);
                         editor.putString("address2", address2);
 
+
                         editor.apply();
                         // Send to dashboard
                         Intent intent = new Intent(LoginOTPActivity.this, dashboard.class);
@@ -94,7 +95,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                         intent.putExtra("mobile1",mobile1);
                         intent.putExtra("address2",address2);
                         intent.putExtra("file", file);
-                        intent.putExtra("docname", filename);
+                        intent.putExtra("docname",docname);
                         intent.putExtra("s_id", s_id);        // <-- add this
                         intent.putExtra("session", session);  // <-- add this
                         intent.putExtra("college", college);

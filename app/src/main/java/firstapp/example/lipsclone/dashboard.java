@@ -71,6 +71,8 @@ public class dashboard extends AppCompatActivity {
         String studentId = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
         String collegeId = getIntent().getStringExtra("college");
+        String docname= getIntent().getStringExtra("docname");
+        String file=getIntent().getStringExtra("file");
 
         ;  // Pass this from dashboard
 
@@ -97,10 +99,10 @@ public class dashboard extends AppCompatActivity {
         });
         document.setOnClickListener(v -> {
             Intent intent = new Intent(dashboard.this, Document.class);
-            intent.putExtra("s_id", studentId);
-            intent.putExtra("session", sessionId);
-            intent.putExtra("college", collegeId);
+            intent.putExtra("docname", docname);       // Must be initialized
+            intent.putExtra("file", file);
             startActivity(intent);
+
         });
 
 
