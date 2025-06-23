@@ -35,7 +35,7 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence, document, notes, canteenn, feesDetails, Notice;
+        CardView profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable;
         Button btn;
 
         document = findViewById(R.id.document);
@@ -49,6 +49,7 @@ public class dashboard extends AppCompatActivity {
         profile = findViewById(R.id.stuProfile);
         Stuattendence = findViewById(R.id.attendence);
         feesDetails = findViewById(R.id.fees);
+        timetable=findViewById(R.id.e_learning);
 
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
@@ -154,6 +155,15 @@ public class dashboard extends AppCompatActivity {
             noticeIntent.putExtra("s_id", studentId);
             noticeIntent.putExtra("session", sessionId);
             startActivity(noticeIntent);
+        });
+        timetable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent TimeModule =new Intent(dashboard.this,Time_table.class);
+                TimeModule.putExtra("s_id", studentId);
+                TimeModule.putExtra("session", sessionId);
+                startActivity(TimeModule);
+            }
         });
     }
 }

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
+            android:name=".Time_table"
+            android:exported="false" />
+        <activity
             android:name=".Notice_Section"
             android:exported="false" />
         <activity
