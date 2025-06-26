@@ -1,53 +1,87 @@
 package firstapp.example.lipsclone;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+
+import firstapp.example.lipsclone.api.Models.StudentTimeTableRequest;
+import firstapp.example.lipsclone.api.Models.StudentTimeTableResponse;
+import firstapp.example.lipsclone.api.apiServices;
+import firstapp.example.lipsclone.api.apiclient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Time_table extends AppCompatActivity {
+
+    private static final String TAG = "TimeTableActivity";
+    private RecyclerView rvSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_time_table);
 
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
-        // Toolbar setup
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        RecyclerView rvSchedule = findViewById(R.id.rvSchedule);
+        rvSchedule = findViewById(R.id.rvSchedule);
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create sample data manually since ScheduleUtils is not available
-        List<Object> scheduleItems = new ArrayList<>();
-        scheduleItems.add("Monday");
-        scheduleItems.add(new ScheduleItem("DSA", "Dr. Smith", "Room 101", "09:00 - 10:00", 0xFFE6DCE9));
-        scheduleItems.add(new ScheduleItem("COMPUTER NETWORKD", "Prof. Johnson", "Lab 201", "10:00 - 11:00", 0xFFD4EAD4));
-        scheduleItems.add(new ScheduleItem("Chemistry", "Dr. Wilson", "Lab 102", "11:00 - 12:00", 0xFFE6DCE9));
-        scheduleItems.add("Tuesday");
-        scheduleItems.add(new ScheduleItem("CLIENT SERVER   ", "Prof. Johnson", "Lab 201", "09:00 - 10:00", 0xFFD4EAD4));
-        scheduleItems.add(new ScheduleItem("Chemistry", "Dr. Wilson", "Lab 102", "10:00 - 11:00", 0xFFE6DCE9));
-        scheduleItems.add("Wednesday");
-        scheduleItems.add(new ScheduleItem("Chemistry", "Dr. Wilson", "Lab 102", "09:00 - 10:00", 0xFFE6DCE9));
+        String s_id = getIntent().getStringExtra("s_id");
+        String sessionId = getIntent().getStringExtra("session");
+        String college = getIntent().getStringExtra("college");
+        if (college == null) college = "gdcol1";
 
-        rvSchedule.setAdapter(new ScheduleAdapter(scheduleItems));
+        Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college);
+
+        // Build request object and log it
+        StudentTimeTableRequest request = new StudentTimeTableRequest(s_id, sessionId, college);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String requestJson = gson.toJson(request);
+        Log.d(TAG, "📝 Request JSON:\n" + requestJson);
+
+        apiServices api = apiclient.getClient().create(apiServices.class);
+        Call<StudentTimeTableResponse> call = api.getStudentTimeTable(request);
+
+        call.enqueue(new Callback<StudentTimeTableResponse>() {
+            @Override
+            public void onResponse(Call<StudentTimeTableResponse> call, Response<StudentTimeTableResponse> response) {
+                try {
+                    Log.d(TAG, "✅ Response Code: " + response.code());
+
+                    if (response.isSuccessful() && response.body() != null) {
+                        // Pretty print full JSON
+                        String prettyResponse = gson.toJson(response.body());
+                        Log.d(TAG, "📦 Time Table Response:\n" + prettyResponse);
+
+                        // If needed, you can now pass this data to your RecyclerView Adapter here
+                        // List<DaySchedule> scheduleList = response.body().getResponse().get(0).getTimeTableFinal();
+
+                    } else {
+                        Log.e(TAG, "❌ API response not successful. Code: " + response.code());
+                        if (response.errorBody() != null) {
+                            Log.e(TAG, "❌ Error Body: " + response.errorBody().string());
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "❗ Exception while processing response: " + e.getMessage(), e);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StudentTimeTableResponse> call, Throwable t) {
+                Log.e(TAG, "❌ Network/API failure: " + t.getMessage(), t);
+            }
+        });
     }
 }

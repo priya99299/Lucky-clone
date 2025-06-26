@@ -12,9 +12,13 @@ import firstapp.example.lipsclone.api.Models.StudentDocumentResponse;
 import firstapp.example.lipsclone.api.Models.StudentDownloadRequest;
 import firstapp.example.lipsclone.api.Models.StudentDownloadResponse;
 import firstapp.example.lipsclone.api.Models.FeeTransactionRequest;
+import firstapp.example.lipsclone.api.Models.StudentTimeTableRequest;
+import firstapp.example.lipsclone.api.Models.StudentTimeTableResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface apiServices {
@@ -37,6 +41,16 @@ public interface apiServices {
     Call<StudentDownloadResponse> getStudentDownloads(@Body StudentDownloadRequest request);
     @POST("api/index.php")
     Call<FeeTransactionResponse> getFeeTransaction(@Body FeeTransactionRequest request);
+    @Headers({
+            "Content-Type: application/json",
+            "Accept: application/json"
+    })
+    @POST("api/index.php")
+    Call<StudentTimeTableResponse> getStudentTimeTable(@Body StudentTimeTableRequest request);
+
+//@POST("api/index.php")
+//Call<ResponseBody> getStudentTimeTable(@Body StudentTimeTableRequest request);
+
 
 
 
