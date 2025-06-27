@@ -458,7 +458,8 @@
 
             <!-- Library Card -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/library"
+                android:id="@+id/lecture_Details"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"

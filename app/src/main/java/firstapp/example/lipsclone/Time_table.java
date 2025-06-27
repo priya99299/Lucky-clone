@@ -34,7 +34,7 @@ public class Time_table extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        rvSchedule = findViewById(R.id.rvSchedule);
+//        rvSchedule = findViewById(R.id.recyclerView_lectures);
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
 
         String s_id = getIntent().getStringExtra("s_id");

@@ -5,6 +5,8 @@ import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.FeeRequest;
 import firstapp.example.lipsclone.api.Models.FeeResponse;
 import firstapp.example.lipsclone.api.Models.FeeTransactionResponse;
+import firstapp.example.lipsclone.api.Models.LectureRequest;
+import firstapp.example.lipsclone.api.Models.LectureResponse;
 import firstapp.example.lipsclone.api.Models.NoticeRequest;
 import firstapp.example.lipsclone.api.Models.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.StudentDocument;
@@ -41,10 +43,8 @@ public interface apiServices {
     Call<StudentDownloadResponse> getStudentDownloads(@Body StudentDownloadRequest request);
     @POST("api/index.php")
     Call<FeeTransactionResponse> getFeeTransaction(@Body FeeTransactionRequest request);
-    @Headers({
-            "Content-Type: application/json",
-            "Accept: application/json"
-    })
+    @POST("api/index.php")
+    Call<LectureResponse> getLectures(@Body LectureRequest request);
     @POST("api/index.php")
     Call<StudentTimeTableResponse> getStudentTimeTable(@Body StudentTimeTableRequest request);
 
