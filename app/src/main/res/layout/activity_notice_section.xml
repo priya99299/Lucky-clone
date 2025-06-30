@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
-    tools:context=".Notice_Section">
+    tools:context=".Notice.Notice_Section">
 
     <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar

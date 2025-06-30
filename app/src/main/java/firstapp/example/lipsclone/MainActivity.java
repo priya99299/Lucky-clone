@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,10 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.gson.Gson;
 
-import firstapp.example.lipsclone.api.LoginReponse;
-import firstapp.example.lipsclone.api.LoginRequest;
-import firstapp.example.lipsclone.api.apiServices;
-import firstapp.example.lipsclone.api.apiclient;
+import firstapp.example.lipsclone.LoginActivty.LoginOTPActivity;
+import firstapp.example.lipsclone.api.Login.LoginReponse;
+import firstapp.example.lipsclone.api.Login.LoginRequest;
+import firstapp.example.lipsclone.api.Network.apiServices;
+import firstapp.example.lipsclone.api.Network.apiclient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,0 +1,68 @@
+package firstapp.example.lipsclone.api.Network;
+
+import firstapp.example.lipsclone.api.Login.LoginReponse;
+import firstapp.example.lipsclone.api.Login.LoginRequest;
+import firstapp.example.lipsclone.api.Models.Login.AppConfigRequest;
+import firstapp.example.lipsclone.api.Models.AppConfigResponse;
+import firstapp.example.lipsclone.api.Models.Fees.FeeRequest;
+import firstapp.example.lipsclone.api.Models.Fees.FeeResponse;
+import firstapp.example.lipsclone.api.Models.Fees.FeeTransactionResponse;
+import firstapp.example.lipsclone.api.Models.Lecture.LectureRequest;
+import firstapp.example.lipsclone.api.Models.Lecture.LectureResponse;
+import firstapp.example.lipsclone.api.Models.Notice.NoticeRequest ;
+import firstapp.example.lipsclone.api.Models.Notice.Notice_Reponse;
+import firstapp.example.lipsclone.api.Models.Documents.StudentDocument;
+import firstapp.example.lipsclone.api.Models.Downloads.StudentDocumentResponse;
+import firstapp.example.lipsclone.api.Models.Downloads.StudentDownloadRequest;
+import firstapp.example.lipsclone.api.Models.Downloads.StudentDownloadResponse;
+import firstapp.example.lipsclone.api.Models.Fees.FeeTransactionRequest;
+import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableRequest;
+import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableResponse;
+import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
+public interface apiServices {
+    @POST("api/index.php")
+    Call<LoginReponse> loginStudent(@Body LoginRequest request);
+
+
+    @POST("api/index.php")
+    Call<AppConfigResponse> getAppConfig(@Body AppConfigRequest request);
+
+    @POST("api/index.php")
+    Call<AppConfigResponse> verifyStudent(@Body StudentVerifyRequest request);
+    @POST("api/index.php")
+    Call<StudentDocumentResponse> getDocuments(@Body StudentDocument request);
+    @POST("api/index.php")
+    Call<Notice_Reponse> getNotices(@Body NoticeRequest request);
+    @POST("api/index.php")
+    Call<FeeResponse> getFeeDetails(@Body FeeRequest request);
+    @POST("api/index.php")
+    Call<StudentDownloadResponse> getStudentDownloads(@Body StudentDownloadRequest request);
+    @POST("api/index.php")
+    Call<FeeTransactionResponse> getFeeTransaction(@Body FeeTransactionRequest request);
+    @POST("api/index.php")
+    Call<LectureResponse> getLectures(@Body LectureRequest request);
+    @POST("api/index.php")
+    Call<StudentTimeTableResponse> getStudentTimeTable(@Body StudentTimeTableRequest request);
+
+//    @POST("api/index.php")
+//    Call<okhttp3.ResponseBody> getStudentTimeTable(@Body StudentTimeTableRequest request);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

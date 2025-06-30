@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8FAFB"
-    tools:context=".Canteen">
+    tools:context=".Canteen.Canteen">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

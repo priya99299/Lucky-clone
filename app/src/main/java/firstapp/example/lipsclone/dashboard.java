@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +16,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+
+import firstapp.example.lipsclone.Canteen.Canteen;
+import firstapp.example.lipsclone.Documents.Document;
+import firstapp.example.lipsclone.Downloads.Downloads;
+import firstapp.example.lipsclone.Lecture_Performa.Lecture_Perfrorma;
+import firstapp.example.lipsclone.Notice.Notice_Section;
+import firstapp.example.lipsclone.Profile.Profile_module;
+import firstapp.example.lipsclone.fees.fees_Details;
+import firstapp.example.lipsclone.timeTable.Time_table;
 
 public class dashboard extends AppCompatActivity {
 
@@ -160,7 +168,7 @@ public class dashboard extends AppCompatActivity {
         timetable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent TimeModule =new Intent(dashboard.this,Time_table.class);
+                Intent TimeModule =new Intent(dashboard.this, Time_table.class);
                 TimeModule.putExtra("s_id", studentId);
                 TimeModule.putExtra("session", sessionId);
                 startActivity(TimeModule);
@@ -169,7 +177,7 @@ public class dashboard extends AppCompatActivity {
         Lecturees.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Lecture =new Intent(dashboard.this,Lecture_Perfrorma.class);
+                Intent Lecture =new Intent(dashboard.this, Lecture_Perfrorma.class);
                 Lecture.putExtra("s_id", studentId);
                 Lecture.putExtra("session", sessionId);
                 startActivity(Lecture);

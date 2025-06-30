@@ -15,47 +15,47 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
-            android:name=".Lecture_Perfrorma"
+            android:name=".Lecture_Performa.Lecture_Perfrorma"
             android:exported="false" />
         <activity
-            android:name=".Time_table"
+            android:name=".timeTable.Time_table"
             android:exported="false" />
         <activity
-            android:name=".Notice_Section"
+            android:name=".Notice.Notice_Section"
             android:exported="false" />
         <activity
             android:name=".feesDetails"
             android:exported="false" />
         <activity
-            android:name=".Canteen"
+            android:name=".Canteen.Canteen"
             android:exported="false"
             android:theme="@style/Theme.LipsClone" />
         <activity
-            android:name=".Downloads"
+            android:name=".Downloads.Downloads"
             android:exported="false" />
         <activity
-            android:name=".Calender"
+            android:name=".calender.Calender"
             android:exported="false" />
         <activity
-            android:name=".LoginOTPActivity"
+            android:name=".LoginActivty.LoginOTPActivity"
             android:exported="false" />
         <activity
             android:name=".TimaTable"
             android:exported="false" />
         <activity
-            android:name=".Contact_us"
+            android:name=".Contact_us.Contact_us"
             android:exported="false" />
         <activity
-            android:name=".Document"
+            android:name=".Documents.Document"
             android:exported="false" />
         <activity
-            android:name=".fees_Details"
+            android:name=".fees.fees_Details"
             android:exported="false" />
         <activity
             android:name=".Notes"
             android:exported="false" />
         <activity
-            android:name=".Attendence_module"
+            android:name=".Attendence.Attendence_module"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -68,7 +68,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Profile_module"
+            android:name=".Profile.Profile_module"
             android:exported="false" />
         <activity
             android:name=".dashboard"
