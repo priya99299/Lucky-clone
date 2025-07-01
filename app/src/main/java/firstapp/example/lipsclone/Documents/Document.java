@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,9 +41,9 @@ public class Document extends AppCompatActivity {
             public void uncaughtException(Thread thread, Throwable e) {
                 Log.e(TAG, "Uncaught exception: ", e);
             }
+
         });
-//        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-//        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
 
         Log.d(TAG, "onCreate started");
         setContentView(R.layout.activity_document);
@@ -107,5 +108,7 @@ public class Document extends AppCompatActivity {
 
 
         Log.d(TAG, "onCreate finished");
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 }

@@ -1,154 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="4dp"
+    android:background="@android:color/white">
 
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardElevation="3dp"
-        app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:strokeColor="#E8ECEF"
-        app:strokeWidth="1dp">
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/lecture_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="6dp"
-            android:background="@drawable/gradient_background">
+            android:layout_weight="1"
+            android:text="Subject Name"
+            android:textSize="11sp"
+            android:textColor="#424242" />
 
-            <!-- Lecture Title -->
-            <TextView
-                android:id="@+id/lecture_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lecture Title"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#1A237E"
-                android:letterSpacing="0.01"
-                android:paddingBottom="4dp" />
+        <TextView
+            android:id="@+id/lecture_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Faculty Name"
+            android:textSize="11sp"
+            android:textColor="#424242" />
 
-            <!-- Teacher Name and Duration Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4dp">
+        <TextView
+            android:id="@+id/lecture_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Duration"
+            android:textSize="11sp"
+            android:textColor="#424242" />
 
-                <!-- Teacher Name -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/view_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.5"
+            android:src="@drawable/visible"
+            android:scaleType="fitCenter"
+            android:contentDescription="View Details"
+            android:layout_gravity="center" />
 
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@drawable/ic_teacher"
-                        android:tint="#757575"
-                        android:layout_gravity="center_vertical" />
-
-                    <TextView
-                        android:id="@+id/lecture_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dr. John Smith"
-                        android:textSize="10sp"
-                        android:textColor="#616161"
-                        android:layout_marginStart="3dp" />
-                </LinearLayout>
-
-                <!-- Duration -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@drawable/ic_clock"
-                        android:tint="#757575"
-                        android:layout_gravity="center_vertical" />
-
-                    <TextView
-                        android:id="@+id/lecture_duration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="45 min"
-                        android:textSize="10sp"
-                        android:textColor="#616161"
-                        android:layout_marginStart="3dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-<!--            &lt;!&ndash; Lecture Description &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/lecture_description"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Lecture description goes here."-->
-<!--                android:textSize="10sp"-->
-<!--                android:textColor="#424242"-->
-<!--                android:lineSpacingExtra="2dp"-->
-<!--                android:paddingBottom="4dp"-->
-<!--                android:maxLines="1"-->
-<!--                android:ellipsize="end" />-->
-
-            <!-- Clickable Topics Section -->
-            <LinearLayout
-                android:id="@+id/topics_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_topic_background"
-                android:padding="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <!-- Topics Header with Arrow -->
-                <LinearLayout
-                    android:id="@+id/TopicList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Topics"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A237E"
-                        android:paddingBottom="2dp" />
-
-                    <ImageView
-                        android:id="@+id/manual_line"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@drawable/ic_arrow_down"
-                        android:tint="#1A237E"
-                        android:layout_gravity="center_vertical" />
-                </LinearLayout>
-
-                <!-- Topics List (Initially Hidden) -->
-                <TextView
-                    android:id="@+id/lecture_topics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Intro to AI\nML Basics\nNeural Networks"
-                    android:textSize="10sp"
-                    android:textColor="#424242"
-                    android:visibility="gone"
-                    android:paddingTop="2dp" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

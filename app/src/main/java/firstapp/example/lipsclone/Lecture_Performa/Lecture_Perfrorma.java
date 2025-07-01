@@ -35,8 +35,10 @@ public class Lecture_Perfrorma extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView_lectures);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new LectureAdapter(lectureList);
+
+        adapter = new LectureAdapter(this, lectureList);
         recyclerView.setAdapter(adapter);
+
 
         fetchLectures();
     }

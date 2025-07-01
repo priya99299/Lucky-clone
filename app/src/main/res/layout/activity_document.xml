@@ -17,6 +17,7 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:navigationIconTint="@color/white"
         app:title="Document Details"
+
         app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
         app:titleTextColor="@color/white" />
     <!-- Rounded Card Info Message -->
@@ -37,7 +38,7 @@
             android:padding="16dp"
             android:text="Download a scan copy of all your deposited document(s) to college campus at time of admission."
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="11sp"
             android:fontFamily="sans-serif" />
     </androidx.cardview.widget.CardView>
 
@@ -52,7 +53,7 @@
         android:layout_marginBottom="4dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="#3F51B5"
+        app:cardBackgroundColor="@color/Purple"
         app:layout_constraintTop_toBottomOf="@id/infoCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -65,23 +66,32 @@
             android:paddingEnd="12dp"
             android:paddingTop="4dp"
             android:paddingBottom="4dp">
-
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.30"
+                android:layout_weight="1"
                 android:text="NAME"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:fontFamily="sans-serif-medium" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
+                android:layout_weight="1"
                 android:text="TYPE"
-                android:textSize="8sp"
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="STATUS"
+                android:textSize="10sp"
                 android:textColor="#FFFFFF"
                 android:gravity="center"
                 android:fontFamily="sans-serif-medium" />
@@ -89,16 +99,13 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
-                android:text="STATUS"
-                android:textSize="8sp"
+                android:layout_weight="0.5"
+                android:text="View"
+                android:textSize="14sp"
                 android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:fontFamily="sans-serif-medium" />
+                android:textStyle="normal"
+                android:gravity="center" />
 
-            <Space
-                android:layout_width="40dp"
-                android:layout_height="32dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

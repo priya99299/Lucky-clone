@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:navigationIconTint="@color/white"
-        app:title="Downloads-Section"
+        app:title="@string/Notes"
         app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
         app:titleTextColor="@color/white" />
     <androidx.cardview.widget.CardView
@@ -35,7 +35,7 @@
             android:padding="16dp"
             android:text="Download some of important document(s) like syllabus and prospectus of your related course"
             android:textColor="#000000"
-            android:textSize="13sp"
+            android:textSize="11sp"
             android:fontFamily="sans-serif" />
     </androidx.cardview.widget.CardView>
 
@@ -50,7 +50,7 @@
         android:layout_marginBottom="4dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="#3F51B5"
+        app:cardBackgroundColor="@color/Purple"
         app:layout_constraintTop_toBottomOf="@id/infoCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

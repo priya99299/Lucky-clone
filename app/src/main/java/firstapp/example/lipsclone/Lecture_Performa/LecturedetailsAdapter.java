@@ -16,52 +16,50 @@ import java.util.List;
 import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.Lecture.LectureItem;
 
-public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHolder> {
+public class LecturedetailsAdapter extends RecyclerView.Adapter<LecturedetailsAdapter.ViewHolder> {
 
     private final Context context;
     private final List<LectureItem> items;
 
-    public LectureAdapter(Context context, List<LectureItem> items) {
+    public LecturedetailsAdapter(Context context, List<LectureItem> items) {
         this.context = context;
         this.items = items;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView subject, faculty, duration;
+        TextView subject, faculty, totalLecture;
         ImageView viewIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
             subject = itemView.findViewById(R.id.lecture_title);
             faculty = itemView.findViewById(R.id.lecture_description);
-            duration = itemView.findViewById(R.id.lecture_duration);
+//            totalLecture = itemView.findViewById(R.id.lecture_total);
             viewIcon = itemView.findViewById(R.id.view_icon);
         }
     }
 
     @NonNull
     @Override
-    public LectureAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lecture, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LectureAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LectureItem item = items.get(position);
 
-        holder.subject.setText(item.subject);
-        holder.faculty.setText(item.facultyName);
-        holder.duration.setText(item.duration);
+        holder.subject.setText(item.subject != null ? item.subject : "--");
+        holder.faculty.setText(item.facultyName != null ? item.facultyName : "--");
+        holder.totalLecture.setText(item.totalLecture != null ? item.totalLecture : "--");
 
-        // 👇 Only icon click will open new activity
         holder.viewIcon.setOnClickListener(v -> {
+            // Open detail screen with extras
             Intent intent = new Intent(context, Lecture_details.class);
             intent.putExtra("subject", item.subject);
             intent.putExtra("faculty", item.facultyName);
-//            intent.putExtra("duration", item.duration);
             intent.putExtra("totalLecture", item.totalLecture);
-
             context.startActivity(intent);
         });
     }

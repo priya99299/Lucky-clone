@@ -8,18 +8,18 @@
     android:background="@color/background_light"
     tools:context=".Notice.Notice_Section">
 
-    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_color"
+        android:background="@color/Purple"
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Notice Board"
-        app:titleTextColor="@android:color/white"
-
-        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:navigationIconTint="@color/white"
+        app:title="Notice - Section"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+        app:titleTextColor="@color/white" />
 
     <!-- Header Text -->
     <TextView
