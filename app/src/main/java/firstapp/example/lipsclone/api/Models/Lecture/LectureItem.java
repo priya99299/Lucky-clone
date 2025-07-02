@@ -6,4 +6,5 @@ public class LectureItem {
     public String duration;
     public String totalLecture;
     public String action;
+    public String p_id;
 }

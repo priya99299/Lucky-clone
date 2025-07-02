@@ -2,6 +2,8 @@ package firstapp.example.lipsclone.api.Network;
 
 import firstapp.example.lipsclone.api.Login.LoginReponse;
 import firstapp.example.lipsclone.api.Login.LoginRequest;
+import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.StudentLectureDetailsRequest;
+import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.LectureDetailResponse;
 import firstapp.example.lipsclone.api.Models.Login.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.Fees.FeeRequest;
@@ -47,6 +49,9 @@ public interface apiServices {
     Call<LectureResponse> getLectures(@Body LectureRequest request);
     @POST("api/index.php")
     Call<StudentTimeTableResponse> getStudentTimeTable(@Body StudentTimeTableRequest request);
+    @POST("api/index.php")
+    Call<LectureDetailResponse> getStudentLectureDetails(@Body StudentLectureDetailsRequest request);
+
 
 //    @POST("api/index.php")
 //    Call<okhttp3.ResponseBody> getStudentTimeTable(@Body StudentTimeTableRequest request);

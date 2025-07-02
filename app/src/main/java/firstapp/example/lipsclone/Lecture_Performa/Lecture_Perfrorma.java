@@ -47,7 +47,7 @@ public class Lecture_Perfrorma extends AppCompatActivity {
         LectureRequest request = new LectureRequest("5552", "18", "2024_25", "gdcol1");
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Log.d("📤 Request Payload", gson.toJson(request));
+        Log.d(" Request Payload", gson.toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<LectureResponse> call = api.getLectures(request);

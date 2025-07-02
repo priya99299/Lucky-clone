@@ -54,16 +54,15 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHold
         holder.faculty.setText(item.facultyName);
         holder.duration.setText(item.duration);
 
-        // 👇 Only icon click will open new activity
         holder.viewIcon.setOnClickListener(v -> {
             Intent intent = new Intent(context, Lecture_details.class);
             intent.putExtra("subject", item.subject);
             intent.putExtra("faculty", item.facultyName);
-//            intent.putExtra("duration", item.duration);
             intent.putExtra("totalLecture", item.totalLecture);
-
+            intent.putExtra("p_id", item.action);
             context.startActivity(intent);
         });
+
     }
 
     @Override
