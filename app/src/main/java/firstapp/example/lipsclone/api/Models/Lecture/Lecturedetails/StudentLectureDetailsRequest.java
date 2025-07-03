@@ -7,7 +7,9 @@ public class StudentLectureDetailsRequest {
     public String session;
     public String college;
 
-    public StudentLectureDetailsRequest(String p_id) {
+    public StudentLectureDetailsRequest(String p_id, String session, String college) {
         this.p_id = p_id;
+        this.session = session;
+        this.college = college;
     }
 }

@@ -13,7 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
 import firstapp.example.lipsclone.R;
+import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.LectureDetailItem;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.LectureDetailResponse;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.StudentLectureDetailsRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.LectureInfo;
@@ -25,7 +28,7 @@ import retrofit2.Response;
 
 public class Lecture_details extends AppCompatActivity {
 
-    private static final String TAG = "📋 LectureDetails";
+    private static final String TAG = "LectureDetails";
 
     private TextView subject, faculty, totalLecture;
 
@@ -49,7 +52,7 @@ public class Lecture_details extends AppCompatActivity {
         Log.d(TAG, "✅ Received p_id from Intent: " + p_id);
 
         if (p_id == null || p_id.isEmpty()) {
-            Log.e(TAG, "❌ p_id is missing in Intent extras!");
+            Log.e(TAG, " p_id is missing in Intent extras!");
             return;
         }
 
@@ -57,12 +60,13 @@ public class Lecture_details extends AppCompatActivity {
     }
 
     private void fetchLectureDetails(String pId) {
-        Log.d(TAG, "🚀 Calling API with p_id: " + pId);
+        Log.d(TAG, "Calling API with p_id: " + pId);
 
-        StudentLectureDetailsRequest request = new StudentLectureDetailsRequest(pId);
+        StudentLectureDetailsRequest request = new StudentLectureDetailsRequest(pId, "2024_25", "gdcol1");
+
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Log.d(TAG, "📦 Request Payload:\n" + gson.toJson(request));
+        Log.d(TAG, "Request Payload:\n" + gson.toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
 
@@ -71,47 +75,54 @@ public class Lecture_details extends AppCompatActivity {
             @Override
             public void onResponse(Call<LectureDetailResponse> call, Response<LectureDetailResponse> response) {
                 Log.d(TAG, "🌐 HTTP Status Code: " + response.code());
-                Log.d(TAG, "🌐 Raw Response: " + response.raw().toString());
+                Log.d(TAG, "🌐 Raw Response: " + response.raw());
 
                 try {
                     if (response.isSuccessful() && response.body() != null) {
-                        // Server gave JSON matching your model
                         Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-                        String json = prettyGson.toJson(response.body());
-                        Log.d(TAG, "✅ Parsed Success Body:\n" + json);
+                        Log.d(TAG, "✅ Parsed Success Body:\n" + prettyGson.toJson(response.body()));
 
                         if (response.body().success) {
                             LectureInfo info = response.body().response.lectureInfo;
+                            List<LectureDetailItem> details = response.body().response.lectureDetails;
+
                             if (info != null) {
                                 showLectureInfo(info);
                             } else {
-                                Log.e(TAG, "❌ lectureInfo is null!");
+                                Log.e(TAG, " lectureInfo is null!");
                             }
+
+                            if (details != null && !details.isEmpty()) {
+                                showLectureDetails(details);
+                            } else {
+                                Log.e(TAG, " lectureDetails is empty or null!");
+                            }
+
                         } else {
-                            Log.e(TAG, "❌ Server returned success=false!");
+                            Log.e(TAG, " Server responded with success=false!");
                         }
 
                     } else {
-                        // Non-200 response or body parse fail
-                        Log.e(TAG, "❌ Unsuccessful response!");
+                        Log.e(TAG, "Unsuccessful response!");
                         if (response.errorBody() != null) {
                             String errorRaw = response.errorBody().string();
-                            Log.e(TAG, "❌ ErrorBody:\n" + errorRaw);
+                            Log.e(TAG, "ErrorBody:\n" + errorRaw);
                         } else {
-                            Log.e(TAG, "❌ ErrorBody is null");
+                            Log.e(TAG, " ErrorBody is null");
                         }
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "❌ Exception parsing response", e);
+                    Log.e(TAG, " Exception parsing response", e);
                     try {
                         if (response.errorBody() != null) {
-                            Log.e(TAG, "❌ ErrorBody:\n" + response.errorBody().string());
+                            Log.e(TAG, "ErrorBody:\n" + response.errorBody().string());
                         }
                     } catch (Exception ex) {
-                        Log.e(TAG, "❌ Exception reading errorBody", ex);
+                        Log.e(TAG, " Exception reading errorBody", ex);
                     }
                 }
             }
+
 
             @Override
             public void onFailure(Call<LectureDetailResponse> call, Throwable t) {
@@ -120,9 +131,19 @@ public class Lecture_details extends AppCompatActivity {
         });
 
     }
+    private void showLectureDetails(List<LectureDetailItem> details) {
+        if (details == null || details.isEmpty()) {
+            Log.e(TAG, " lectureDetails list is empty or null!");
+            return;
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Log.d(TAG, "Showing Lecture Details:\n" + gson.toJson(details));
+    }
+
 
     private void showLectureInfo(LectureInfo info) {
-        Log.d(TAG, "📌 Showing Lecture Info: " + new Gson().toJson(info));
+        Log.d(TAG, " Showing Lecture Info: " + new Gson().toJson(info));
 
         subject.setText(info.subject != null ? info.subject : "--");
         faculty.setText(info.facultyName != null ? info.facultyName : "--");

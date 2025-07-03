@@ -44,7 +44,13 @@ public class Lecture_Perfrorma extends AppCompatActivity {
     }
 
     private void fetchLectures() {
-        LectureRequest request = new LectureRequest("5552", "18", "2024_25", "gdcol1");
+        String s_id = getIntent().getStringExtra("s_id");
+        String sessionId = getIntent().getStringExtra("session");
+        String college = getIntent().getStringExtra("college");
+        if (college == null) college = "gdcol1";
+
+        Log.d("response", "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college);
+        LectureRequest request = new LectureRequest("5552", "18", sessionId, college);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Log.d(" Request Payload", gson.toJson(request));
