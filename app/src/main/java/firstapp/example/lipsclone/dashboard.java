@@ -126,6 +126,7 @@ public class dashboard extends AppCompatActivity {
             profileIntent.putExtra("mname", mname);
             profileIntent.putExtra("mobile1", mobile1);
             profileIntent.putExtra("address2", address2);
+            profileIntent.putExtra("session", sessionId);
             startActivity(profileIntent);
         });
 

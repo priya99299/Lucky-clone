@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -38,7 +39,8 @@ public class Lecture_Perfrorma extends AppCompatActivity {
 
         adapter = new LectureAdapter(this, lectureList);
         recyclerView.setAdapter(adapter);
-
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         fetchLectures();
     }

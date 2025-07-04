@@ -37,21 +37,28 @@ public class LecturedetailsAdapter extends RecyclerView.Adapter<LecturedetailsAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lecture, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lecture_detail, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (items == null || items.size() <= position) return;
         LectureDetailItem item = items.get(position);
 
-        holder.topic.setText(item.getMainTopic() != null ? item.getMainTopic() : "--");
-        holder.subTopic.setText(item.getSubTopic() != null ? item.getSubTopic() : "--");
-        holder.completedOn.setText(
-                (item.getCompletedOn() != null && !item.getCompletedOn().equals("0000-00-00"))
-                        ? item.getCompletedOn()
-                        : "--"
-        );
+        if (holder.topic != null)
+            holder.topic.setText(item.getMainTopic() != null ? item.getMainTopic() : "--");
+
+        if (holder.subTopic != null)
+            holder.subTopic.setText(item.getSubTopic() != null ? item.getSubTopic() : "--");
+
+        if (holder.completedOn != null)
+            holder.completedOn.setText(
+                    (item.getCompletedOn() != null && !item.getCompletedOn().equals("0000-00-00"))
+                            ? item.getCompletedOn()
+                            : "--"
+            );
+
     }
 
 

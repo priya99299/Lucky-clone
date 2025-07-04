@@ -41,6 +41,7 @@ public class Profile_module extends AppCompatActivity {
         TextView mothername = findViewById(R.id.mother_name);
         TextView contact = findViewById(R.id.contact);
         TextView address = findViewById(R.id.address);
+        TextView sessionshow=findViewById(R.id.session_text);
 
         // Get Intent Data
         String Studentdetails = getIntent().getStringExtra("name");
@@ -51,15 +52,20 @@ public class Profile_module extends AppCompatActivity {
         String Mobile = getIntent().getStringExtra("mobile1");
         String addresss = getIntent().getStringExtra("address2");
         String ImageUrl = getIntent().getStringExtra("image_url");
+        String session =getIntent().getStringExtra("session");
 
         // Set Values to Views
         studentName.setText(Studentdetails);
         StudentadmissionNo.setText(admisionno);
+        sessionshow.setText(session);
+
         Session.setText(Section);
         fathername.setText(fname1);
         mothername.setText(Mothername);
         contact.setText(Mobile);
         address.setText(addresss);
+
+
 
         // Load Image
         if (ImageUrl != null && !ImageUrl.isEmpty()) {
