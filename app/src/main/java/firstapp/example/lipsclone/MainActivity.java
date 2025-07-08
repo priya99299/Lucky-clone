@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        phone_no = findViewById(R.id.phone_input);
-        btn = findViewById(R.id.submit_button);
+//        phone_no = findViewById(R.id.phone_input);
+//        btn = findViewById(R.id.submit_button);
         // Assuming you have already initialized the fields
         phone_no = findViewById(R.id.phone_input);
         btn = findViewById(R.id.submit_button);
