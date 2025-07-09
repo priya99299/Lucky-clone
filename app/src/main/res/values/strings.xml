@@ -33,8 +33,12 @@
     <string name="logout">Logout</string>
     <string name="Attend"> Attendence</string>
 
+    <string name="Email">info@luckyinstitute.org</string>
+    <string name="number">+91-97842-11113</string>
+    <string name="address">Kamla Nehru Nagar,First Extension Jodhpur(Raj)</string>
     <string name="documents">Documents</string>
-    <string name="note_title">Note Title</string> <!-- Placeholder, replace with dynamic data -->
+    <string name="msg">For more Information or any kind of help please drop us an email or whatsapp or call by the information given below</string>
+    <string name="note_title">Note Title</string>
     <string name="back">Back</string>
     <string name="visibility">Visibility</string>
 

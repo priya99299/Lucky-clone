@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
+        <activity
+            android:name=".Contact_us.Contact_us"
+            android:exported="false" />
         <activity
             android:name=".Lecture_Performa.Lecture_details"
             android:exported="false" />
@@ -27,7 +31,7 @@
             android:name=".Notice.Notice_Section"
             android:exported="false" />
         <activity
-            android:name=".feesDetails"
+            android:name=".fees.fees_Details"
             android:exported="false" />
         <activity
             android:name=".Canteen.Canteen"
@@ -42,21 +46,12 @@
         <activity
             android:name=".LoginActivty.LoginOTPActivity"
             android:exported="false" />
-        <activity
-            android:name=".TimaTable"
-            android:exported="false" />
-        <activity
-            android:name=".Contact_us.Contact_us"
-            android:exported="false" />
+
+
         <activity
             android:name=".Documents.Document"
             android:exported="false" />
-        <activity
-            android:name=".fees.fees_Details"
-            android:exported="false" />
-        <activity
-            android:name=".Notes"
-            android:exported="false" />
+
         <activity
             android:name=".Attendence.Attendence_module"
             android:exported="false" />

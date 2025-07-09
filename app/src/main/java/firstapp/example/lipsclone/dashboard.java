@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 
 import firstapp.example.lipsclone.Canteen.Canteen;
+import firstapp.example.lipsclone.Contact_us.Contact_us;
 import firstapp.example.lipsclone.Documents.Document;
 import firstapp.example.lipsclone.Downloads.Downloads;
 import firstapp.example.lipsclone.Lecture_Performa.Lecture_Perfrorma;
@@ -188,7 +189,8 @@ public class dashboard extends AppCompatActivity {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            Intent Information=new Intent(dashboard.this, Contact_us.class);
+            startActivity(Information);
             }
         });
     }
