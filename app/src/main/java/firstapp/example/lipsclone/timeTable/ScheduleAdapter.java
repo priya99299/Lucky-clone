@@ -85,8 +85,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             tvSubject = itemView.findViewById(R.id.tvSubject);
             tvTeacher = itemView.findViewById(R.id.tvTeacher);
-            tvRoom = itemView.findViewById(R.id.tvRoom);
-            tvTime = itemView.findViewById(R.id.tvTime);
+            tvRoom = itemView.findViewById(R.id.tvLocation);
+            tvTime = itemView.findViewById(R.id.tvTiming);
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
