@@ -21,6 +21,8 @@ import firstapp.example.lipsclone.api.Models.Fees.FeeTransactionRequest;
 import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableRequest;
 import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
+import firstapp.example.lipsclone.api.Models.attendence.AttendanceRequest;
+import firstapp.example.lipsclone.api.Models.attendence.AttendanceResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -51,10 +53,9 @@ public interface apiServices {
     Call<StudentTimeTableResponse> getStudentTimeTable(@Body StudentTimeTableRequest request);
     @POST("api/index.php")
     Call<LectureDetailResponse> getStudentLectureDetails(@Body StudentLectureDetailsRequest request);
+    @POST("api/index.php")
+    Call<AttendanceResponse> getMonthlyAttendance(@Body AttendanceRequest request);
 
-
-//    @POST("api/index.php")
-//    Call<okhttp3.ResponseBody> getStudentTimeTable(@Body StudentTimeTableRequest request);
 
 
 

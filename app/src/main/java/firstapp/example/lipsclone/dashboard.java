@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 
+import firstapp.example.lipsclone.Attendence.Attendence_module;
 import firstapp.example.lipsclone.Canteen.Canteen;
 import firstapp.example.lipsclone.Contact_us.Contact_us;
 import firstapp.example.lipsclone.Documents.Document;
@@ -44,7 +45,7 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact;
+        CardView profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact,attendence;
         Button btn;
 
         document = findViewById(R.id.document);
@@ -61,7 +62,7 @@ public class dashboard extends AppCompatActivity {
         timetable=findViewById(R.id.e_learning);
         Lecturees=findViewById(R.id.lecture_Details);
         contact=findViewById(R.id.contact);
-
+        attendence=findViewById(R.id.attendence);
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -191,6 +192,15 @@ public class dashboard extends AppCompatActivity {
             public void onClick(View v) {
             Intent Information=new Intent(dashboard.this, Contact_us.class);
             startActivity(Information);
+            }
+        });
+        attendence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Attendence = new Intent(dashboard.this, Attendence_module.class);
+                Attendence.putExtra("s_id", studentId);
+                Attendence.putExtra("session", sessionId);
+                startActivity(Attendence);
             }
         });
     }

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
+            android:name=".Attendence.Monthly_Attendence"
+            android:exported="false" />
+        <activity
             android:name=".Contact_us.Contact_us"
             android:exported="false" />
         <activity
@@ -46,12 +49,9 @@
         <activity
             android:name=".LoginActivty.LoginOTPActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".Documents.Document"
             android:exported="false" />
-
         <activity
             android:name=".Attendence.Attendence_module"
             android:exported="false" />

@@ -37,7 +37,7 @@ public class LoginOTPActivity extends AppCompatActivity {
         String s_id = getIntent().getStringExtra("s_id");
         String session = getIntent().getStringExtra("session");
         String college = getIntent().getStringExtra("college");
-        String f_id = getIntent().getStringExtra("f_id");
+        String f_id = getIntent().getStringExtra("F_id");
 
         submitButton.setOnClickListener(v -> {
             String enteredOtp = otpInput.getText().toString().trim();
@@ -90,6 +90,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                             editor.putString("college", college);
                             editor.putString("s_id", s_id);
                             editor.putString("session", session);
+                            editor.putString("F_id", F_id);
 
 //                        editor.apply();
 
@@ -110,6 +111,8 @@ public class LoginOTPActivity extends AppCompatActivity {
                             intent.putExtra("s_id", s_id);        // <-- add this
                             intent.putExtra("session", session);  // <-- add this
                             intent.putExtra("college", college);
+                            intent.putExtra("F_id", F_id);
+
 
                             startActivity(intent);
                             finish();
