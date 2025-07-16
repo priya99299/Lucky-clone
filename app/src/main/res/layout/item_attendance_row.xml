@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:paddingVertical="8dp"
         android:paddingHorizontal="12dp"
-        android:background="?attr/selectableItemBackground">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tvMonth"
@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:text="Month"
             android:textColor="@color/on_surface"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:paddingEnd="4dp" />
 
         <TextView

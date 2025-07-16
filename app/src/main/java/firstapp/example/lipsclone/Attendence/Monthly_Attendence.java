@@ -73,9 +73,13 @@ public class Monthly_Attendence extends AppCompatActivity {
 
         Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId);
 
+//        String fId = getIntent().getStringExtra("f_id");
 
-        AttendanceRequest request = new AttendanceRequest(s_id, sessionId, college);
-        request.setSem("");    // ✅ important: sem is empty string
+        String fId="18";
+        AttendanceRequest request = new AttendanceRequest(s_id, sessionId, college, fId);
+
+
+//        request.setSem("");    // ✅ important: sem is empty string
 
         String requestJson = gson.toJson(request);
         Log.d(TAG, "--> REQUEST PAYLOAD:\n" + requestJson);

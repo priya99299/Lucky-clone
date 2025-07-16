@@ -5,27 +5,17 @@ import com.google.gson.annotations.SerializedName;
 public class AttendanceData {
 
     @SerializedName("Month")
-    private String month;
+    public String month;
 
     @SerializedName("Present")
-    private String present;
+    public String present;
 
     @SerializedName("Total_Class")
-    private String totalClass;
+    public String totalClass;
 
-    public String getMonth() {
-        return month;
+    public AttendanceData() {
+        // Default constructor for Gson
     }
-
-    public String getPresent() {
-        return present;
-    }
-
-    public String getTotalClass() {
-        return totalClass;
-    }
-
-    public AttendanceData() {}
 
     public AttendanceData(String month, String present, String totalClass) {
         this.month = month;

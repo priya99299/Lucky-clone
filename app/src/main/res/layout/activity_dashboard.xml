@@ -33,7 +33,7 @@
                 android:id="@+id/college_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="Lucky Institute of Professional Studies "
                 android:textSize="15sp"
                 android:textColor="@color/white"
                 android:textStyle="normal" />

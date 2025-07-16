@@ -13,7 +13,6 @@ import java.util.List;
 import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceData;
 
-
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.AttendanceViewHolder> {
 
     private final List<AttendanceData> attendanceList;
@@ -25,25 +24,31 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
     @NonNull
     @Override
     public AttendanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_attendance_row, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_attendance_row, parent, false);
         return new AttendanceViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AttendanceViewHolder holder, int position) {
         AttendanceData data = attendanceList.get(position);
-        holder.tvMonth.setText(data.getMonth());
-        holder.tvPresent.setText( data.getPresent());
-        holder.tvTotalClass.setText( data.getTotalClass());
+
+        if (data != null) {
+            holder.tvMonth.setText(data.month);
+            holder.tvPresent.setText(data.present);
+            holder.tvTotalClass.setText(data.totalClass);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return attendanceList.size();
+        return attendanceList != null ? attendanceList.size() : 0;
     }
 
     static class AttendanceViewHolder extends RecyclerView.ViewHolder {
-        TextView tvMonth, tvPresent, tvTotalClass;
+        final TextView tvMonth;
+        final TextView tvPresent;
+        final TextView tvTotalClass;
 
         public AttendanceViewHolder(@NonNull View itemView) {
             super(itemView);

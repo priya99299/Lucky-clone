@@ -87,7 +87,7 @@ public class dashboard extends AppCompatActivity {
         String studentId = sharedPreferences.getString("s_id", "");
         String sessionId = sharedPreferences.getString("session", "");
         String collegeId = sharedPreferences.getString("college", "");
-        String F_id = sharedPreferences.getString("f_id" ,"");
+        String f_id = sharedPreferences.getString("f_id" ,"");
 
         // Update UI
         name.setText(Studentdetails);
@@ -139,7 +139,7 @@ public class dashboard extends AppCompatActivity {
             notesIntent.putExtra("s_id", studentId);
             notesIntent.putExtra("session", sessionId);
             notesIntent.putExtra("college", collegeId);
-            notesIntent.putExtra("f_id", F_id);
+            notesIntent.putExtra("f_id", f_id);
 
             startActivity(notesIntent);
         });
@@ -157,7 +157,7 @@ public class dashboard extends AppCompatActivity {
             feesIntent.putExtra("s_id", studentId);
             feesIntent.putExtra("session", sessionId);
             feesIntent.putExtra("college", collegeId);
-            feesIntent.putExtra("f_id", F_id);
+            feesIntent.putExtra("f_id", f_id);
 
             startActivity(feesIntent);
         });
@@ -200,6 +200,7 @@ public class dashboard extends AppCompatActivity {
                 Intent Attendence = new Intent(dashboard.this, Attendence_module.class);
                 Attendence.putExtra("s_id", studentId);
                 Attendence.putExtra("session", sessionId);
+                Attendence.putExtra("f_id", f_id);
                 startActivity(Attendence);
             }
         });
