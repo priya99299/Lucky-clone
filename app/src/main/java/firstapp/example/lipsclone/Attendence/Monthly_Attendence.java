@@ -68,14 +68,14 @@ public class Monthly_Attendence extends AppCompatActivity {
         // Get data from Intent
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
-//        String class_id = "18"; // 🔁 You can make this dynamic if needed
+
         String college = "gdcol1";
 
         Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId);
 
-//        String fId = getIntent().getStringExtra("f_id");
+        String fId = getIntent().getStringExtra("f_id");
 
-        String fId="18";
+        Log.d(TAG, "Intent Extras Check --> f_id"+fId);
         AttendanceRequest request = new AttendanceRequest(s_id, sessionId, college, fId);
 
 

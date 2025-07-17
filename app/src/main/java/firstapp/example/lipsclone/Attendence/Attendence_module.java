@@ -42,7 +42,8 @@ public class Attendence_module extends AppCompatActivity {
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
         String f_id = getIntent().getStringExtra("f_id");
-        Log.d(TAG, "Intent Extras Check --> s_id: " + s_id + ", sessionId: " + sessionId+f_id);
+        Log.d(TAG, "Intent Extras Check --> s_id: " + s_id + ", sessionId: " + sessionId);
+        Log.d(TAG, "Intent Extras Check --> f_id"+f_id);
 
         // Monthly Attendance CardView
         CardView monthlyCard = findViewById(R.id.Monthly);
