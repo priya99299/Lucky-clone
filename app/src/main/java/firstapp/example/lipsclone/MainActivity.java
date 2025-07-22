@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginReponse> call, Throwable t) {
                 Log.e("LOGIN_ERROR", "Network failure: " + t.getMessage());
-                Toast.makeText(MainActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }

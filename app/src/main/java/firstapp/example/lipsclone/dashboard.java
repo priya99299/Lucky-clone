@@ -196,15 +196,14 @@ public class dashboard extends AppCompatActivity {
             startActivity(Information);
             }
         });
-        attendence.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Attendence = new Intent(dashboard.this, Attendence_module.class);
-                Attendence.putExtra("s_id", studentId);
-                Attendence.putExtra("session", sessionId);
-                Attendence.putExtra("f_id", f_id);
-                startActivity(Attendence);
-            }
+        attendence.setOnClickListener(v -> {
+            Intent intent = new Intent(dashboard.this, Attendence_module.class);
+            intent.putExtra("s_id", studentId);
+            intent.putExtra("session", sessionId);
+            intent.putExtra("f_id", f_id);
+            intent.putExtra("live_status", "0"); // ✅ hardcoded
+            startActivity(intent);
         });
+
     }
 }
