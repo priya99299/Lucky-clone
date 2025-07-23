@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -46,7 +47,7 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        CardView profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact,attendence;
+        LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact,attendence;
         Button btn;
 
         document = findViewById(R.id.document);

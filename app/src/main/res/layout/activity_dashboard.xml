@@ -40,6 +40,7 @@
         </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
+
     <LinearLayout
         android:id="@+id/header_second_row"
         android:layout_width="match_parent"
@@ -50,7 +51,6 @@
         android:padding="17dp"
         android:layout_marginTop="11dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
-
 
         <!-- Profile Image FIRST -->
         <ImageView
@@ -131,8 +131,8 @@
             android:paddingVertical="16dp"
             android:rowCount="6">
 
-            <!-- Profile Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Profile -->
+            <LinearLayout
                 android:id="@+id/stuProfile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -140,39 +140,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="timetable_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/Profile"
+                    android:textSize="12sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/profile" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/Profile"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Documents Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Documents -->
+            <LinearLayout
                 android:id="@+id/document"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -180,39 +170,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="document_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/docum" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/document"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/docum" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/document"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Fees Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Fees -->
+            <LinearLayout
                 android:id="@+id/fees"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -220,40 +200,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="fees_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/fees" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/fees"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/fees" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/fees"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <!-- Notice Board Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Notice Board -->
+            <LinearLayout
                 android:id="@+id/Notice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -261,39 +230,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="notice_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/noticeboard" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/notice"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/noticeboard" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/notice"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Attendance Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Attendance -->
+            <LinearLayout
                 android:id="@+id/attendence"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -301,39 +260,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="contact_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/attedence" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/attendance"
+                    android:textSize="10sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="27dp"
-                        android:layout_height="27dp"
-                        android:src="@drawable/attedence" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/attendance"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Notes Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Notes -->
+            <LinearLayout
                 android:id="@+id/notes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -341,38 +290,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="ask_doubt_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/note" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/notes"
+                    android:textSize="10sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/note" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/notes"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-            <!-- Academic Calendar Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Time Table -->
+            <LinearLayout
                 android:id="@+id/e_learning"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -380,40 +320,29 @@
                 android:layout_margin="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="e_learning_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/time_table" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:text="Time Table"
+                    android:textSize="10dp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/time_table" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Time Table"
-                        android:textSize="10dp"
-                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Results Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Library -->
+            <LinearLayout
                 android:id="@+id/results"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -421,81 +350,59 @@
                 android:layout_margin="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="results_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/booke" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:text="@string/library"
+                    android:textSize="12dp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/booke" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/library"
-                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Library Card -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Lecture Details -->
+            <LinearLayout
                 android:id="@+id/lecture_Details"
-
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="library_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/training" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:textSize="11dp"
+                    android:text="@string/lecture_performa"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/training" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:textSize="8dp"
-                        android:text="@string/lecture_performa"
-                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Example Card: Canteen -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Canteen -->
+            <LinearLayout
                 android:id="@+id/canteen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -503,37 +410,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="events_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/canteen" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="Canteen"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/canteen" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="Canteen"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            <!-- Quiz -->
+            <LinearLayout
                 android:id="@+id/feedback1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -541,37 +440,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="feedback_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/quiz" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="@string/quiz"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/quiz" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="@string/quiz"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            <!-- Result -->
+            <LinearLayout
                 android:id="@+id/feedback"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -579,38 +470,29 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackground"
                 android:transitionName="feedback_card_transition"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/result" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="Result"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="23dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/result" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="Result"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-            <!-- New Row: 3 Cards -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- Message -->
+            <LinearLayout
                 android:id="@+id/msg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -618,37 +500,28 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/msg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="Message from \nto College"
+                    android:textSize="9sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/msg" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="Message from \nto College"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <!-- Complaint -->
+            <LinearLayout
                 android:id="@+id/complaint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -656,37 +529,28 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/comments" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:text="Complaint"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/comments" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="Complaint"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <!-- Contact Us -->
+            <LinearLayout
                 android:id="@+id/contact"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -694,38 +558,27 @@
                 android:layout_margin="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/very_light_grey"
-                app:strokeWidth="0.5dp">
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/contact" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/contact" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:text="Contact-US"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
+                    android:text="Contact-US"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
 
         </GridLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
