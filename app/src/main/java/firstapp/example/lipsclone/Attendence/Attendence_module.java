@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,22 +12,17 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import firstapp.example.lipsclone.R;
-import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceRequest;
-import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceResponse;
-import firstapp.example.lipsclone.api.Network.apiServices;
-import firstapp.example.lipsclone.api.Network.apiclient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Attendence_module extends AppCompatActivity {
 
     private static final String TAG = "Attendance";
+    private Button markAttendanceBtn;
+    private String s_id, sessionId, f_id, liveStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +42,14 @@ public class Attendence_module extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         // Get intent extras
-        String s_id = getIntent().getStringExtra("s_id");
-        String sessionId = getIntent().getStringExtra("session");
-        String f_id = getIntent().getStringExtra("f_id");
-        Log.d(TAG, "Intent Extras Check --> s_id: " + s_id + ", sessionId: " + sessionId);
-        Log.d(TAG, "Intent Extras Check --> f_id"+f_id);
+        s_id = getIntent().getStringExtra("s_id");
+        sessionId = getIntent().getStringExtra("session");
+        f_id = getIntent().getStringExtra("f_id");
+        liveStatus = getIntent().getStringExtra("live_status");
 
-        // Monthly Attendance CardView
+        Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId + ", f_id: " + f_id + ", live_status: " + liveStatus);
+
+        // Monthly Attendance CardView click
         CardView monthlyCard = findViewById(R.id.Monthly);
         monthlyCard.setOnClickListener(v -> {
             Intent monthly = new Intent(Attendence_module.this, Monthly_Attendence.class);
@@ -63,23 +58,40 @@ public class Attendence_module extends AppCompatActivity {
             monthly.putExtra("f_id", f_id);
             startActivity(monthly);
         });
-        CardView Lecture=findViewById(R.id.Lecture);
-        Lecture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Lecture= new Intent(Attendence_module.this,Lecture_wise_Attendence.class);
-                Lecture.putExtra("s_id", s_id);
-                Lecture.putExtra("session", sessionId);
-                Lecture.putExtra("f_id", f_id);
-                startActivity(Lecture);
+
+        // Lecture-wise Attendance CardView click
+        CardView lecture = findViewById(R.id.Lecture);
+        lecture.setOnClickListener(v -> {
+            Intent lectureIntent = new Intent(Attendence_module.this, Lecture_wise_Attendence.class);
+            lectureIntent.putExtra("s_id", s_id);
+            lectureIntent.putExtra("session", sessionId);
+            lectureIntent.putExtra("f_id", f_id);
+            startActivity(lectureIntent);
+        });
+
+        // Mark Attendance button setup
+        markAttendanceBtn = findViewById(R.id.markAttendanceBtn);
+        updateButton(); // initial status set
+
+        // Refresh button click (FloatingActionButton)
+        FloatingActionButton refreshFab = findViewById(R.id.refreshFab);
+        refreshFab.setOnClickListener(v -> {
+            if (markAttendanceBtn.isEnabled()) {
+                markAttendanceBtn.setEnabled(false);
+                markAttendanceBtn.setAlpha(0.5f);
+            } else {
+                markAttendanceBtn.setEnabled(true);
+                markAttendanceBtn.setAlpha(1f);
             }
         });
 
-        // Inside onCreate, after getting intent extras
-        String liveStatus = getIntent().getStringExtra("live_status");
-        Log.d("Attendence_module", "Received status: " + liveStatus);
+    }
 
-        Button markAttendanceBtn = findViewById(R.id.markAttendanceBtn);
+    /**
+     * Updates the markAttendanceBtn based on liveStatus value
+     */
+    private void updateButton() {
+        Log.d(TAG, "Updating button. Current live_status: " + liveStatus);
         if ("1".equals(liveStatus)) {
             markAttendanceBtn.setEnabled(true);
             markAttendanceBtn.setAlpha(1f);
@@ -87,6 +99,5 @@ public class Attendence_module extends AppCompatActivity {
             markAttendanceBtn.setEnabled(false);
             markAttendanceBtn.setAlpha(0.5f);
         }
-
     }
 }
