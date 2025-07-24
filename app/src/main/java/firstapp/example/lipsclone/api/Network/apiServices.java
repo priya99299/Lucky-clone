@@ -25,6 +25,7 @@ import firstapp.example.lipsclone.api.Models.attendence.AttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceResponse;
+import firstapp.example.lipsclone.api.Models.attendence.SaveAttendanceRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -58,7 +59,12 @@ public interface apiServices {
     @POST("api/index.php")
     Call<AttendanceResponse> getMonthlyAttendance(@Body AttendanceRequest request);
     @POST("api/index.php")
-    Call<LiveAttendanceResponse> getLiveAttendanceStatus(@Body LiveAttendanceRequest request);
+    Call<LiveAttendanceResponse> getLiveAttendance(@Body LiveAttendanceRequest request);
+
+    @POST("api/index.php")
+    Call<LiveAttendanceResponse> saveAttendance(@Body SaveAttendanceRequest request);
+
+
 
 
 
