@@ -16,6 +16,9 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
+            android:name=".complaint.TrackComplaintActivity"
+            android:exported="false" />
+        <activity
             android:name=".complaint.ComplaintSection"
             android:exported="false" />
         <activity

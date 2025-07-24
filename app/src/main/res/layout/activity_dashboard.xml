@@ -56,12 +56,13 @@
         <ImageView
             android:id="@+id/studentImage"
             android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_height="46dp"
             android:contentDescription="@string/profile_image_desc"
             android:clickable="true"
             android:focusable="true"
             android:scaleType="centerCrop"
             android:src="@drawable/profile1"
+            app:shapeAppearanceOverlay="@style/CircleImage"
             android:transitionName="profile_transition" />
 
         <!-- THIS SPACE creates spacing between Image and Student Info -->
