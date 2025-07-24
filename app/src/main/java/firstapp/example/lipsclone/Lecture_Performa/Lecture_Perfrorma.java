@@ -55,7 +55,7 @@ public class Lecture_Perfrorma extends AppCompatActivity {
         LectureRequest request = new LectureRequest("5552", "18", sessionId, college);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Log.d(" Request Payload", gson.toJson(request));
+        Log.d("Request Payload of lecture", gson.toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<LectureResponse> call = api.getLectures(request);
@@ -65,7 +65,7 @@ public class Lecture_Perfrorma extends AppCompatActivity {
             public void onResponse(Call<LectureResponse> call, Response<LectureResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     LectureResponse res = response.body();
-                    Log.d("✅ Response", gson.toJson(res));
+                    Log.d("Response of lectrue", gson.toJson(res));
 
                     if (res.success && !res.response.isEmpty()) {
                         lectureList.clear();

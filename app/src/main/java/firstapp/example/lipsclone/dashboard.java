@@ -25,8 +25,10 @@ import firstapp.example.lipsclone.Contact_us.Contact_us;
 import firstapp.example.lipsclone.Documents.Document;
 import firstapp.example.lipsclone.Downloads.Downloads;
 import firstapp.example.lipsclone.Lecture_Performa.Lecture_Perfrorma;
+import firstapp.example.lipsclone.Msgfromclg.MsgFromClg;
 import firstapp.example.lipsclone.Notice.Notice_Section;
 import firstapp.example.lipsclone.Profile.Profile_module;
+import firstapp.example.lipsclone.complaint.ComplaintSection;
 import firstapp.example.lipsclone.fees.fees_Details;
 import firstapp.example.lipsclone.timeTable.Time_table;
 
@@ -47,7 +49,7 @@ public class dashboard extends AppCompatActivity {
         // UI Components
         ImageView ProfilePic;
         TextView name, Session;
-        LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact,attendence;
+        LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact,attendence,complaint,msg;
         Button btn;
 
         document = findViewById(R.id.document);
@@ -65,6 +67,8 @@ public class dashboard extends AppCompatActivity {
         Lecturees=findViewById(R.id.lecture_Details);
         contact=findViewById(R.id.contact);
         attendence=findViewById(R.id.attendence);
+        complaint=findViewById(R.id.complaint);
+        msg=findViewById(R.id.msg);
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -205,6 +209,21 @@ public class dashboard extends AppCompatActivity {
             intent.putExtra("live_status", "0"); // ✅ hardcoded
             startActivity(intent);
         });
+        complaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent complaint=new Intent(dashboard.this, ComplaintSection.class);
+                startActivity(complaint);
+            }
+        });
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent msg=new Intent(dashboard.this,MsgFromClg.class);
+                startActivity(msg);
+            }
+        });
+
 
     }
 }
