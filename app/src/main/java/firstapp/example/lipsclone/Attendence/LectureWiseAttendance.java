@@ -124,7 +124,7 @@ public class LectureWiseAttendance extends AppCompatActivity {
             @Override
             public void onResponse(Call<LectureAttendanceResponse> call, Response<LectureAttendanceResponse> response) {
                 if (response.isSuccessful() && response.body() != null && !response.body().error) {
-                    Log.d(TAG, "✅ API Response: " + response.body().toString());
+                    Log.d(TAG, "API Response: " + response.body());
 
                     List<String[]> attendanceRows = new ArrayList<>();
                     for (LectureAttendanceResponse.AttendanceItem item : response.body().response) {
@@ -139,13 +139,13 @@ public class LectureWiseAttendance extends AppCompatActivity {
                     LectureAdapter adapter = new LectureAdapter(attendanceRows);
                     attendanceRecyclerView.setAdapter(adapter);
                 } else {
-                    Log.e(TAG, "❌ Invalid API Response or Empty Data");
+                    Log.e(TAG, "Invalid API Response or Empty Data");
                 }
             }
 
             @Override
             public void onFailure(Call<LectureAttendanceResponse> call, Throwable t) {
-                Log.e(TAG, "❌ API Failure: " + t.getMessage());
+                Log.e(TAG, "API Failure: " + t.getMessage());
             }
         });
     }

@@ -21,7 +21,7 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.Attendan
 
     public LectureAdapter(List<String[]> data) {
         attendanceList = new ArrayList<>();
-        attendanceList.add(new String[]{"Subject", "Total Lecture", "Class Attd."}); // header
+      
         attendanceList.addAll(data);
     }
 
@@ -42,16 +42,13 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.Attendan
         holder.tvAttd.setText(row[2]);
 
         if (position == 0) {
-            // Header styling
-            holder.tvSubject.setTypeface(null, Typeface.BOLD);
-            holder.tvTotal.setTypeface(null, Typeface.BOLD);
-            holder.tvAttd.setTypeface(null, Typeface.BOLD);
+
 
             holder.tvSubject.setTextColor(Color.WHITE);
             holder.tvTotal.setTextColor(Color.WHITE);
             holder.tvAttd.setTextColor(Color.WHITE);
 
-            holder.itemView.setBackgroundColor(Color.parseColor("#4B3F9C"));
+
         } else {
             // Data styling
             holder.tvSubject.setTypeface(null, Typeface.NORMAL);

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -76,15 +77,18 @@ public class Attendence_module extends AppCompatActivity {
             monthly.putExtra("sem", sem);
             startActivity(monthly);
         });
+        CardView Lecture;
+        Lecture=findViewById(R.id.Lecture);
 
         // Lecture-wise Attendance click
-        findViewById(R.id.Lecture).setOnClickListener(v -> {
-            Intent lectureIntent = new Intent(this,LectureWiseAttendance.class);
+        Lecture.setOnClickListener(v -> {
+            Intent lectureIntent = new Intent(this, LectureWiseAttendance.class);
             lectureIntent.putExtra("s_id", s_id);
             lectureIntent.putExtra("session", sessionId);
             lectureIntent.putExtra("f_id", f_id);
             lectureIntent.putExtra("sem", sem);
             startActivity(lectureIntent);
+
         });
 
         // Mark Attendance button setup
