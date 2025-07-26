@@ -8,13 +8,11 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -35,7 +33,7 @@ public class Attendence_module extends AppCompatActivity {
 
     private static final String TAG = "Attendance";
     private Button markAttendanceBtn;
-    private String s_id, sessionId, f_id, college, a_id;
+    private String s_id, sessionId, f_id, college, a_id, sem;
     private Gson gson;
 
     @Override
@@ -44,9 +42,9 @@ public class Attendence_module extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_attendence_module);
 
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
-        // Handle status bar insets
+        // Status bar insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -62,25 +60,30 @@ public class Attendence_module extends AppCompatActivity {
         sessionId = getIntent().getStringExtra("session");
         f_id = getIntent().getStringExtra("f_id");
         college = getIntent().getStringExtra("college");
+        sem = getIntent().getStringExtra("semester");
+
         if (college == null) college = "gdcol1";
 
-        Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId + ", f_id: " + f_id + ", college: " + college);
+        Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId +
+                ", f_id: " + f_id + ", college: " + college + ", semester: " + sem);
 
-        // Monthly Attendance CardView click
+        // Monthly Attendance click
         findViewById(R.id.Monthly).setOnClickListener(v -> {
             Intent monthly = new Intent(this, Monthly_Attendence.class);
             monthly.putExtra("s_id", s_id);
             monthly.putExtra("session", sessionId);
             monthly.putExtra("f_id", f_id);
+            monthly.putExtra("sem", sem);
             startActivity(monthly);
         });
 
-        // Lecture-wise Attendance CardView click
+        // Lecture-wise Attendance click
         findViewById(R.id.Lecture).setOnClickListener(v -> {
             Intent lectureIntent = new Intent(this, Lecture_wise_Attendence.class);
             lectureIntent.putExtra("s_id", s_id);
             lectureIntent.putExtra("session", sessionId);
             lectureIntent.putExtra("f_id", f_id);
+            lectureIntent.putExtra("sem", sem);
             startActivity(lectureIntent);
         });
 
@@ -99,6 +102,8 @@ public class Attendence_module extends AppCompatActivity {
      * Calls the live attendance API to enable/disable button
      */
     private void fetchLiveAttendance() {
+        Log.d(TAG, "Starting fetchLiveAttendance...");
+
         apiServices api = apiclient.getClient().create(apiServices.class);
 
         LiveAttendanceRequest request = new LiveAttendanceRequest(
@@ -107,10 +112,10 @@ public class Attendence_module extends AppCompatActivity {
                 college,
                 sessionId,
                 s_id,
-                f_id
+                f_id,
+                sem
         );
 
-        // Log request payload
         Log.d(TAG, "LiveAttendance API Request Payload:\n" + gson.toJson(request));
 
         Call<LiveAttendanceResponse> call = api.getLiveAttendance(request);
@@ -118,47 +123,73 @@ public class Attendence_module extends AppCompatActivity {
         call.enqueue(new Callback<LiveAttendanceResponse>() {
             @Override
             public void onResponse(Call<LiveAttendanceResponse> call, Response<LiveAttendanceResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "LiveAttendance API Response:\n" + gson.toJson(response.body()));
+                Log.d(TAG, "Response received - Code: " + response.code());
+
+                if (response.isSuccessful()) {
                     LiveAttendanceResponse res = response.body();
 
-                    if (res.isSuccess() && !res.isError() && res.getResponse() != null) {
-                        String status = res.getResponse().getStatus();
-                        String markStatus = res.getResponse().getMark_status();
-                        a_id = res.getResponse().getA_id();
+                    if (res == null) {
+                        Log.e(TAG, "Response body is NULL");
+                        logRawResponse(response);
+                        disableButton();
+                        Toast.makeText(Attendence_module.this, "Empty response from server", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-                        Log.d(TAG, "status: " + status + ", mark_status: " + markStatus + ", a_id: " + a_id);
+                    Log.d(TAG, "Parsed Response:\n" + gson.toJson(res));
+
+                    LiveAttendanceResponse.ResponseData data = res.getResponse();
+                    if (data != null) {
+                        String status = data.getStatus();
+                        String markStatus = data.getMark_status();
+                        String msg = data.getMsg();
+                        a_id = data.getA_id();
 
                         if ("1".equals(status) && "1".equals(markStatus)) {
                             enableButton();
+                            Toast.makeText(Attendence_module.this, msg != null ? msg : "Attendance available", Toast.LENGTH_SHORT).show();
                         } else {
                             disableButton();
+                            Toast.makeText(Attendence_module.this, msg != null ? msg : "Attendance not available", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Log.e(TAG, "API returned error or null response data");
                         disableButton();
+                        Toast.makeText(Attendence_module.this, "No attendance data available", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    // 🔴 Log raw error body for debugging
-                    ResponseBody errorBody = response.errorBody();
-                    if (errorBody != null) {
-                        try {
-                            Log.e(TAG, "ErrorBody:\n" + errorBody.string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    Log.e(TAG, "API call failed. Response code: " + response.code());
+                    Log.e(TAG, "API call unsuccessful. Response code: " + response.code());
+                    logRawResponse(response);
                     disableButton();
+                    Toast.makeText(Attendence_module.this, "Failed to fetch attendance status", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LiveAttendanceResponse> call, Throwable t) {
-                Log.e(TAG, "API call failed: " + t.getMessage());
+                Log.d(TAG, "Attendence api not called/ not lived");
+                t.printStackTrace();
                 disableButton();
+                Toast.makeText(Attendence_module.this, "Please try again", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /**
+     * Logs raw error or body string for debugging empty or invalid responses
+     */
+    private void logRawResponse(Response<?> response) {
+        try {
+            ResponseBody errorBody = response.errorBody();
+            if (errorBody != null) {
+                Log.e(TAG, "Raw ErrorBody:\n" + errorBody.string());
+            } else if (response.body() != null) {
+                Log.d(TAG, "Raw Body:\n" + gson.toJson(response.body()));
+            } else {
+                Log.e(TAG, "Both response body and error body are null");
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Error reading raw response: " + e.getMessage());
+        }
     }
 
     /**
@@ -169,6 +200,8 @@ public class Attendence_module extends AppCompatActivity {
             Toast.makeText(this, "Attendance not available to mark.", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        Log.d(TAG, "Starting saveAttendance with a_id: " + a_id);
 
         apiServices api = apiclient.getClient().create(apiServices.class);
 
@@ -188,23 +221,28 @@ public class Attendence_module extends AppCompatActivity {
         call.enqueue(new Callback<LiveAttendanceResponse>() {
             @Override
             public void onResponse(Call<LiveAttendanceResponse> call, Response<LiveAttendanceResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "SaveAttendance API Response:\n" + gson.toJson(response.body()));
-                    LiveAttendanceResponse res = response.body();
-                    String msg = res.getResponse() != null ? res.getResponse().getMsg() : "Attendance marked.";
+                Log.d(TAG, "SaveAttendance Response - Code: " + response.code());
 
-                    Toast.makeText(Attendence_module.this, msg, Toast.LENGTH_SHORT).show();
-                    disableButton(); // disable after marking
+                if (response.isSuccessful()) {
+                    LiveAttendanceResponse res = response.body();
+                    if (res != null) {
+                        String msg = res.getResponse() != null ? res.getResponse().getMsg() : "Attendance marked successfully";
+                        Toast.makeText(Attendence_module.this, msg, Toast.LENGTH_SHORT).show();
+                        disableButton();
+                    } else {
+                        Toast.makeText(Attendence_module.this, "Invalid response from server", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Log.e(TAG, "SaveAttendance API call failed. Response code: " + response.code());
-                    Toast.makeText(Attendence_module.this, "Failed to mark attendance.", Toast.LENGTH_SHORT).show();
+                    logRawResponse(response);
+                    Toast.makeText(Attendence_module.this, "Failed to mark attendance", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LiveAttendanceResponse> call, Throwable t) {
                 Log.e(TAG, "SaveAttendance API call failed: " + t.getMessage());
-                Toast.makeText(Attendence_module.this, "API error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+                Toast.makeText(Attendence_module.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -212,10 +250,12 @@ public class Attendence_module extends AppCompatActivity {
     private void enableButton() {
         markAttendanceBtn.setEnabled(true);
         markAttendanceBtn.setAlpha(1f);
+        markAttendanceBtn.setText("Mark Attendance");
     }
 
     private void disableButton() {
         markAttendanceBtn.setEnabled(false);
         markAttendanceBtn.setAlpha(0.5f);
+        markAttendanceBtn.setText("Not Available");
     }
 }

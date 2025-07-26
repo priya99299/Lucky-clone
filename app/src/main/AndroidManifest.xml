@@ -65,6 +65,9 @@
             android:name=".Attendence.Attendence_module"
             android:exported="false" />
         <activity
+            android:name=".Msgfromclg.MsgFromClg"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.LipsClone">

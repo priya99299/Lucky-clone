@@ -21,6 +21,7 @@ public class AppConfigResponse {
         public String college;
         public String s_id;
         public String name;
+        public String  sem;
         public String class_name;
         public String pic;
         public String admno;

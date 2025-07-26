@@ -10,7 +10,7 @@
         private String f_id;
         private String sem;
 
-        public LiveAttendanceRequest(String action, String page, String college, String session, String s_id, String f_id) {
+        public LiveAttendanceRequest(String action, String page, String college, String session, String s_id, String f_id,String sem) {
             this.action = action;
             this.page = page;
             this.college = college;

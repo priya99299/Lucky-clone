@@ -1,5 +1,6 @@
 package firstapp.example.lipsclone.timeTable;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,89 +33,133 @@ public class Time_table extends AppCompatActivity {
     private static final String TAG = "TimeTableActivity";
     private RecyclerView rvSchedule;
     private Gson gson;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
 
-        // Setup toolbar
+        sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        // Setup RecyclerView
         rvSchedule = findViewById(R.id.recyclerView_lectures);
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize Gson
         gson = new GsonBuilder().setPrettyPrinting().create();
 
-        // Get Intent extras safely
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
         String college = getIntent().getStringExtra("college");
         if (college == null || college.trim().isEmpty()) college = "gdcol1";
 
+        Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college);
+
         if (s_id == null || sessionId == null) {
-            Log.e(TAG, "❌ Missing required parameters! s_id or sessionId is null.");
+            Log.e(TAG, "Missing s_id or sessionId. Exiting activity.");
             finish();
             return;
         }
 
-        // Build correct request
         StudentTimeTableRequest request = new StudentTimeTableRequest(
-                "api",
-                "student_time_table",
-                s_id,
-                sessionId,
-                college
+                "api", "student_time_table", s_id, sessionId, college
         );
 
-        Log.d(TAG, "📝 Request JSON:\n" + gson.toJson(request));
+        Log.d(TAG, "Request Payload:\n" + gson.toJson(request));
         fetchStudentTimeTable(request);
     }
 
     private void fetchStudentTimeTable(StudentTimeTableRequest request) {
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<StudentTimeTableResponse> call = api.getStudentTimeTable(request);
+
         call.enqueue(new Callback<StudentTimeTableResponse>() {
             @Override
             public void onResponse(Call<StudentTimeTableResponse> call, Response<StudentTimeTableResponse> response) {
-                Log.d(TAG, "✅ HTTP Code: " + response.code());
+                Log.d(TAG, "HTTP Code: " + response.code());
+
                 if (response.isSuccessful() && response.body() != null) {
                     StudentTimeTableResponse body = response.body();
-                    Log.d(TAG, "✅ PARSED JSON:\n" + gson.toJson(body));
+                    Log.d(TAG, "Full Response:\n" + gson.toJson(body));
 
                     if (body.success && body.response != null && !body.response.isEmpty()) {
-                        List<Object> items = parseTimeTableItems(body.response);
+                        extractAndStoreSemesterInfo(body.response);
 
-                        Log.d(TAG, "✅ Parsed items count: " + items.size());
+                        List<Object> items = parseTimeTableItems(body.response);
+                        Log.d(TAG, "Parsed items count: " + items.size());
 
                         ScheduleAdapter adapter = new ScheduleAdapter(items);
                         rvSchedule.setAdapter(adapter);
                     } else {
-                        Log.e(TAG, "❌ API returned no timetable data.");
+                        Log.e(TAG, "No timetable data or success=false");
                     }
                 } else {
-                    Log.e(TAG, "❌ Server error");
+                    Log.e(TAG, "API Error - Code: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<StudentTimeTableResponse> call, Throwable t) {
-                Log.e(TAG, "❌ Network failure: " + t.getMessage(), t);
+                Log.e(TAG, "Network failure: " + t.getMessage(), t);
             }
         });
     }
 
-    private List<Object> parseTimeTableItems(List<TimeTableData> timeTableDataList) {
-        List<Object> items = new ArrayList<>();
-        if (timeTableDataList == null) return items;
+    /**
+     * Extract semester information and store it in SharedPreferences
+     */
+    private void extractAndStoreSemesterInfo(List<TimeTableData> dataList) {
+        Log.d(TAG, "Extracting semester info...");
 
-        for (TimeTableData data : timeTableDataList) {
+        for (TimeTableData data : dataList) {
+            if (data != null && data.course_details != null) {
+                String semester = safe(data.course_details.semester);
+                String courseName = safe(data.course_details.courseName);
+                String createdBy = safe(data.course_details.createdBy);
+                String totalPeriods = safe(data.course_details.totalPeriods);
+
+                Log.d(TAG, "Extracted --> Semester: " + semester + ", Course: " + courseName);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (!semester.isEmpty()) {
+                    editor.putString("semester", semester);
+                    Log.d(TAG, " Stored semester: " + semester);
+                }
+                if (!courseName.isEmpty()) {
+                    editor.putString("course_name", courseName);
+                }
+                if (!createdBy.isEmpty()) {
+                    editor.putString("created_by", createdBy);
+                }
+                if (!totalPeriods.isEmpty()) {
+                    editor.putString("total_periods", totalPeriods);
+                }
+
+                editor.apply();
+                verifyStoredData();
+                break; // store only first valid entry
+            }
+        }
+    }
+
+    private void verifyStoredData() {
+        Log.d(TAG, "Verifying SharedPreferences data:");
+        Log.d(TAG, " - semester: " + sharedPreferences.getString("semester", "NOT_FOUND"));
+        Log.d(TAG, " - course_name: " + sharedPreferences.getString("course_name", "NOT_FOUND"));
+        Log.d(TAG, " - created_by: " + sharedPreferences.getString("created_by", "NOT_FOUND"));
+        Log.d(TAG, " - total_periods: " + sharedPreferences.getString("total_periods", "NOT_FOUND"));
+    }
+
+    private List<Object> parseTimeTableItems(List<TimeTableData> dataList) {
+        List<Object> items = new ArrayList<>();
+        if (dataList == null) return items;
+
+        for (TimeTableData data : dataList) {
             if (data.time_table_final != null) {
                 for (TimeTableDay day : data.time_table_final) {
-                    items.add(day.Day); // always add day header
+                    items.add(day.Day);
 
                     if (day.period_by_days != null) {
                         for (PeriodByDay period : day.period_by_days) {
@@ -123,7 +168,6 @@ public class Time_table extends AppCompatActivity {
                             String room = safe(period.getLocation());
                             String time = safe(period.getTime());
 
-                            // Only add if there's real content in subject / teacher / room
                             if (!subject.isEmpty() || !teacher.isEmpty() || !room.isEmpty()) {
                                 int color = Color.parseColor("#FFFFFF");
                                 ScheduleItem item = new ScheduleItem(subject, teacher, room, time, color);
@@ -137,8 +181,7 @@ public class Time_table extends AppCompatActivity {
         return items;
     }
 
-
     private String safe(String str) {
-        return (str != null) ? str.trim() : "";
+        return str != null ? str.trim() : "";
     }
 }

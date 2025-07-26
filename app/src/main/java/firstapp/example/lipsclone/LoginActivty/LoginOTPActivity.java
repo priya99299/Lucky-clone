@@ -73,6 +73,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                             String filename = response.body().response.docname;
                             String session = response.body().response.session;
                             String f_id = response.body().response.f_id;
+                            String sem= response.body().response.sem;
 
 
                             SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
@@ -91,6 +92,8 @@ public class LoginOTPActivity extends AppCompatActivity {
                             editor.putString("s_id", s_id);
                             editor.putString("session", session);
                             editor.putString("f_id", f_id);
+                            editor.putString("sem",sem);
+                            editor.putString("sem",sem);
 
 //                        editor.apply();
 
@@ -112,6 +115,7 @@ public class LoginOTPActivity extends AppCompatActivity {
                             intent.putExtra("session", session);  // <-- add this
                             intent.putExtra("college", college);
                             intent.putExtra("f_id", f_id);
+                            intent.putExtra("sem",sem);
 
 
                             startActivity(intent);

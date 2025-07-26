@@ -68,7 +68,7 @@ public class dashboard extends AppCompatActivity {
         contact=findViewById(R.id.contact);
         attendence=findViewById(R.id.attendence);
         complaint=findViewById(R.id.complaint);
-        msg=findViewById(R.id.msg);
+        msg=findViewById(R.id.messageSection);
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -94,7 +94,11 @@ public class dashboard extends AppCompatActivity {
         String sessionId = sharedPreferences.getString("session", "");
         String collegeId = sharedPreferences.getString("college", "");
         String f_id = sharedPreferences.getString("f_id" ,"");
-        Log.d("F_id", "Intent Extras Check --> f_id"+f_id);
+        String sem = sharedPreferences.getString("sem" ,"");
+
+
+
+
 
         // Update UI
         name.setText(Studentdetails);
@@ -206,9 +210,11 @@ public class dashboard extends AppCompatActivity {
             intent.putExtra("s_id", studentId);
             intent.putExtra("session", sessionId);
             intent.putExtra("f_id", f_id);
-            intent.putExtra("live_status", "0"); // ✅ hardcoded
+            intent.putExtra("semester", sem);
+
             startActivity(intent);
         });
+
         complaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,14 +222,50 @@ public class dashboard extends AppCompatActivity {
                 startActivity(complaint);
             }
         });
-        msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent msg=new Intent(dashboard.this,MsgFromClg.class);
-                startActivity(msg);
-            }
+        msg.setOnClickListener(v -> {
+            Log.d("MSG","intent");
+            Intent intent = new Intent(dashboard.this, MsgFromClg.class);
+
+            startActivity(intent);
         });
+        // Add this line after: SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+        debugSemesterRetrieval(sharedPreferences);
 
 
+    }
+    // Add this method to your dashboard.java class to test semester retrieval
+
+    /**
+     * Add this method to your dashboard onCreate() method to debug semester fetching
+     */
+    private void debugSemesterRetrieval(SharedPreferences sharedPreferences) {
+        Log.d("Dashboard", " DEBUG: Checking semester data in SharedPreferences...");
+
+        // Get all semester-related data
+        String semester = sharedPreferences.getString("semester", "");
+        String courseName = sharedPreferences.getString("course_name", "");
+        String createdBy = sharedPreferences.getString("created_by", "");
+        String totalPeriods = sharedPreferences.getString("total_periods", "");
+
+        Log.d("Dashboard", "Semester Data Retrieved:");
+        Log.d("Dashboard", "   - Semester: '" + semester + "' (empty: " + semester.isEmpty() + ")");
+        Log.d("Dashboard", "   - Course Name: '" + courseName + "' (empty: " + courseName.isEmpty() + ")");
+        Log.d("Dashboard", "   - Created By: '" + createdBy + "' (empty: " + createdBy.isEmpty() + ")");
+        Log.d("Dashboard", "   - Total Periods: '" + totalPeriods + "' (empty: " + totalPeriods.isEmpty() + ")");
+
+        // Check all keys in SharedPreferences to see what's actually stored
+        Log.d("Dashboard", "🗝️ All SharedPreferences keys:");
+        for (String key : sharedPreferences.getAll().keySet()) {
+            Object value = sharedPreferences.getAll().get(key);
+            Log.d("Dashboard", "   - " + key + " = '" + value + "'");
+        }
+
+        if (semester.isEmpty()) {
+            Log.w("Dashboard", "⚠️ ISSUE: Semester is empty! User may need to visit timetable first.");
+            // You can show a Toast to inform the user
+            // Toast.makeText(this, "Please visit Timetable to load semester information", Toast.LENGTH_LONG).show();
+        } else {
+            Log.d("Dashboard", "✅ Semester data found successfully!");
+        }
     }
 }
