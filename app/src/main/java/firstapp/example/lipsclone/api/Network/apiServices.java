@@ -23,6 +23,8 @@ import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableResponse
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceResponse;
+import firstapp.example.lipsclone.api.Models.attendence.LectureAttendanceRequest;
+import firstapp.example.lipsclone.api.Models.attendence.LectureAttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.SaveAttendanceRequest;
@@ -63,6 +65,8 @@ public interface apiServices {
 
     @POST("api/index.php")
     Call<LiveAttendanceResponse> saveAttendance(@Body SaveAttendanceRequest request);
+    @POST("api/index.php")
+    Call<LectureAttendanceResponse>  getLectureAttendance(@Body LectureAttendanceRequest request);
 
 
 

@@ -1,7 +1,10 @@
 package firstapp.example.lipsclone.api.Models.attendence;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+
+
 
 public class AttendanceResponse {
 

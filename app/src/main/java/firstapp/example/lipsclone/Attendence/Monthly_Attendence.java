@@ -35,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Monthly_Attendence extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AttendanceAdapter adapter;
+    private String s_id, sessionId, f_id, college, a_id, sem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,17 @@ public class Monthly_Attendence extends AppCompatActivity {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
-        // Get data from Intent
-        String s_id = getIntent().getStringExtra("s_id");
-        String sessionId = getIntent().getStringExtra("session");
+        // Get intent extras
+        s_id = getIntent().getStringExtra("s_id");
+        sessionId = getIntent().getStringExtra("session");
+        f_id = getIntent().getStringExtra("f_id");
+        college = getIntent().getStringExtra("college");
+        sem = getIntent().getStringExtra("semester");
 
-        String college = "gdcol1";
+        if (college == null) college = "gdcol1";
 
-        Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId);
+        Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId +
+                ", f_id: " + f_id + ", college: " + college + ", semester: " + sem);
 
         String fId = getIntent().getStringExtra("f_id");
 

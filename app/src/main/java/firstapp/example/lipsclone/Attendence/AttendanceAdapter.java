@@ -34,9 +34,10 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
         AttendanceData data = attendanceList.get(position);
 
         if (data != null) {
-            holder.tvMonth.setText(data.month);
-            holder.tvPresent.setText(data.present);
-            holder.tvTotalClass.setText(data.totalClass);
+            holder.tvMonth.setText(data.getMonth());
+            holder.tvPresent.setText(data.getPresent());
+            holder.tvTotalClass.setText(data.getTotalClass());
+
         }
     }
 

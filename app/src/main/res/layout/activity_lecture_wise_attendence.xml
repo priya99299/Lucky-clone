@@ -19,16 +19,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:navigationIconTint="@color/white"
-        app:title="Lecture-wise Attendence"
+        app:title="Lecture-wise Attendance"
         app:titleTextColor="@color/white" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -46,24 +46,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:background="@drawable/bg_date_field"
                 android:clickable="true"
                 android:focusable="true">
-
-<!--                <ImageView-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:src="@drawable/ic_calendar"-->
-<!--                    android:tint="#000000"-->
-<!--                    android:layout_marginEnd="8dp" />-->
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="From Date"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="#000000" />
 
                 <TextView
@@ -73,7 +66,7 @@
 
                     android:textColor="#000000"
                     android:textStyle="normal"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- TO DATE -->
@@ -81,27 +74,20 @@
                 android:id="@+id/toDateLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:background="@drawable/bg_date_field"
                 android:clickable="true"
                 android:focusable="true">
-
-<!--                <ImageView-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:src="@drawable/ic_calendar"-->
-<!--                    android:tint="#000000"-->
-<!--                    android:layout_marginEnd="8dp" />-->
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="To Date"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="#000000" />
 
                 <TextView
@@ -111,7 +97,7 @@
 
                     android:textColor="#000000"
                     android:textStyle="normal"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- GO BUTTON -->
@@ -120,61 +106,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:text="GO >"
                 android:backgroundTint="#5E35B1"
+                android:textSize="13sp"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!--    &lt;!&ndash; Heading Row &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/headerLayout"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:padding="8dp"-->
-<!--        android:background="#E0E0E0"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/cardView"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Subject"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="14sp"/>-->
-
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Total Lecture"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="14sp"/>-->
-
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Class Attd."-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="14sp"/>-->
-<!--    </LinearLayout>-->
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/attendanceRecyclerView"
+    <!-- Table Container -->
+    <LinearLayout
+        android:id="@+id/tableContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingTop="23dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/cardView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <include layout="@layout/attendance_table_header" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/table_divider" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/attendanceRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

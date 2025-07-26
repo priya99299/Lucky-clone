@@ -21,16 +21,15 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.Attendan
 
     public LectureAdapter(List<String[]> data) {
         attendanceList = new ArrayList<>();
-        attendanceList.add(new String[]{"Subject", "Total Lecture", "Class Attd."});
+        attendanceList.add(new String[]{"Subject", "Total Lecture", "Class Attd."}); // header
         attendanceList.addAll(data);
     }
 
     @NonNull
     @Override
     public AttendanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_attendancelecture_row, parent, false);
-
-
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_attendancelecture_row, parent, false);
         return new AttendanceViewHolder(view);
     }
 
@@ -43,14 +42,26 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.Attendan
         holder.tvAttd.setText(row[2]);
 
         if (position == 0) {
+            // Header styling
             holder.tvSubject.setTypeface(null, Typeface.BOLD);
             holder.tvTotal.setTypeface(null, Typeface.BOLD);
             holder.tvAttd.setTypeface(null, Typeface.BOLD);
-            holder.itemView.setBackgroundColor(Color.parseColor("#EEEEEE"));
+
+            holder.tvSubject.setTextColor(Color.WHITE);
+            holder.tvTotal.setTextColor(Color.WHITE);
+            holder.tvAttd.setTextColor(Color.WHITE);
+
+            holder.itemView.setBackgroundColor(Color.parseColor("#4B3F9C"));
         } else {
+            // Data styling
             holder.tvSubject.setTypeface(null, Typeface.NORMAL);
             holder.tvTotal.setTypeface(null, Typeface.NORMAL);
             holder.tvAttd.setTypeface(null, Typeface.NORMAL);
+
+            holder.tvSubject.setTextColor(Color.BLACK);
+            holder.tvTotal.setTextColor(Color.BLACK);
+            holder.tvAttd.setTextColor(Color.BLACK);
+
             holder.itemView.setBackgroundColor(Color.WHITE);
         }
     }

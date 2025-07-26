@@ -79,7 +79,7 @@ public class Attendence_module extends AppCompatActivity {
 
         // Lecture-wise Attendance click
         findViewById(R.id.Lecture).setOnClickListener(v -> {
-            Intent lectureIntent = new Intent(this, Lecture_wise_Attendence.class);
+            Intent lectureIntent = new Intent(this,LectureWiseAttendance.class);
             lectureIntent.putExtra("s_id", s_id);
             lectureIntent.putExtra("session", sessionId);
             lectureIntent.putExtra("f_id", f_id);
