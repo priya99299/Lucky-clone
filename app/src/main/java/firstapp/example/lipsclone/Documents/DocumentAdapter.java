@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,11 +44,16 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
 
         holder.showDocumentButton.setOnClickListener(v -> {
             String fileUrl = document.getFile();
-            if (fileUrl != null && !fileUrl.isEmpty()) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl));
-                context.startActivity(intent);
+            String status = document.getStatus();
+
+            if (fileUrl == null || fileUrl.isEmpty() || "Pending".equalsIgnoreCase(status) || "Not Submitted".equalsIgnoreCase(status)) {
+                Toast.makeText(context, "Document not submitted yet", Toast.LENGTH_SHORT).show();
+            } else {
+                String filename = document.getDocname() + ".pdf";
+                DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename);
             }
         });
+
     }
 
     @Override

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name=".complaint.TrackComplaintActivity"
             android:exported="false" />
@@ -22,7 +33,7 @@
             android:name=".complaint.ComplaintSection"
             android:exported="false" />
         <activity
-            android:name=".Attendence.Lecture_wise_Attendence"
+            android:name=".Attendence.LectureWiseAttendance"
             android:exported="false" />
         <activity
             android:name=".Attendence.Monthly_Attendence"

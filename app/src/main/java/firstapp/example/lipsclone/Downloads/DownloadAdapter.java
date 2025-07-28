@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import firstapp.example.lipsclone.Documents.DownloadAndOpenPDF;
 import firstapp.example.lipsclone.R;
 
 import firstapp.example.lipsclone.api.Models.Downloads.DownloadItem;
@@ -41,10 +43,18 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         holder.docName.setText(item.getTitle());
 
         holder.fileUrl.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getFile()));
-            context.startActivity(intent);
+            String fileUrl = item.getFile();
+
+            if (fileUrl != null && fileUrl.toLowerCase().endsWith(".pdf")) {
+                String filename = item.getTitle().replaceAll("\\s+", "_") + ".pdf";
+                DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename);
+            } else {
+                // Optional: Show a message for non-PDFs
+                Toast.makeText(context, "Not uploaded yet", Toast.LENGTH_SHORT).show();
+            }
         });
     }
+
 
     @Override
     public int getItemCount() {

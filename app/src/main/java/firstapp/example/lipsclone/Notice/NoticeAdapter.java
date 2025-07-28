@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import firstapp.example.lipsclone.Documents.DownloadAndOpenPDF;
 import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.Notice.Notice_Reponse;
 
@@ -47,19 +48,21 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
         holder.icon.setOnClickListener(v -> {
             String url = notice.description;
+
             if (url == null || url.trim().isEmpty()) {
                 Toast.makeText(context, "No link available", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            try {
-                context.startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(context, "No app found to open this link.", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Error opening link: " + e.getMessage(), e);
+            if (!url.toLowerCase().endsWith(".pdf")) {
+                Toast.makeText(context, "Only PDF notices are supported", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            String filename = notice.title.replaceAll("\\s+", "_") + ".pdf";
+            DownloadAndOpenPDF.downloadAndOpen(context, url, filename);
         });
+
     }
 
     @Override
