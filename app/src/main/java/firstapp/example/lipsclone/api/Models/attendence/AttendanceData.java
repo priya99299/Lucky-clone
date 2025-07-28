@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttendanceData {
 
-    @SerializedName("month")
+    @SerializedName("Month")
     private String month;
 
-    @SerializedName("present")
+    @SerializedName("Present")
     private String present;
 
-    @SerializedName("totalClass")
+    @SerializedName("Total_Class")
     private String totalClass;
 
     public AttendanceData(String month, String present, String totalClass) {

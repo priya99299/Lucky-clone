@@ -51,6 +51,15 @@ public class Attendence_module extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Save semester to SharedPreferences
+        if (sem != null && !sem.isEmpty()) {
+            getSharedPreferences("MyPrefs", MODE_PRIVATE)
+                    .edit()
+                    .putString("sem", sem)
+                    .apply();
+            Log.d(TAG, "Saved semester to SharedPreferences: " + sem);
+        }
+
 
         // Toolbar back button
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
@@ -61,21 +70,34 @@ public class Attendence_module extends AppCompatActivity {
         sessionId = getIntent().getStringExtra("session");
         f_id = getIntent().getStringExtra("f_id");
         college = getIntent().getStringExtra("college");
-        sem = getIntent().getStringExtra("semester");
+        sem = getIntent().getStringExtra("sem");
 
         if (college == null) college = "gdcol1";
 
         Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId +
                 ", f_id: " + f_id + ", college: " + college + ", semester: " + sem);
 
+// ✅ Now save semester to SharedPreferences
+        if (sem != null && !sem.isEmpty()) {
+            getSharedPreferences("MyPrefs", MODE_PRIVATE)
+                    .edit()
+                    .putString("sem", sem)
+                    .apply();
+            Log.d(TAG, "Saved semester to SharedPreferences: " + sem);
+        }
+
+
         // Monthly Attendance click
         findViewById(R.id.Monthly).setOnClickListener(v -> {
-            Intent monthly = new Intent(this, Monthly_Attendence.class);
-            monthly.putExtra("s_id", s_id);
-            monthly.putExtra("session", sessionId);
-            monthly.putExtra("f_id", f_id);
-            monthly.putExtra("sem", sem);
-            startActivity(monthly);
+            Intent intent = new Intent(Attendence_module.this, Monthly_Attendence.class);
+            intent.putExtra("s_id", s_id);
+            intent.putExtra("session", sessionId);
+            intent.putExtra("f_id", f_id);
+            intent.putExtra("college", college);
+            Log.d("Onclick","On click sems" +sem);
+            intent.putExtra("sem", sem);
+            startActivity(intent);
+
         });
         CardView Lecture;
         Lecture=findViewById(R.id.Lecture);

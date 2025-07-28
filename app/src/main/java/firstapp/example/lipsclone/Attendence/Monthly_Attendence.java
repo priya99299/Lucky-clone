@@ -1,5 +1,7 @@
 package firstapp.example.lipsclone.Attendence;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,9 +21,6 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
 import firstapp.example.lipsclone.R;
-
-import firstapp.example.lipsclone.api.Models.Downloads.StudentDownloadResponse;
-import firstapp.example.lipsclone.api.Models.attendence.AttendanceData;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceResponse;
 import firstapp.example.lipsclone.api.Network.apiServices;
@@ -29,13 +28,11 @@ import firstapp.example.lipsclone.api.Network.apiclient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Monthly_Attendence extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AttendanceAdapter adapter;
-    private String s_id, sessionId, f_id, college, a_id, sem;
+    private String s_id, sessionId, f_id, college, sem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,37 +51,44 @@ public class Monthly_Attendence extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.attendanceRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initially empty
         adapter = new AttendanceAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
-        fetchAttendanceData();
+        fetchAttendanceData(); // Call after setting up all values
     }
+
     private void fetchAttendanceData() {
         final String TAG = "AttendanceAPI";
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+        Intent intent = getIntent();
+        s_id = intent.getStringExtra("s_id");
+        sessionId = intent.getStringExtra("session");
+        f_id = intent.getStringExtra("f_id");
+        college = intent.getStringExtra("college");
 
-        // Get intent extras
-        s_id = getIntent().getStringExtra("s_id");
-        sessionId = getIntent().getStringExtra("session");
-        f_id = getIntent().getStringExtra("f_id");
-        college = getIntent().getStringExtra("college");
-        sem = getIntent().getStringExtra("semester");
+        // Step 1: Try to get from Intent
+        sem = intent.getStringExtra("sem");
+
+        // Step 2: If Intent fails, use SharedPreferences fallback
+        if (sem == null || sem.isEmpty()) {
+            SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+            sem = prefs.getString("sem", "");
+        }
 
         if (college == null) college = "gdcol1";
 
         Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", sessionId: " + sessionId +
                 ", f_id: " + f_id + ", college: " + college + ", semester: " + sem);
 
-        String fId = getIntent().getStringExtra("f_id");
+        if (sem == null || sem.isEmpty()) {
+            Log.e("Monthly Error", "Semester not available for attendance request!");
+            Toast.makeText(this, "Semester missing!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Log.d(TAG, "Intent Extras Check --> f_id"+fId);
-        AttendanceRequest request = new AttendanceRequest(s_id, sessionId, college, fId);
-
-
-//        request.setSem("");
+        AttendanceRequest request = new AttendanceRequest(s_id, sessionId, college, f_id);
+        request.setSem(sem);  // ✅ Set semester in request
 
         String requestJson = gson.toJson(request);
         Log.d(TAG, "--> REQUEST PAYLOAD:\n" + requestJson);
@@ -120,9 +124,4 @@ public class Monthly_Attendence extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
 }
