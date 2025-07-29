@@ -31,7 +31,7 @@ public class fees_Details extends AppCompatActivity {
     private TextView totalAmountTextView, dueDateTextView;
     private RecyclerView feeContainer;
 
-    private static final String TAG = "Fee_API";
+    private static final String TAG = "f";
     private Gson gson;
 
     @Override
