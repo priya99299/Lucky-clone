@@ -48,15 +48,16 @@ public class dashboard extends AppCompatActivity {
 
         // UI Components
         ImageView ProfilePic;
-        TextView name, Session,year;
-        LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice,timetable,Lecturees,contact,attendence,complaint,msg;
+        TextView name, Session, year;
+        LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice, timetable, Lecturees, contact, attendence, complaint, msg,
+                Library;
         Button btn;
 
         document = findViewById(R.id.document);
         name = findViewById(R.id.studentName);
         Session = findViewById(R.id.Section);
-        year=findViewById(R.id.yearname);
-            //dasborad card
+        year = findViewById(R.id.yearname);
+        //dasborad card
         ProfilePic = findViewById(R.id.studentImage);
         notes = findViewById(R.id.notes);
         canteenn = findViewById(R.id.canteen);
@@ -65,12 +66,13 @@ public class dashboard extends AppCompatActivity {
         profile = findViewById(R.id.stuProfile);
         Stuattendence = findViewById(R.id.attendence);
         feesDetails = findViewById(R.id.fees);
-        timetable=findViewById(R.id.e_learning);
-        Lecturees=findViewById(R.id.lecture_Details);
-        contact=findViewById(R.id.contact);
-        attendence=findViewById(R.id.attendence);
-        complaint=findViewById(R.id.complaint);
-        msg=findViewById(R.id.messageSection);
+        timetable = findViewById(R.id.e_learning);
+        Lecturees = findViewById(R.id.lecture_Details);
+        contact = findViewById(R.id.contact);
+        attendence = findViewById(R.id.attendence);
+        complaint = findViewById(R.id.complaint);
+        msg = findViewById(R.id.messageSection);
+        Library = findViewById(R.id.Library);
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -95,11 +97,8 @@ public class dashboard extends AppCompatActivity {
         String studentId = sharedPreferences.getString("s_id", "");
         String sessionId = sharedPreferences.getString("session", "");
         String collegeId = sharedPreferences.getString("college", "");
-        String f_id = sharedPreferences.getString("f_id" ,"");
-        String sem = sharedPreferences.getString("sem" ,"");
-
-
-
+        String f_id = sharedPreferences.getString("f_id", "");
+        String sem = sharedPreferences.getString("sem", "");
 
 
         // Student profile ui UI
@@ -186,7 +185,7 @@ public class dashboard extends AppCompatActivity {
         timetable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent TimeModule =new Intent(dashboard.this, Time_table.class);
+                Intent TimeModule = new Intent(dashboard.this, Time_table.class);
                 TimeModule.putExtra("s_id", studentId);
                 TimeModule.putExtra("session", sessionId);
                 startActivity(TimeModule);
@@ -195,7 +194,7 @@ public class dashboard extends AppCompatActivity {
         Lecturees.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Lecture =new Intent(dashboard.this, Lecture_Perfrorma.class);
+                Intent Lecture = new Intent(dashboard.this, Lecture_Perfrorma.class);
                 Lecture.putExtra("s_id", studentId);
                 Lecture.putExtra("session", sessionId);
                 startActivity(Lecture);
@@ -204,8 +203,8 @@ public class dashboard extends AppCompatActivity {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent Information=new Intent(dashboard.this, Contact_us.class);
-            startActivity(Information);
+                Intent Information = new Intent(dashboard.this, Contact_us.class);
+                startActivity(Information);
             }
         });
         attendence.setOnClickListener(v -> {
@@ -213,7 +212,7 @@ public class dashboard extends AppCompatActivity {
             intent.putExtra("s_id", studentId);
             intent.putExtra("session", sessionId);
             intent.putExtra("f_id", f_id);
-            Log.d("sem",sem);
+            Log.d("sem", sem);
             intent.putExtra("sem", sem);
 
             startActivity(intent);
@@ -222,54 +221,22 @@ public class dashboard extends AppCompatActivity {
         complaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent complaint=new Intent(dashboard.this, ComplaintSection.class);
+                Intent complaint = new Intent(dashboard.this, ComplaintSection.class);
                 startActivity(complaint);
             }
         });
         msg.setOnClickListener(v -> {
-            Log.d("MSG","intent");
+            Log.d("MSG", "intent");
             Intent intent = new Intent(dashboard.this, MsgFromClg.class);
 
             startActivity(intent);
         });
-//        // Add this line after: SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-//        debugSemesterRetrieval(sharedPreferences);
-
-
+        Library.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent library=new Intent(dashboard.this, Library.class);
+                startActivity(library);
+            }
+        });
     }
-    // Add this method to your dashboard.java class to test semester retrieval
-
-    /**
-     * Add this method to your dashboard onCreate() method to debug semester fetching
-     */
-//    private void debugSemesterRetrieval(SharedPreferences sharedPreferences) {
-//        Log.d("Dashboard", " DEBUG: Checking semester data in SharedPreferences...");
-//
-//        // Get all semester-related data
-//        String semester = sharedPreferences.getString("semester", "");
-//        String courseName = sharedPreferences.getString("course_name", "");
-//        String createdBy = sharedPreferences.getString("created_by", "");
-//        String totalPeriods = sharedPreferences.getString("total_periods", "");
-//
-//        Log.d("Dashboard", "Semester Data Retrieved:");
-//        Log.d("Dashboard", "   - Semester: '" + semester + "' (empty: " + semester.isEmpty() + ")");
-//        Log.d("Dashboard", "   - Course Name: '" + courseName + "' (empty: " + courseName.isEmpty() + ")");
-//        Log.d("Dashboard", "   - Created By: '" + createdBy + "' (empty: " + createdBy.isEmpty() + ")");
-//        Log.d("Dashboard", "   - Total Periods: '" + totalPeriods + "' (empty: " + totalPeriods.isEmpty() + ")");
-//
-//        // Check all keys in SharedPreferences to see what's actually stored
-//        Log.d("Dashboard", "🗝️ All SharedPreferences keys:");
-//        for (String key : sharedPreferences.getAll().keySet()) {
-//            Object value = sharedPreferences.getAll().get(key);
-//            Log.d("Dashboard", "   - " + key + " = '" + value + "'");
-//        }
-//
-//        if (semester.isEmpty()) {
-//            Log.w("Dashboard", "⚠️ ISSUE: Semester is empty! User may need to visit timetable first.");
-//            // You can show a Toast to inform the user
-//            // Toast.makeText(this, "Please visit Timetable to load semester information", Toast.LENGTH_LONG).show();
-//        } else {
-//            Log.d("Dashboard", "✅ Semester data found successfully!");
-//        }
-//    }
 }

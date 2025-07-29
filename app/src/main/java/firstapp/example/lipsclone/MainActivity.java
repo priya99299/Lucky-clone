@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         // ✅ Login session check: if already logged in, go to dashboard directly
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         if (isLoggedIn) {
             Intent intent = new Intent(MainActivity.this, dashboard.class);

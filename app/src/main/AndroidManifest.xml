@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
+        <activity
+            android:name=".Library"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -35,6 +38,9 @@
         <activity
             android:name=".Attendence.LectureWiseAttendance"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Attendence.LectureWiseAttendance"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Attendence.Monthly_Attendence"
             android:exported="false" />
@@ -74,9 +80,6 @@
             android:exported="false" />
         <activity
             android:name=".Attendence.Attendence_module"
-            android:exported="false" />
-
-        <activity android:name=".Attendence.LectureWiseAttendance"
             android:exported="false" />
         <activity
             android:name=".Msgfromclg.MsgFromClg"

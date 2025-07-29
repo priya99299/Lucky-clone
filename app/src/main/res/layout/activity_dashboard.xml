@@ -51,7 +51,7 @@
             android:layout_marginTop="70dp"
             android:src="@drawable/profile1"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/CircleImage"
+
             android:padding="2dp" />
 
         <!-- Student Name -->
@@ -322,7 +322,7 @@
 
             <!-- Library -->
             <LinearLayout
-                android:id="@+id/results"
+                android:id="@+id/Library"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"

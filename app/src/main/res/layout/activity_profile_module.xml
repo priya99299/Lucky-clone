@@ -76,7 +76,7 @@
                         android:scaleType="centerCrop"
 
                         android:src="@drawable/profile1"
-                        app:shapeAppearanceOverlay="@style/CircleImage"
+                        app:shapeAppearanceOverlay="@drawable/circle_border_gradient"
                         android:contentDescription="Profile Picture" />
 
                     <!-- Name -->
