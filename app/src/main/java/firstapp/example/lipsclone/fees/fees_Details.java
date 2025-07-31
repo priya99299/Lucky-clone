@@ -5,12 +5,12 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import firstapp.example.lipsclone.R;
@@ -30,15 +30,13 @@ public class fees_Details extends AppCompatActivity {
 
     private TextView totalAmountTextView, dueDateTextView;
     private RecyclerView feeContainer;
-
-    private static final String TAG = "f";
+    private static final String TAG = "fes";
     private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fees_details);
-
 
         Log.d(TAG, "fees_Details Activity started");
 
@@ -50,103 +48,88 @@ public class fees_Details extends AppCompatActivity {
         totalAmountTextView = findViewById(R.id.total_amount);
         dueDateTextView = findViewById(R.id.due_date);
         feeContainer = findViewById(R.id.fee_container);
-
+        feeContainer.setLayoutManager(new LinearLayoutManager(this));
         gson = new Gson();
 
         try {
-            // Get data from intent
+            // Get Intent Data
             String s_id = getIntent().getStringExtra("s_id");
             String sessionId = getIntent().getStringExtra("session");
             String college = getIntent().getStringExtra("college");
             String F_id = getIntent().getStringExtra("f_id");
-
             if (college == null) college = "gdcol1";
-
-//            // Validate intent values
-//            if (s_id == null || sessionId == null || F_id == null) {
-//                Log.e(TAG, "Intent data missing. s_id: " + s_id + ", session: " + sessionId + ", f_id: " + F_id);
-//                return;
-//            }
 
             Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college + ", f_id: " + F_id);
 
-            // Create request
-            FeeRequest request = new FeeRequest("api","student_fee",s_id, F_id, sessionId, college);
-            Log.d(TAG, "Request Payload: " + gson.toJson(request));
+            // ----------- First API: student_fee -----------
+            FeeRequest feeRequest = new FeeRequest("api", "student_fee", s_id, F_id, sessionId, college);
+            Log.d(TAG, "Request Payload (student_fee): " + gson.toJson(feeRequest));
 
-            // API call
             apiServices api = apiclient.getClient().create(apiServices.class);
-            Call<FeeResponse> call = api.getFeeDetails(request);
+            Call<FeeResponse> call1 = api.getFeeDetails(feeRequest);
 
-            call.enqueue(new Callback<FeeResponse>() {
+            call1.enqueue(new Callback<FeeResponse>() {
                 @Override
                 public void onResponse(Call<FeeResponse> call, Response<FeeResponse> response) {
-                    Log.d(TAG, "API onResponse called");
                     if (response.isSuccessful() && response.body() != null) {
-                        String responseJson = gson.toJson(response.body());
-                        Log.d(TAG, "Response Body: " + responseJson);
-
                         FeeData data = response.body().getResponse();
+                        Log.d(TAG, "FeeData Response: " + gson.toJson(data));
 
                         if (data != null) {
-                            totalAmountTextView.setText("₹" + data.getTotalDeposite());
-                            dueDateTextView.setText("Due Date: " + data.getNextDueDate());
-                            Log.d(TAG, "Data shown on UI");
+                            String amount = data.getTotalDeposite();
+                            String dueDate = data.getNextDueDate();
+
+                            totalAmountTextView.setText("₹" + (amount != null ? amount : "0"));
+                            dueDateTextView.setText("Due Date: " + (dueDate != null ? dueDate : "N/A"));
                         } else {
-                            Log.e(TAG, "FeeData in response is null");
+                            Log.e(TAG, "FeeData is null");
+                            totalAmountTextView.setText("₹0");
+                            dueDateTextView.setText("Due Date: N/A");
                         }
                     } else {
-                        try {
-                            String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
-                            Log.e(TAG, "Response Error: " + errorBody);
-                        } catch (Exception e) {
-                            Log.e(TAG, "Error reading errorBody", e);
-                        }
+                        Log.e(TAG, "FeeDetails API Error: " + response.errorBody());
+                        totalAmountTextView.setText("₹0");
+                        dueDateTextView.setText("Due Date: N/A");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<FeeResponse> call, Throwable t) {
-                    Log.e(TAG, "API Failure: " + t.getMessage(), t);
+                    Log.e(TAG, "FeeDetails API Failure: " + t.getMessage(), t);
+                    totalAmountTextView.setText("₹0");
+                    dueDateTextView.setText("Due Date: N/A");
                 }
             });
+
+            // ----------- Second API: student_fee_transaction -----------
+            FeeTransactionRequest transactionRequest = new FeeTransactionRequest("api", "student_fee_transaction", s_id, F_id, sessionId, college);
+            Log.d(TAG, "Request Payload (student_fee_transaction): " + gson.toJson(transactionRequest));
+
+            Call<FeeTransactionResponse> call2 = api.getFeeTransaction(transactionRequest);
+            call2.enqueue(new Callback<FeeTransactionResponse>() {
+                @Override
+                public void onResponse(Call<FeeTransactionResponse> call, Response<FeeTransactionResponse> response) {
+                    if (response.isSuccessful() && response.body() != null && !response.body().isError()) {
+                        List<FeeTransactionItem> transactionList = response.body().getResponse();
+                        Log.d("fes3", "Transaction count: " + transactionList.size());
+
+                        FeeTransactionAdapter adapter = new FeeTransactionAdapter(transactionList);
+                        feeContainer.setLayoutManager(new LinearLayoutManager(fees_Details.this));
+                        feeContainer.setAdapter(adapter);
+                    } else {
+                        Log.e("fes", "API Error or Empty Response");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<FeeTransactionResponse> call, Throwable t) {
+                    Log.e("fes", "API Failure: " + t.getMessage());
+                }
+            });
+
 
         } catch (Exception e) {
             Log.e(TAG, "Exception in onCreate", e);
         }
-
-        // Now these variables are in scope
-        String s_id = getIntent().getStringExtra("s_id");
-        String sessionId = getIntent().getStringExtra("session");
-        String college = getIntent().getStringExtra("college");
-        String F_id = getIntent().getStringExtra("f_id");
-        FeeTransactionRequest transactionRequest = new FeeTransactionRequest("api", "student_fee_transaction", s_id, F_id, sessionId, college);
-        apiServices api = apiclient.getClient().create(apiServices.class);
-        Call<FeeTransactionResponse> call2 = api.getFeeTransaction(transactionRequest);
-
-        call2.enqueue(new Callback<FeeTransactionResponse>() {
-            @Override
-            public void onResponse(Call<FeeTransactionResponse> call, Response<FeeTransactionResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<FeeTransactionItem> items = response.body().getResponse();
-
-                    List<FeeTransactionItem> filtered = new ArrayList<>();
-                    for (FeeTransactionItem item : items) {
-                        if (item.getTransactionId() != null) {
-                            filtered.add(item);
-                        }
-                    }
-
-                    FeeTransactionAdapter adapter = new FeeTransactionAdapter(filtered);
-                    feeContainer.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<FeeTransactionResponse> call, Throwable t) {
-                Log.e(TAG, "FeeTransaction API Failure: " + t.getMessage());
-            }
-        });
-
     }
 }

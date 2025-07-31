@@ -17,13 +17,14 @@ import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.Lecture.LectureItem;
 
 public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHolder> {
-
     private final Context context;
     private final List<LectureItem> items;
+    private final String session;
 
-    public LectureAdapter(Context context, List<LectureItem> items) {
+    public LectureAdapter(Context context, List<LectureItem> items, String session) {
         this.context = context;
         this.items = items;
+        this.session = session;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,7 +50,6 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull LectureAdapter.ViewHolder holder, int position) {
         LectureItem item = items.get(position);
-
         holder.subject.setText(item.subject);
         holder.faculty.setText(item.facultyName);
         holder.duration.setText(item.duration);
@@ -59,10 +59,10 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHold
             intent.putExtra("subject", item.subject);
             intent.putExtra("faculty", item.facultyName);
             intent.putExtra("totalLecture", item.totalLecture);
-            intent.putExtra("p_id", item.action);
+            intent.putExtra("p_id", item.action); // or item.p_id if named that
+            intent.putExtra("session", session);
             context.startActivity(intent);
         });
-
     }
 
     @Override

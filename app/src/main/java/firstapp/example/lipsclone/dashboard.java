@@ -197,6 +197,8 @@ public class dashboard extends AppCompatActivity {
                 Intent Lecture = new Intent(dashboard.this, Lecture_Perfrorma.class);
                 Lecture.putExtra("s_id", studentId);
                 Lecture.putExtra("session", sessionId);
+                Lecture.putExtra("f_id", f_id);
+                Lecture.putExtra("sem", sem);
                 startActivity(Lecture);
             }
         });

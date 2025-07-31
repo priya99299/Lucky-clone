@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".Lecture_Performa.Lecture_details">
 
     <!-- Toolbar -->
@@ -20,16 +21,17 @@
         app:title="Lecture Details"
         app:titleTextColor="@color/white"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        app:navigationIconTint="@color/white"/>
+        app:navigationIconTint="@color/white" />
 
-    <!-- Compact CardView with Details -->
+    <!-- Details Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/detailsCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="3dp"
+        android:layout_margin="12dp"
+        android:background="@android:color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="5dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -38,19 +40,71 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/lectureDetailsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lecture Details"
-                android:textSize="12sp"
+                android:text="Lecture Overview"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#3F51B5"
-                android:paddingBottom="4dp"/>
+                android:textColor="@color/Purple"
+                android:paddingBottom="8dp"/>
 
-            <!-- ROW: Subject -->
+            <!-- Row: Subject -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Subject:"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#333"/>
+
+                <TextView
+                    android:id="@+id/subjectValue"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="12sp"
+                    android:textColor="#555"/>
+            </LinearLayout>
+
+            <!-- Row: Faculty -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Faculty:"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#333"/>
+
+                <TextView
+                    android:id="@+id/facultyValue"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="12sp"
+                    android:textColor="#555"/>
+            </LinearLayout>
+
+            <!-- Row: Total Lectures -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,57 +114,10 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Subject:"
-                    android:textSize="10sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/subjectValue"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textSize="10sp"/>
-            </LinearLayout>
-
-            <!-- ROW: Faculty -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Faculty:"
-                    android:textSize="10sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/facultyValue"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textSize="10sp"/>
-            </LinearLayout>
-
-            <!-- ROW: Total Lectures -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="2dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     android:text="Total Lectures:"
-                    android:textSize="10sp"
-                    android:textStyle="bold"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#333"/>
 
                 <TextView
                     android:id="@+id/totalLectureValue"
@@ -118,60 +125,70 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="10sp"/>
+                    android:textSize="12sp"
+                    android:textColor="#555"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <!-- Table Header -->
-    <LinearLayout
-        android:id="@+id/tableHeader"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tableHeaderCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/Purple"
-        android:orientation="horizontal"
-        android:padding="2dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/detailsCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
+        <LinearLayout
+            android:id="@+id/tableHeader"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Topic"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold"/>
+            android:background="@color/Purple"
+            android:orientation="horizontal"
+            android:padding="12dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="Subtopic"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Topic"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Completed On"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Subtopic"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Completed On"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_lectures"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:padding="8dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/tableHeader"
+        app:layout_constraintTop_toBottomOf="@id/tableHeaderCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

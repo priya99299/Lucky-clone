@@ -1,7 +1,7 @@
 package firstapp.example.lipsclone.Lecture_Performa;
+
 import android.os.Bundle;
 import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,10 +24,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Lecture_Perfrorma extends AppCompatActivity {
+    private static final String TAG = "LecturePerforma";
 
     RecyclerView recyclerView;
     LectureAdapter adapter;
     List<LectureItem> lectureList = new ArrayList<>();
+    String sessionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +39,26 @@ public class Lecture_Perfrorma extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_lectures);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new LectureAdapter(this, lectureList);
+        sessionId = getIntent().getStringExtra("session");
+        String s_id = getIntent().getStringExtra("s_id");
+        String f_id = getIntent().getStringExtra("f_id");
+        String college = getIntent().getStringExtra("college");
+        String semester = getIntent().getStringExtra("sem");
+
+        if (college == null) college = "gdcol1";
+
+        Log.d(TAG, "Intent Extras --> s_id: " + s_id + ", session: " + sessionId +
+                ", f_id: " + f_id + ", college: " + college + ", semester: " + semester);
+
+        adapter = new LectureAdapter(this, lectureList, sessionId);
         recyclerView.setAdapter(adapter);
+
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        fetchLectures();
-    }
-
-    private void fetchLectures() {
-        String s_id = getIntent().getStringExtra("s_id");
-        String sessionId = getIntent().getStringExtra("session");
-        String college = getIntent().getStringExtra("college");
-        if (college == null) college = "gdcol1";
-
-        Log.d("response", "Received s_id: " + s_id + ", sessionId: " + sessionId + ", college: " + college);
-        LectureRequest request = new LectureRequest("5552", "18", sessionId, college);
-
+        LectureRequest request = new LectureRequest(s_id, f_id,  semester, sessionId,college);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Log.d("Request Payload of lecture", gson.toJson(request));
+        Log.d(TAG, "Request Payload: " + gson.toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<LectureResponse> call = api.getLectures(request);
@@ -65,21 +68,23 @@ public class Lecture_Perfrorma extends AppCompatActivity {
             public void onResponse(Call<LectureResponse> call, Response<LectureResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     LectureResponse res = response.body();
-                    Log.d("Response of lectrue", gson.toJson(res));
+                    Log.d(TAG, "API Response: " + gson.toJson(res));
 
                     if (res.success && !res.response.isEmpty()) {
                         lectureList.clear();
                         lectureList.addAll(res.response);
                         adapter.notifyDataSetChanged();
+                    } else {
+                        Log.w(TAG, "Empty or failed response from API.");
                     }
                 } else {
-                    Log.e("❌ Error", "Unsuccessful response");
+                    Log.e(TAG, "Unsuccessful API response");
                 }
             }
 
             @Override
             public void onFailure(Call<LectureResponse> call, Throwable t) {
-                Log.e("🚫 API Failed", t.getMessage());
+                Log.e(TAG, "API Failure: " + t.getMessage(), t);
             }
         });
     }

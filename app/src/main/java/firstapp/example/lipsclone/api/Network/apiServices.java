@@ -28,6 +28,7 @@ import firstapp.example.lipsclone.api.Models.attendence.LectureAttendanceRespons
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.SaveAttendanceRequest;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -58,6 +59,9 @@ public interface apiServices {
     Call<StudentTimeTableResponse> getStudentTimeTable(@Body StudentTimeTableRequest request);
     @POST("api/index.php")
     Call<LectureDetailResponse> getStudentLectureDetails(@Body StudentLectureDetailsRequest request);
+    @POST("index.php")
+    Call<ResponseBody> getStudentLectureDetailsRaw(@Body StudentLectureDetailsRequest request);
+
     @POST("api/index.php")
     Call<AttendanceResponse> getMonthlyAttendance(@Body AttendanceRequest request);
     @POST("api/index.php")
