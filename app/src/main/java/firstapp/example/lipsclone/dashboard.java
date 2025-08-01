@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -236,7 +235,9 @@ public class dashboard extends AppCompatActivity {
         Library.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent library=new Intent(dashboard.this, Library.class);
+                Intent library=new Intent(dashboard.this, firstapp.example.lipsclone.Library.Library.class);
+                library.putExtra("s_id", studentId);
+                library.putExtra("session", sessionId);
                 startActivity(library);
             }
         });

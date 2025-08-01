@@ -4,6 +4,8 @@ import firstapp.example.lipsclone.api.Login.LoginReponse;
 import firstapp.example.lipsclone.api.Login.LoginRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.StudentLectureDetailsRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.LectureDetailResponse;
+import firstapp.example.lipsclone.api.Models.Library.LibraryResponse;
+import firstapp.example.lipsclone.api.Models.Library.StudentLibraryRequest;
 import firstapp.example.lipsclone.api.Models.Login.AppConfigRequest;
 import firstapp.example.lipsclone.api.Models.AppConfigResponse;
 import firstapp.example.lipsclone.api.Models.Fees.FeeRequest;
@@ -71,6 +73,16 @@ public interface apiServices {
     Call<LiveAttendanceResponse> saveAttendance(@Body SaveAttendanceRequest request);
     @POST("api/index.php")
     Call<LectureAttendanceResponse>  getLectureAttendance(@Body LectureAttendanceRequest request);
+    @POST("api/index.php")
+    Call<LibraryResponse> getStudentLibrary(@Body StudentLibraryRequest request);
+
+    // In apiServices.java
+
+
+
+
+
+
 
 
 
