@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submitted"
-            app:chipBackgroundColor="@color/light_grey"
+            android:textColor="@color/black"
             app:chipCornerRadius="16dp" />
 
         <com.google.android.material.chip.Chip
@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:text="Issued"
             android:layout_marginStart="8dp"
-            app:chipBackgroundColor="@color/light_green"
+            app:chipBackgroundColor="@color/Purple"
+            android:textColor="@color/white"
             app:chipCornerRadius="16dp" />
     </LinearLayout>
 

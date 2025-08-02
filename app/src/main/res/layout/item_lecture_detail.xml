@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Topic"
             android:textColor="#212121"
-            android:textSize="10sp"
+            android:textSize="9sp"
             android:lineSpacingExtra="2dp"
             android:maxLines="5"
             android:ellipsize="end" />
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Subtopic"
             android:textColor="#212121"
-            android:textSize="10sp"
+            android:textSize="9sp"
             android:lineSpacingExtra="2dp"
 
             android:ellipsize="end"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="01-07-2025"
             android:textColor="#424242"
-            android:textSize="10sp"
+            android:textSize="8sp"
             android:gravity="end"
             android:maxLines="1"
             android:ellipsize="end"

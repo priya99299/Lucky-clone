@@ -11,7 +11,9 @@
     <RelativeLayout
         android:id="@+id/header_second_row"
         android:layout_width="match_parent"
-        android:layout_height="237dp"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:paddingBottom="16dp"
         android:background="@drawable/wave_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,52 +22,64 @@
         <!-- Logo Top-Left -->
         <ImageView
             android:id="@+id/college_logo"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/lips"
             android:contentDescription="Logo" />
 
-        <!-- College Name - To the right of Logo -->
+        <!-- College Name - Responsive width -->
         <TextView
             android:id="@+id/college_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/college_logo"
+            android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/college_logo"
-            android:layout_marginStart="13dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="16dp"
             android:text="Lucky Institute of Professional Study"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:textSize="13sp"
+            android:textStyle="normal"
+            android:maxLines="2"
+            android:ellipsize="end" />
 
-        <!-- Student Profile Image (Circular with white border) -->
-        <ImageView
-
-            android:id="@+id/studentImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+        <!-- Student Profile Image (Circular) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profile_card"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/profile1"
-            android:scaleType="centerCrop"
+            android:layout_marginTop="55dp"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@android:color/white">
 
-            android:padding="2dp" />
+            <ImageView
+                android:id="@+id/studentImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/profile1"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
 
         <!-- Student Name -->
         <TextView
             android:id="@+id/studentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/studentImage"
+            android:layout_below="@id/profile_card"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:text="KHUSH SONI"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
         <!-- Section Name -->
         <TextView
@@ -74,11 +88,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/studentName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="2dp"
             android:text="Section A"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textColor="@color/white" />
-        <!-- Section Name -->
+
+        <!-- Year Name -->
         <TextView
             android:id="@+id/yearname"
             android:layout_width="wrap_content"
@@ -86,490 +101,567 @@
             android:layout_below="@id/Section"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="1dp"
-            android:text="Section A"
-            android:textSize="12sp"
+            android:text="2023-2024"
+            android:textSize="11sp"
             android:textColor="@color/white" />
     </RelativeLayout>
 
     <!-- Scrollable Dashboard Section -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/header_second_row"
         app:layout_constraintBottom_toTopOf="@id/btm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <GridLayout
-            android:id="@+id/featureGrid"
+        <!-- Responsive Grid using LinearLayouts -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:columnCount="3"
-            android:rowCount="5">
+            android:orientation="vertical">
 
-            <!-- Profile -->
+            <!-- Row 1 -->
             <LinearLayout
-                android:id="@+id/stuProfile"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="timetable_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="8dp">
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/profile" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Profile -->
+                <LinearLayout
+                    android:id="@+id/stuProfile"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="@string/Profile"
-                    android:textSize="12sp"
-                    android:textColor="@color/dark_grey" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/profile" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/Profile"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Documents -->
+                <LinearLayout
+                    android:id="@+id/document"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/docum" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/document"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Fees -->
+                <LinearLayout
+                    android:id="@+id/fees"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/fees" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/fees"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Documents -->
+            <!-- Row 2 -->
             <LinearLayout
-                android:id="@+id/document"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="document_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="8dp">
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/docum" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Notice Board -->
+                <LinearLayout
+                    android:id="@+id/Notice"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="@string/document"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/noticeboard" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/notice"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Attendance -->
+                <LinearLayout
+                    android:id="@+id/attendence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/attedence" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/attendance"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Notes -->
+                <LinearLayout
+                    android:id="@+id/notes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/note" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/notes"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Fees -->
+            <!-- Row 3 -->
             <LinearLayout
-                android:id="@+id/fees"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="fees_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="8dp">
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/fees" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Time Table -->
+                <LinearLayout
+                    android:id="@+id/e_learning"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="@string/fees"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/time_table" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Time Table"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Library -->
+                <LinearLayout
+                    android:id="@+id/Library"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/booke" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/library"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Lecture Details -->
+                <LinearLayout
+                    android:id="@+id/lecture_Details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/training" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Lecture Details"
+                        android:textSize="10sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Notice Board -->
+            <!-- Row 4 -->
             <LinearLayout
-                android:id="@+id/Notice"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="notice_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="8dp">
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/noticeboard" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Canteen -->
+                <LinearLayout
+                    android:id="@+id/canteen"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="@string/notice"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/canteen" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Canteen"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Quiz -->
+                <LinearLayout
+                    android:id="@+id/feedback1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/quiz" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="@string/quiz"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+                <!-- Result -->
+                <LinearLayout
+                    android:id="@+id/feedback"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/result" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Result"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Attendance -->
+            <!-- Row 5 -->
             <LinearLayout
-                android:id="@+id/attendence"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="contact_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="8dp">
 
-                <ImageView
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:src="@drawable/attedence" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Message -->
+                <LinearLayout
+                    android:id="@+id/messageSection"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="@string/attendance"
-                    android:textSize="10sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
 
-            <!-- Notes -->
-            <LinearLayout
-                android:id="@+id/notes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="ask_doubt_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/msg" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/note" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Message"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Complaint -->
+                <LinearLayout
+                    android:id="@+id/complaint"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="@string/notes"
-                    android:textSize="10sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
 
-            <!-- Time Table -->
-            <LinearLayout
-                android:id="@+id/e_learning"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="e_learning_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/comments" />
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/time_table" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Complaint"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Contact Us -->
+                <LinearLayout
+                    android:id="@+id/contact"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:padding="12dp"
+                    android:minHeight="85dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="Time Table"
-                    android:textSize="10sp"
-                    android:textColor="@color/dark_grey" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/contact" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="Contact-US"
+                        android:textSize="11sp"
+                        android:textColor="@color/dark_grey"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
             </LinearLayout>
-
-            <!-- Library -->
-            <LinearLayout
-                android:id="@+id/Library"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="results_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/booke" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="@string/library"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Lecture Details -->
-            <LinearLayout
-                android:id="@+id/lecture_Details"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="library_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:src="@drawable/training" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:text="@string/lecture_performa"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Canteen -->
-            <LinearLayout
-                android:id="@+id/canteen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="events_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/canteen" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="Canteen"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Quiz -->
-            <LinearLayout
-                android:id="@+id/feedback1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="feedback_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/quiz" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="@string/quiz"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Result -->
-            <LinearLayout
-                android:id="@+id/feedback"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:transitionName="feedback_card_transition"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/result" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="Result"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Message -->
-            <LinearLayout
-                android:id="@+id/messageSection"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/msg" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="Message from \nto College"
-                    android:textSize="9sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Complaint -->
-            <LinearLayout
-                android:id="@+id/complaint"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/comments" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="Complaint"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-            <!-- Contact Us -->
-            <LinearLayout
-                android:id="@+id/contact"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/contact" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="Contact-US"
-                    android:textSize="11sp"
-                    android:textColor="@color/dark_grey" />
-            </LinearLayout>
-
-        </GridLayout>
-    </ScrollView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <!-- Logout Button (Fixed at Bottom) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btm"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/logout"
         android:textColor="@android:color/white"
+        android:textSize="14sp"
         android:backgroundTint="@color/Purple"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"

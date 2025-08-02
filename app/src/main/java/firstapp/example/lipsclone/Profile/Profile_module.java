@@ -1,6 +1,7 @@
 package firstapp.example.lipsclone.Profile;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class Profile_module extends AppCompatActivity {
         TextView contact = findViewById(R.id.contact);
         TextView address = findViewById(R.id.address);
         TextView sessionshow=findViewById(R.id.session_text);
+//        TextView birth=findViewById(R.id.birth);
 
         // Get Intent Data
         String Studentdetails = getIntent().getStringExtra("name");
@@ -53,6 +55,11 @@ public class Profile_module extends AppCompatActivity {
         String addresss = getIntent().getStringExtra("address2");
         String ImageUrl = getIntent().getStringExtra("image_url");
         String session =getIntent().getStringExtra("session");
+//        String dob = getIntent().getStringExtra("dob");
+
+//        Log.d("Birth",dob);
+
+
 
         // Set Values to Views
         studentName.setText(Studentdetails);
@@ -64,6 +71,8 @@ public class Profile_module extends AppCompatActivity {
         mothername.setText(Mothername);
         contact.setText(Mobile);
         address.setText(addresss);
+//        birth.setText(dob);
+
 
 
 

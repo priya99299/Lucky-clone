@@ -31,6 +31,6 @@ public class AppConfigResponse {
         public String   address2;
         public String file;
         public String docname;
-
+        public String dob;
     }
 }

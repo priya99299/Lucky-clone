@@ -60,6 +60,7 @@ public class Contact_us extends AppCompatActivity {
         marker.setPosition(location);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         marker.setTitle("Lucky Institute of Professional Studies");
+        marker.setIcon(getResources().getDrawable(R.drawable.baseline_place_24));
         osmMap.getOverlays().add(marker);
     }
 

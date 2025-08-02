@@ -74,7 +74,7 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textColor="#555"/>
             </LinearLayout>
 
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:background="@color/Purple"
             android:orientation="horizontal"
-            android:padding="12dp">
+            android:padding="5dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:text="Completed On"
                 android:textColor="@android:color/white"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textStyle="bold"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -31,6 +31,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_DAY) {
@@ -52,11 +53,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (holder instanceof ScheduleViewHolder) {
             ScheduleItem scheduleItem = (ScheduleItem) item;
             ScheduleViewHolder scheduleHolder = (ScheduleViewHolder) holder;
+
             scheduleHolder.tvSubject.setText(scheduleItem.getSubject());
             scheduleHolder.tvTeacher.setText(scheduleItem.getTeacher());
             scheduleHolder.tvRoom.setText(scheduleItem.getRoom());
             scheduleHolder.tvTime.setText(scheduleItem.getTime());
             scheduleHolder.cardView.setCardBackgroundColor(scheduleItem.getColor());
+
+
         }
     }
 
@@ -89,5 +93,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvTime = itemView.findViewById(R.id.tvTiming);
             cardView = itemView.findViewById(R.id.cardView);
         }
+
     }
 }

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Subject Name"
-            android:textSize="8sp"
+            android:textSize="9sp"
             android:textColor="#424242" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Faculty Name"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:textColor="#424242" />
 
         <TextView

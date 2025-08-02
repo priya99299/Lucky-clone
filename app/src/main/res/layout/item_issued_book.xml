@@ -1,280 +1,90 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="8dp"
-    app:strokeWidth="0dp"
-    android:backgroundTint="?attr/colorSurfaceContainer">
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:backgroundTint="@android:color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="20dp">
+        android:orientation="horizontal"
+        android:padding="12dp">
 
-        <!-- Gradient Status Indicator -->
-        <View
-            android:id="@+id/statusIndicator"
-            android:layout_width="6dp"
-            android:layout_height="0dp"
-            android:background="@drawable/gradient_status_indicator"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <!-- Left: Book Icon -->
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_menu_book"
+        android:contentDescription="Book Icon"
+      />
 
-        <!-- Book Icon -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/bookIconContainer"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
-            android:backgroundTint="?attr/colorPrimaryContainer"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/statusIndicator">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_menu_book"
-            />
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Status Chip -->
-        <com.google.android.material.chip.Chip
-            android:id="@+id/statusChip"
-            style="@style/Widget.Material3.Chip.Suggestion.Elevated"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="● Issued"
-            android:textColor="?attr/colorOnErrorContainer"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:chipBackgroundColor="?attr/colorErrorContainer"
-            app:chipCornerRadius="18dp"
-            app:chipStartPadding="12dp"
-            app:chipEndPadding="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Book Title -->
-        <TextView
-            android:id="@+id/bookTitle"
+        <!-- Right: Book Info -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="Let Us Python"
-            android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="20sp"
-            android:maxLines="2"
-            android:ellipsize="end"
-            app:layout_constraintStart_toEndOf="@id/bookIconContainer"
-            app:layout_constraintTop_toTopOf="@id/bookIconContainer"
-            app:layout_constraintEnd_toStartOf="@id/statusChip" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <!-- Book Code -->
-        <com.google.android.material.chip.Chip
-            android:id="@+id/codeChip"
-            style="@style/Widget.Material3.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:text="CS05128"
-            android:textColor="?attr/colorOnSecondaryContainer"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            app:chipBackgroundColor="?attr/colorSecondaryContainer"
-            app:chipCornerRadius="14dp"
-            app:chipStartPadding="8dp"
-            app:chipEndPadding="8dp"
-            app:layout_constraintStart_toEndOf="@id/bookIconContainer"
-            app:layout_constraintTop_toBottomOf="@id/bookTitle" />
-
-        <!-- Divider -->
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/colorOutlineVariant"
-            android:alpha="0.5"
-            app:layout_constraintTop_toBottomOf="@id/bookIconContainer"
-            app:layout_constraintStart_toStartOf="@id/statusIndicator"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Author Info -->
-        <LinearLayout
-            android:id="@+id/authorSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="6dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintStart_toEndOf="@id/statusIndicator">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_person"
-
-                android:layout_marginEnd="6dp" />
-
+            <!-- Book Title -->
             <TextView
-                android:id="@+id/author"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-                android:text="KANETKAR"
-
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- Publisher Info -->
-        <LinearLayout
-            android:id="@+id/publisherSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_domain"
-
-                android:layout_marginEnd="6dp" />
-
-            <TextView
+                android:id="@+id/bookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BPB Publications"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:text="Let Us C"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@android:color/black" />
 
-        <!-- Issue Period -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/issuePeriodCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="8dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="?attr/colorPrimary"
-            android:backgroundTint="?attr/colorPrimaryContainer"
-            app:layout_constraintTop_toBottomOf="@id/authorSection"
-            app:layout_constraintStart_toEndOf="@id/statusIndicator"
-            app:layout_constraintEnd_toStartOf="@id/fineCard">
+            <!-- Author + Publisher (single line) -->
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KANETKAR | BPB"
+                android:textSize="11sp"
+                android:textColor="#555555"
+                android:layout_marginTop="2dp" />
 
+            <!-- Issue & Return Dates -->
+            <TextView
+                android:id="@+id/issueDates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Issued: 29 Jul | Return: 12 Aug"
+                android:textSize="10sp"
+                android:textColor="#888888"
+                android:layout_marginTop="4dp" />
+
+            <!-- Fine & Status Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_calendar_today"
-
-                        android:layout_marginEnd="6dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Issue Period"
-                        android:textColor="?attr/colorPrimary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
 
                 <TextView
-                    android:id="@+id/issueDates"
+                    android:id="@+id/fineAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="29 Jul - 12 Aug"
-                    android:textColor="?attr/colorOnPrimaryContainer"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Fine Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/fineCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="?attr/colorTertiary"
-            android:backgroundTint="?attr/colorTertiaryContainer"
-            app:layout_constraintTop_toBottomOf="@id/publisherSection"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:minWidth="80dp"
-                android:gravity="center">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_payments"
-                        android:layout_marginEnd="4dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fine"
-                        android:textColor="?attr/colorTertiary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    android:text="Fine: ₹0"
+                    android:textSize="13sp"
+                    android:textColor="#D32F2F"
+                    android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/statusText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="₹0"
-                    android:textColor="?attr/colorOnTertiaryContainer"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="ISSUED"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                 />
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
