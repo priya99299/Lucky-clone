@@ -39,19 +39,17 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
     public void onBindViewHolder(@NonNull DocumentViewHolder holder, int position) {
         DocumentModel document = documentList.get(position);
         holder.documentTitle.setText(document.getDocname());
-        holder.documentType.setText(document.getType());
-        holder.documentStatus.setText( document.getStatus());
+//        holder.documentType.setText(document.getType());
+//        holder.documentStatus.setText( document.getStatus());
 
         holder.showDocumentButton.setOnClickListener(v -> {
             String fileUrl = document.getFile();
-            String status = document.getStatus();
+//            String status = document.getStatus();
 
-            if (fileUrl == null || fileUrl.isEmpty() || "Pending".equalsIgnoreCase(status) || "Not Submitted".equalsIgnoreCase(status)) {
-                Toast.makeText(context, "Document not submitted yet", Toast.LENGTH_SHORT).show();
-            } else {
+
                 String filename = document.getDocname() + ".pdf";
                 DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename);
-            }
+
         });
 
     }
@@ -68,8 +66,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
         public DocumentViewHolder(@NonNull View itemView) {
             super(itemView);
             documentTitle = itemView.findViewById(R.id.documentTitle);
-            documentType = itemView.findViewById(R.id.documentType);
-            documentStatus = itemView.findViewById(R.id.statusTextView);
+//            documentType = itemView.findViewById(R.id.documentType);
+//            documentStatus = itemView.findViewById(R.id.statusTextView);
             showDocumentButton = itemView.findViewById(R.id.showDocumentButton);
         }
     }
