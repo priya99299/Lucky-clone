@@ -1,6 +1,7 @@
 package firstapp.example.lipsclone.Attendence;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -102,8 +103,13 @@ public class LectureWiseAttendance extends AppCompatActivity {
         sessionId = getIntent().getStringExtra("session");
         f_id = getIntent().getStringExtra("f_id");
         college = getIntent().getStringExtra("college");
-        sem = getIntent().getStringExtra("semester");
+        sem = getIntent().getStringExtra("sem");
 
+        // Step 2: If Intent fails, use SharedPreferences fallback
+        if (sem == null || sem.isEmpty()) {
+            SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+            sem = prefs.getString("sem", "");
+        }
         if (college == null) college = "gdcol1";
 
         LectureAttendanceRequest request = new LectureAttendanceRequest(

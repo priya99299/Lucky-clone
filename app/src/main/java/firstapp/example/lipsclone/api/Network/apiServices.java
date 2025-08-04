@@ -1,5 +1,7 @@
 package firstapp.example.lipsclone.api.Network;
 
+import java.util.Map;
+
 import firstapp.example.lipsclone.api.Login.LoginReponse;
 import firstapp.example.lipsclone.api.Login.LoginRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.StudentLectureDetailsRequest;
@@ -30,6 +32,12 @@ import firstapp.example.lipsclone.api.Models.attendence.LectureAttendanceRespons
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.SaveAttendanceRequest;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintCategoryRequest;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintCategoryResponse;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintRequest;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintResponse;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintSubmitRequest;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintSubmitResponse;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -75,6 +83,19 @@ public interface apiServices {
     Call<LectureAttendanceResponse>  getLectureAttendance(@Body LectureAttendanceRequest request);
     @POST("api/index.php")
     Call<LibraryResponse> getStudentLibrary(@Body StudentLibraryRequest request);
+    @POST("api/index.php")
+    Call<ComplaintResponse> getComplaints(@Body ComplaintRequest request);
+    @POST("api/index.php")
+    Call<ComplaintResponse> submitComplaint(@Body ComplaintRequest request);
+    @POST("api/index.php")
+    Call<ComplaintCategoryResponse> getComplaintCategories(@Body ComplaintCategoryRequest request);
+//    @POST("api/index.php")
+//    Call<ComplaintResponse> getComplaints(@Body Map<String, String> request);
+
+
+
+
+
 
     // In apiServices.java
 

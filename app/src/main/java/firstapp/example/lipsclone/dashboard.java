@@ -229,6 +229,10 @@ public class dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent complaint = new Intent(dashboard.this, ComplaintSection.class);
+                complaint.putExtra("s_id", studentId);
+                complaint.putExtra("session", sessionId);
+                complaint.putExtra("f_id", f_id);
+                complaint.putExtra("sem", sem);
                 startActivity(complaint);
             }
         });

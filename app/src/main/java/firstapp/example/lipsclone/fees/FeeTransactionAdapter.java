@@ -32,13 +32,18 @@ public class FeeTransactionAdapter extends RecyclerView.Adapter<FeeTransactionAd
     public void onBindViewHolder(@NonNull FeeViewHolder holder, int position) {
         FeeTransactionItem item = transactionList.get(position);
 
+        if (item.getAmount() == null ||
+                item.getType() == null ||
+                (!"Due".equalsIgnoreCase(item.getType()) && !"Deposit".equalsIgnoreCase(item.getType()))) {
+            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            return;
+        }
+
         holder.feeName.setText(item.getParticulars());
+        holder.feeAmount.setText("");
+        holder.payIn.setText("");
 
-        // Reset columns to avoid recycled data issues
-        holder.feeAmount.setText(""); // Due column
-        holder.payIn.setText("");     // Deposit column
-
-        // Show amount in the appropriate column based on the type
         if ("Due".equalsIgnoreCase(item.getType())) {
             holder.feeAmount.setText("₹" + item.getAmount());
         } else if ("Deposit".equalsIgnoreCase(item.getType())) {

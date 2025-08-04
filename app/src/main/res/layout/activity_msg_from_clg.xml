@@ -22,6 +22,7 @@
         app:navigationIconTint="@color/white"
         app:titleTextColor="@color/white" />
 
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -35,28 +36,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:gravity="center_horizontal">
+            android:padding="12dp">
 
-            <!-- Info Text -->
-            <TextView
+            <!-- Info Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/infoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Drop a message to college administrator and we will respond within 24 hours. For more information please call or WhatsApp at +91 097842-11113."
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:paddingBottom="16dp"
-                android:lineSpacingExtra="2dp"
-                android:textAlignment="center" />
+                app:cardCornerRadius="30dp"
+                app:cardElevation="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/Msg"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Space between cards -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
 
             <!-- Message to Director Card -->
             <androidx.cardview.widget.CardView
-
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,8 +119,7 @@
                         android:layout_marginStart="16dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
-
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
