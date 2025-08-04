@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.complaint.ComplaintRequest;
 import firstapp.example.lipsclone.api.Models.complaint.ComplaintResponse;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintSubmitRequest;
+import firstapp.example.lipsclone.api.Models.complaint.ComplaintSubmitResponse;
 import firstapp.example.lipsclone.api.Network.apiServices;
 import firstapp.example.lipsclone.api.Network.apiclient;
 import retrofit2.Call;
@@ -87,9 +89,9 @@ public class ComplaintSection extends AppCompatActivity {
 
     private void setupCategoryDropdown() {
         String[] categories = {
-                "Admission", "College Facility", "Food / Canteen",
-                "Hostel", "Lectures and Teachers", "Mobile App Issues",
-                "Payment / Fees", "Transport", "Others"
+                "ADMISSION", "COLLEGE FACILITIES", "FOOD / CANTEEN",
+                "HOSTEL", "LECTURE(S) AND CLASS ROOM(S)", "MOBILE APPLICATION",
+                "RESULT DELAY ", "OTHER", "HOSTEL"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
         categoryDropdown.setAdapter(adapter);
@@ -117,28 +119,43 @@ public class ComplaintSection extends AppCompatActivity {
             return;
         }
 
-        ComplaintRequest request = new ComplaintRequest(s_id, sessionId, college, semester, f_id, category, subject, description);
-        Log.d(TAG, "Complaint Submit - API Request:\n" + gson.toJson(request));
+        // Use the category as title
+        ComplaintSubmitRequest request = new ComplaintSubmitRequest(
+                s_id,
+                sessionId,
+                college,
+                subject, // Title of complaint
+                description,
+                ""       // If no image, leave as empty string
+        );
+
+        Log.d(TAG, "Complaint Submit Request:\n" + gson.toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
-        api.getComplaints(request).enqueue(new Callback<ComplaintResponse>() {
+        api.submitComplaint(request).enqueue(new Callback<ComplaintSubmitResponse>() {
             @Override
-            public void onResponse(Call<ComplaintResponse> call, Response<ComplaintResponse> response) {
+            public void onResponse(Call<ComplaintSubmitResponse> call, Response<ComplaintSubmitResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "Complaint Submit - API Response:\n" + gson.toJson(response.body()));
+                    ComplaintSubmitResponse resp = response.body();
+                    Log.d(TAG, "Complaint Submit Response:\n" + gson.toJson(resp));
+                    Toast.makeText(ComplaintSection.this, resp.getMessage(), Toast.LENGTH_SHORT).show();
 
+                    // Clear fields
                     categoryDropdown.setText("");
                     subjectEditText.setText("");
                     descriptionEditText.setText("");
                 } else {
-                    Log.e(TAG, "Complaint Submit - Error Response Code: " + response.code());
+                    Log.e(TAG, "Complaint Submit Error: " + response.code());
+                    Toast.makeText(ComplaintSection.this, "Submission failed. Try again.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ComplaintResponse> call, Throwable t) {
-                Log.e(TAG, "Complaint Submit - API Failure: " + t.getMessage(), t);
+            public void onFailure(Call<ComplaintSubmitResponse> call, Throwable t) {
+                Log.e(TAG, "Complaint Submit Failed: " + t.getMessage(), t);
+                Toast.makeText(ComplaintSection.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

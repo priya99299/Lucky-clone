@@ -40,44 +40,45 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="12dp"
                         android:background="@drawable/circle_background_purple"
-                        android:padding="12dp"
+                        android:padding="8dp"
                         android:src="@drawable/ic_feedback_24"
                         android:tint="@color/white" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Submit Your Companint"
-                            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                            android:text="Submit Your Complaint"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:textColor="@color/text_primary" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Report any  Issue concerns or payment issues"
-                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            android:layout_marginTop="2dp"
+                            android:text="Report issue concerns or payment problems"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -85,6 +86,7 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
 
             <!-- Complaint Form Card -->
             <com.google.android.material.card.MaterialCardView

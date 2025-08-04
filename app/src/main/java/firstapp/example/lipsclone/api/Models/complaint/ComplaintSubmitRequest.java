@@ -20,4 +20,3 @@ public class ComplaintSubmitRequest {
         this.img = img;
     }
 }
-

@@ -86,7 +86,9 @@ public interface apiServices {
     @POST("api/index.php")
     Call<ComplaintResponse> getComplaints(@Body ComplaintRequest request);
     @POST("api/index.php")
-    Call<ComplaintResponse> submitComplaint(@Body ComplaintRequest request);
+
+    Call<ComplaintSubmitResponse> submitComplaint(@Body ComplaintSubmitRequest request);
+
     @POST("api/index.php")
     Call<ComplaintCategoryResponse> getComplaintCategories(@Body ComplaintCategoryRequest request);
 //    @POST("api/index.php")

@@ -76,35 +76,35 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.30"
             android:text="Document Name"
-            android:textSize="10sp"
+            android:textSize="9sp"
             android:textColor="#000000"
             android:ellipsize="end"
             android:maxLines="1"
             android:fontFamily="sans-serif-medium" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/documentType"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.15"-->
-<!--            android:text="Type"-->
-<!--            android:textSize="10sp"-->
-<!--            android:textColor="#000000"-->
-<!--            android:ellipsize="end"-->
-<!--            android:maxLines="1"-->
-<!--            android:fontFamily="sans-serif" />-->
+        <TextView
+            android:id="@+id/documentType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="Type"
+            android:textSize="9sp"
+            android:textColor="#000000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="sans-serif" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/statusTextView"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.15"-->
-<!--            android:text="Status"-->
-<!--            android:textSize="10sp"-->
-<!--            android:textColor="#000000"-->
-<!--            android:ellipsize="end"-->
-<!--            android:maxLines="1"-->
-<!--            android:fontFamily="sans-serif" />-->
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="Status"
+            android:textSize="9sp"
+            android:textColor="#000000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="sans-serif" />
 
         <ImageButton
             android:id="@+id/showDocumentButton"
