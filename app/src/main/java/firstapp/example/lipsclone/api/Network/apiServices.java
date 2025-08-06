@@ -1,7 +1,6 @@
 package firstapp.example.lipsclone.api.Network;
 
-import java.util.Map;
-
+import firstapp.example.lipsclone.Msgfromclg.DirectorMsg;
 import firstapp.example.lipsclone.api.Login.LoginReponse;
 import firstapp.example.lipsclone.api.Login.LoginRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.Lecturedetails.StudentLectureDetailsRequest;
@@ -15,6 +14,8 @@ import firstapp.example.lipsclone.api.Models.Fees.FeeResponse;
 import firstapp.example.lipsclone.api.Models.Fees.FeeTransactionResponse;
 import firstapp.example.lipsclone.api.Models.Lecture.LectureRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.LectureResponse;
+import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
+import firstapp.example.lipsclone.api.Models.Messages.Messages;
 import firstapp.example.lipsclone.api.Models.Notice.NoticeRequest ;
 import firstapp.example.lipsclone.api.Models.Notice.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.Documents.StudentDocument;
@@ -91,8 +92,14 @@ public interface apiServices {
 
     @POST("api/index.php")
     Call<ComplaintCategoryResponse> getComplaintCategories(@Body ComplaintCategoryRequest request);
-//    @POST("api/index.php")
-//    Call<ComplaintResponse> getComplaints(@Body Map<String, String> request);
+    @POST("api/index.php")
+        Call<MessageResponse> getStudentMessages(@Body Messages request);
+
+
+
+
+
+
 
 
 

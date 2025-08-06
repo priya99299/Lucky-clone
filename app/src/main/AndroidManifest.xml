@@ -16,6 +16,10 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
+            android:name=".Msgfromclg.GenralMSG"
+            android:exported="false" />
+
+        <activity
             android:name=".Library.Library"
             android:exported="false" />
 
@@ -37,10 +41,9 @@
             android:exported="false" />
         <activity
             android:name=".Attendence.LectureWiseAttendance"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Attendence.LectureWiseAttendance"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".Attendence.LectureWiseAttendance" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".Attendence.Monthly_Attendence"
             android:exported="false" />
@@ -82,7 +85,13 @@
             android:name=".Attendence.Attendence_module"
             android:exported="false" />
         <activity
-            android:name=".Msgfromclg.MsgFromClg"
+            android:name=".Msgfromclg.MsgfromClg"
+            android:exported="false" />
+        <activity
+            android:name=".Msgfromclg.DirectorMsg"
+            android:exported="false" />
+        <activity
+            android:name=".Msgfromclg.GenralMSG"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

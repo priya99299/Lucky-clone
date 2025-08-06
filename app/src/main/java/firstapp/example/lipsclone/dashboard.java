@@ -24,7 +24,7 @@ import firstapp.example.lipsclone.Contact_us.Contact_us;
 import firstapp.example.lipsclone.Documents.Document;
 import firstapp.example.lipsclone.Downloads.Downloads;
 import firstapp.example.lipsclone.Lecture_Performa.Lecture_Perfrorma;
-import firstapp.example.lipsclone.Msgfromclg.MsgFromClg;
+import firstapp.example.lipsclone.Msgfromclg.MsgfromClg;
 import firstapp.example.lipsclone.Notice.Notice_Section;
 import firstapp.example.lipsclone.Profile.Profile_module;
 import firstapp.example.lipsclone.complaint.ComplaintSection;
@@ -238,7 +238,9 @@ public class dashboard extends AppCompatActivity {
         });
         msg.setOnClickListener(v -> {
             Log.d("MSG", "intent");
-            Intent intent = new Intent(dashboard.this, MsgFromClg.class);
+            Intent intent = new Intent(dashboard.this, MsgfromClg.class);
+            intent.putExtra("s_id", studentId);
+            intent.putExtra("session", sessionId);
 
             startActivity(intent);
         });
