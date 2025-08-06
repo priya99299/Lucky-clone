@@ -27,5 +27,9 @@ public class GenralMSG extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        String s_id = getIntent().getStringExtra("s_id");
+        String session = getIntent().getStringExtra("session");
+        String college = "gdcol1";
+
     }
 }

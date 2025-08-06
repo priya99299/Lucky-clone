@@ -15,6 +15,7 @@ import firstapp.example.lipsclone.api.Models.Fees.FeeTransactionResponse;
 import firstapp.example.lipsclone.api.Models.Lecture.LectureRequest;
 import firstapp.example.lipsclone.api.Models.Lecture.LectureResponse;
 import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
+import firstapp.example.lipsclone.api.Models.Messages.MessageToDirectorRequest;
 import firstapp.example.lipsclone.api.Models.Messages.Messages;
 import firstapp.example.lipsclone.api.Models.Notice.NoticeRequest ;
 import firstapp.example.lipsclone.api.Models.Notice.Notice_Reponse;
@@ -95,6 +96,9 @@ public interface apiServices {
     @POST("api/index.php")
         Call<MessageResponse> getStudentMessages(@Body Messages request);
 
+    @POST("api/index.php")
+    Call<MessageResponse> sendMessageToDirector(@Body MessageToDirectorRequest request);
+//    Call<ResponseBody> sendMessageToDirector(@Body MessageToDirectorRequest request);
 
 
 
