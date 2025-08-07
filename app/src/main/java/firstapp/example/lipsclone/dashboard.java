@@ -49,7 +49,7 @@ public class dashboard extends AppCompatActivity {
         ImageView ProfilePic;
         TextView name, Session, year;
         LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice, timetable, Lecturees, contact, attendence, complaint, msg,
-                Library;
+                Library,calender;
         Button btn;
 
         document = findViewById(R.id.document);
@@ -72,6 +72,7 @@ public class dashboard extends AppCompatActivity {
         complaint = findViewById(R.id.complaint);
         msg = findViewById(R.id.messageSection);
         Library = findViewById(R.id.Library);
+        calender=findViewById(R.id.calender);
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -251,6 +252,13 @@ public class dashboard extends AppCompatActivity {
                 library.putExtra("s_id", studentId);
                 library.putExtra("session", sessionId);
                 startActivity(library);
+            }
+        });
+        calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Information = new Intent(dashboard.this, acadmicCalender.class);
+                startActivity(Information);
             }
         });
     }

@@ -2,6 +2,8 @@ package firstapp.example.lipsclone.Downloads;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ public class Downloads extends AppCompatActivity {
 
     private static final String TAG = "DownloadAPI";
     private RecyclerView downloadRecyclerView;
+    private TextView noFileText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class Downloads extends AppCompatActivity {
         // RecyclerView init
         downloadRecyclerView = findViewById(R.id.downloadRecyclerView);
         downloadRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // No File TextView
+        noFileText = findViewById(R.id.noFileText);
 
         // Get data from Intent
         String s_id = getIntent().getStringExtra("s_id");
@@ -55,6 +61,8 @@ public class Downloads extends AppCompatActivity {
                 "api", "student_download", s_id, class_id, sessionId, college
         );
 
+        Log.d(TAG, "Request Payload: " + new com.google.gson.Gson().toJson(request));
+
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<StudentDownloadResponse> call = api.getStudentDownloads(request);
 
@@ -64,17 +72,32 @@ public class Downloads extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<DownloadItem> downloads = response.body().getResponse();
 
-                    // Bind to adapter
-                    DownloadAdapter adapter = new DownloadAdapter(downloads, Downloads.this);
-                    downloadRecyclerView.setAdapter(adapter);
+                    Log.d(TAG, "API Response: " + new com.google.gson.Gson().toJson(response.body()));
+
+                    if (downloads != null && !downloads.isEmpty()) {
+                        DownloadAdapter adapter = new DownloadAdapter(downloads, Downloads.this);
+                        downloadRecyclerView.setAdapter(adapter);
+                        noFileText.setVisibility(View.GONE);
+                    } else {
+                        noFileText.setVisibility(View.VISIBLE);
+                    }
+
+                    Log.d(TAG, "Downloads fetched: " + downloads.size());
                 } else {
-                    Log.e(TAG, "Response failed or body is null");
+                    noFileText.setVisibility(View.VISIBLE);
+                    Log.e(TAG, "Response unsuccessful or empty body");
+                    try {
+                        Log.e(TAG, "Error body: " + response.errorBody().string());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<StudentDownloadResponse> call, Throwable t) {
-                Log.e(TAG, "API Error: " + t.getMessage(), t);
+                noFileText.setVisibility(View.VISIBLE);
+                Log.e(TAG, "API Failure: " + t.getMessage(), t);
             }
         });
     }

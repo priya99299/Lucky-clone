@@ -481,7 +481,7 @@
 
                 <!-- Quiz -->
                 <LinearLayout
-                    android:id="@+id/feedback1"
+                    android:id="@+id/calender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -497,14 +497,14 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/quiz" />
+                        android:src="@drawable/calendar" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:gravity="center"
-                        android:text="@string/quiz"
+                        android:text="@string/academic_calendar"
                         android:textSize="11sp"
                         android:textColor="@color/dark_grey"
                         android:maxLines="2"
