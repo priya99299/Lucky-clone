@@ -88,7 +88,7 @@ public class Monthly_Attendence extends AppCompatActivity {
         }
 
         AttendanceRequest request = new AttendanceRequest(s_id, sessionId, college, f_id);
-        request.setSem(sem);  // ✅ Set semester in request
+        request.setSem(sem);  //  Set semester in request
 
         String requestJson = gson.toJson(request);
         Log.d(TAG, "--> REQUEST PAYLOAD:\n" + requestJson);

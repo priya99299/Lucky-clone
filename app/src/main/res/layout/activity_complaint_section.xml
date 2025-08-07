@@ -27,20 +27,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="16dp">
 
-            <!-- Header Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
@@ -58,7 +57,7 @@
                         android:background="@drawable/circle_background_purple"
                         android:padding="8dp"
                         android:src="@drawable/ic_feedback_24"
-                        android:tint="@color/white" />
+                       />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -80,194 +79,15 @@
                             android:text="Report issue concerns or payment problems"
                             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                             android:textColor="@color/text_secondary" />
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
-
-            <!-- Complaint Form Card -->
+            <!-- 🟣 Track Complaints Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-                    <!-- Category Selection -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/categoryInputLayout"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:hint="SUBMIT YOUR COMPLAINT TYPE"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:startIconDrawable="@drawable/ic_category_24">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/categoryDropdown"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Subject Input -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/subjectInputLayout"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:hint="Subject"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:startIconDrawable="@drawable/ic_subject_24">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/subjectEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Description Input -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/descriptionInputLayout"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:hint="Describe your fee-related issue"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="500"
-                        app:startIconDrawable="@drawable/ic_description_24">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/descriptionEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top"
-                            android:inputType="textMultiLine"
-                            android:lines="4"
-                            android:maxLength="500" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-<!--                    &lt;!&ndash; Priority Level &ndash;&gt;-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="8dp"-->
-<!--                        android:text="Priority Level"-->
-<!--                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"-->
-<!--                        android:textColor="@color/text_primary" />-->
-
-<!--                    <com.google.android.material.chip.ChipGroup-->
-<!--                        android:id="@+id/priorityChipGroup"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="20dp"-->
-<!--                        app:checkedChip="@id/mediumChip"-->
-<!--                        app:selectionRequired="true"-->
-<!--                        app:singleSelection="true">-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:id="@+id/lowChip"-->
-<!--                            style="@style/Widget.Material3.Chip.Filter"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Low"-->
-<!--                            app:chipBackgroundColor="@color/chip_low_selector"-->
-<!--                            app:chipStrokeWidth="0dp" />-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:id="@+id/mediumChip"-->
-<!--                            style="@style/Widget.Material3.Chip.Filter"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Medium"-->
-<!--                            app:chipBackgroundColor="@color/chip_medium_selector"-->
-<!--                            app:chipStrokeWidth="0dp" />-->
-
-<!--                        <com.google.android.material.chip.Chip-->
-<!--                            android:id="@+id/highChip"-->
-<!--                            style="@style/Widget.Material3.Chip.Filter"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="High"-->
-<!--                            app:chipBackgroundColor="@color/chip_high_selector"-->
-<!--                            app:chipStrokeWidth="0dp" />-->
-
-<!--                    </com.google.android.material.chip.ChipGroup>-->
-
-                    <!-- Attachment Section -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="24dp"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/attachFileButton"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Attach File"
-                            app:cornerRadius="12dp"
-                            app:icon="@drawable/ic_attach_file_24" />
-
-                        <TextView
-                            android:id="@+id/attachmentCountText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:text="0 files"
-                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                            android:textColor="@color/text_secondary" />
-
-                    </LinearLayout>
-
-                    <!-- Submit Button -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/submitButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:text="Submit Issue"
-                        android:textSize="16sp"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_send_24" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Status Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:strokeWidth="0dp">
@@ -296,7 +116,6 @@
                             android:text="Track Your Complaints"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:textColor="@color/text_primary" />
-
                     </LinearLayout>
 
                     <TextView
@@ -316,13 +135,119 @@
                         android:text="View My Complaints"
                         app:cornerRadius="12dp"
                         app:icon="@drawable/ic_list_24" />
-
                 </LinearLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- 🟣 Complaint Form Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Category Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/categoryInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="SUBMIT YOUR COMPLAINT TYPE"
+                        app:startIconDrawable="@drawable/ic_category_24">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/categoryDropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Subject -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/subjectInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Subject"
+                        app:startIconDrawable="@drawable/ic_subject_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/subjectEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Description -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/descriptionInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="Describe your fee-related issue"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="500"
+                        app:startIconDrawable="@drawable/ic_description_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/descriptionEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            android:lines="4"
+                            android:maxLength="500" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Attachment -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/attachFileButton"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Attach File"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_attach_file_24" />
+
+                        <TextView
+                            android:id="@+id/attachmentCountText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:text="0 files"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/text_secondary" />
+                    </LinearLayout>
+
+                    <!-- Submit Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/submitButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Submit Issue"
+                        android:textSize="16sp"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_send_24" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

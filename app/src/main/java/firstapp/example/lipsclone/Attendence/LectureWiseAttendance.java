@@ -116,7 +116,7 @@ public class LectureWiseAttendance extends AppCompatActivity {
                 "api", "student_attendence_bylecture", s_id, college, f_id, fromDate, toDate, sem
         );
 
-        Log.d(TAG, "➡️ API Request:\n" +
+        Log.d(TAG, "API Request:\n" +
                 "s_id: " + s_id + "\n" +
                 "f_id: " + f_id + "\n" +
                 "college: " + college + "\n" +

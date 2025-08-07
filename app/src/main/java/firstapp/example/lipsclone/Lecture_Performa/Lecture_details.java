@@ -51,7 +51,7 @@ public class Lecture_details extends AppCompatActivity {
         String sessionId = getIntent().getStringExtra("session");
 
         if (p_id == null || p_id.isEmpty()) {
-            Log.e(TAG, "❌ p_id is missing!");
+            Log.e(TAG, " p_id is missing!");
             return;
         }
 
@@ -71,28 +71,28 @@ public class Lecture_details extends AppCompatActivity {
             public void onResponse(Call<LectureDetailResponse> call, Response<LectureDetailResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     LectureDetailResponse res = response.body();
-                    Log.d(TAG, "✅ Response Received: " + new Gson().toJson(res));
+                    Log.d(TAG, "Response Received: " + new Gson().toJson(res));
 
                     if (res.success && res.response != null) {
                         showLectureInfo(res.response.lectureInfo);
                         showLectureDetails(res.response.lectureDetails);
                     } else {
-                        Log.w(TAG, "⚠️ Empty or failed API response");
+                        Log.w(TAG, " Empty or failed API response");
                     }
                 } else {
-                    Log.e(TAG, "❌ API Error Code: " + response.code());
+                    Log.e(TAG, " API Error Code: " + response.code());
                     try {
                         if (response.errorBody() != null)
-                            Log.e(TAG, "🔍 Error Body: " + response.errorBody().string());
+                            Log.e(TAG, " Error Body: " + response.errorBody().string());
                     } catch (IOException e) {
-                        Log.e(TAG, "❌ Failed to read error body", e);
+                        Log.e(TAG, " Failed to read error body", e);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<LectureDetailResponse> call, Throwable t) {
-                Log.e(TAG, "❌ Network/API Failure", t);
+                Log.e(TAG, " Network/API Failure", t);
             }
         });
     }

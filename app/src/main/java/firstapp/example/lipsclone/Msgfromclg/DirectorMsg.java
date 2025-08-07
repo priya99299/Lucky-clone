@@ -65,14 +65,14 @@ public class DirectorMsg extends AppCompatActivity {
             if (!remark.isEmpty()) {
                 sendMessage(remark);
             } else {
-                Log.w(TAG, "✏️ Message is empty, not sending.");
+                Log.w(TAG, "Message is empty, not sending.");
             }
         });
     }
 
     private void fetchMessages() {
         Messages request = new Messages(s_id, session, college, "", "4");
-        Log.d(TAG, "📤 Fetch Request Payload: " + new Gson().toJson(request));
+        Log.d(TAG, "Fetch Request Payload: " + new Gson().toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         api.getStudentMessages(request).enqueue(new Callback<MessageResponse>() {
@@ -83,45 +83,45 @@ public class DirectorMsg extends AppCompatActivity {
                     adapter = new DirectorMsgAdapter(messageList);
                     recyclerView.setAdapter(adapter);
 
-                    Log.d(TAG, "✅ Fetch Response: " + new Gson().toJson(response.body()));
+                    Log.d(TAG, " Fetch Response: " + new Gson().toJson(response.body()));
                 } else {
-                    Log.e(TAG, "❌ Fetch API Error: Code = " + response.code());
+                    Log.e(TAG, " Fetch API Error: Code = " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-                Log.e(TAG, "❌ Fetch API Failure: " + t.getMessage());
+                Log.e(TAG, " Fetch API Failure: " + t.getMessage());
             }
         });
     }
 
     private void sendMessage(String remark) {
         MessageToDirectorRequest request = new MessageToDirectorRequest(s_id, session, college, remark);
-        Log.d(TAG, "📤 Send Request Payload: " + new Gson().toJson(request));
+        Log.d(TAG, " Send Request Payload: " + new Gson().toJson(request));
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         api.sendMessageToDirector(request).enqueue(new Callback<MessageResponse>() {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "📥 Send Response: " + new Gson().toJson(response.body()));
+                    Log.d(TAG, " Send Response: " + new Gson().toJson(response.body()));
 
-                    Toast.makeText(DirectorMsg.this, "✅ Message sent successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DirectorMsg.this, "Message sent successfully!", Toast.LENGTH_SHORT).show();
                     messageEditText.setText("");
 
                     // Delay before re-fetching messages
                     new android.os.Handler().postDelayed(() -> fetchMessages(), 1000);
                 } else {
-                    Log.e(TAG, "❌ Send API Error: Code = " + response.code());
-                    Toast.makeText(DirectorMsg.this, "❌ Error sending message", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, " Send API Error: Code = " + response.code());
+                    Toast.makeText(DirectorMsg.this, " Error sending message", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-                Log.e(TAG, "❌ Send API Failure: " + t.getMessage());
-                Toast.makeText(DirectorMsg.this, "❌ Network error", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, " Send API Failure: " + t.getMessage());
+                Toast.makeText(DirectorMsg.this, " Network error", Toast.LENGTH_SHORT).show();
             }
         });
     }
