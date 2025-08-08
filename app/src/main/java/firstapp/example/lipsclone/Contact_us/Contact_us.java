@@ -3,6 +3,7 @@ package firstapp.example.lipsclone.Contact_us;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -30,6 +31,7 @@ public class Contact_us extends AppCompatActivity {
                 getApplicationContext(),
                 getSharedPreferences("osm_prefs", MODE_PRIVATE)
         );
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_contact_us);

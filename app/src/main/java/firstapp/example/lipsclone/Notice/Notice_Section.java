@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -68,6 +69,9 @@ public class Notice_Section extends AppCompatActivity {
         // API Call
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<Notice_Reponse> call = api.getNotices(request);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         call.enqueue(new Callback<Notice_Reponse>() {
             @Override

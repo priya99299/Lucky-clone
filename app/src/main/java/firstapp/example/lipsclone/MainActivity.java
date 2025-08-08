@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+
         if (isLoggedIn) {
             Intent intent = new Intent(MainActivity.this, dashboard.class);
             startActivity(intent);

@@ -35,8 +35,8 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_info_24"
-                android:tint="?attr/colorOnPrimaryContainer"
-                android:contentDescription="@string/event_icon_desc" />
+                android:tint="@color/Purple"
+               />
 
         </com.google.android.material.card.MaterialCardView>
 
