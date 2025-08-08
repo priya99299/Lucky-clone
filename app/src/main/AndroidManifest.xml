@@ -16,7 +16,7 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
-            android:name=".acadmicCalender"
+            android:name=".calender.acadmicCalender"
             android:exported="false" />
         <activity
             android:name=".Msgfromclg.GenralMSG"

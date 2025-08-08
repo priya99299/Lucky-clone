@@ -27,6 +27,7 @@ import firstapp.example.lipsclone.Lecture_Performa.Lecture_Perfrorma;
 import firstapp.example.lipsclone.Msgfromclg.MsgfromClg;
 import firstapp.example.lipsclone.Notice.Notice_Section;
 import firstapp.example.lipsclone.Profile.Profile_module;
+import firstapp.example.lipsclone.calender.acadmicCalender;
 import firstapp.example.lipsclone.complaint.ComplaintSection;
 import firstapp.example.lipsclone.fees.fees_Details;
 import firstapp.example.lipsclone.timeTable.Time_table;
@@ -258,6 +259,9 @@ public class dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent Information = new Intent(dashboard.this, acadmicCalender.class);
+                Information.putExtra("s_id", studentId);
+                Information.putExtra("session", sessionId);
+                Information.putExtra("f_id", f_id);
                 startActivity(Information);
             }
         });

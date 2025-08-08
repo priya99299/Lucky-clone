@@ -27,6 +27,8 @@ import firstapp.example.lipsclone.api.Models.Fees.FeeTransactionRequest;
 import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableRequest;
 import firstapp.example.lipsclone.api.Models.Time_table.StudentTimeTableResponse;
 import firstapp.example.lipsclone.api.Models.StudentVerifyRequest;
+import firstapp.example.lipsclone.api.Models.acadmic.AcademicCalendarRequest;
+import firstapp.example.lipsclone.api.Models.acadmic.AcademicCalendarResponse;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.AttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.LectureAttendanceRequest;
@@ -98,8 +100,9 @@ public interface apiServices {
 
     @POST("api/index.php")
     Call<MessageResponse> sendMessageToDirector(@Body MessageToDirectorRequest request);
-//    Call<ResponseBody> sendMessageToDirector(@Body MessageToDirectorRequest request);
 
+    @POST("api/index.php")
+    Call<AcademicCalendarResponse> getAcademicCalendar(@Body AcademicCalendarRequest request);
 
 
 
