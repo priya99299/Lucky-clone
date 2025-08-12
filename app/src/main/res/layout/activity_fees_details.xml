@@ -82,89 +82,95 @@
             </androidx.cardview.widget.CardView>
 
             <!-- CardView with Heading and Table Header -->
+            <!-- CardView with Heading and Table Header only -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_fee_table"
+                android:id="@+id/card_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_marginHorizontal="0dp"
-                android:layout_marginVertical="6dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/white"
-                >
+                android:layout_margin="1dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintTop_toBottomOf="@id/infoCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginVertical="6dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp">
-
+                    android:orientation="vertical">
 
                     <!-- Table Heading -->
                     <TextView
                         android:id="@+id/header_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="FEES DETAILS"
-                        android:textSize="16sp"
+                        android:text="Fees Details"
+                        android:textSize="20sp"
                         android:textStyle="bold"
-
-                        android:textColor="@color/Purple"
+                        android:textColor="#1A237E"
                         android:padding="16dp" />
 
                     <!-- Table Header Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="42dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:background="@color/Purple"
-
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/fee_name"
-                            android:textSize="12sp"
-                            android:textColor="@color/white"
-                            android:fontFamily="sans-serif-medium" />
+                        android:padding="8dp">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/fees_due"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="1dp"
-                            android:textColor="@color/white"
-                            android:fontFamily="sans-serif-medium"
-                            android:gravity="end" />
+                            android:text="Fees Name"
+                            android:textSize="13sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="normal" />
+
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/pay_in"
-                            android:textSize="12sp"
-                            android:textColor="@color/white"
-                            android:fontFamily="sans-serif-medium"
-                            android:gravity="end" />
+                            android:text="Fees Deposit"
+                            android:textSize="13sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="Fees Due"
+                            android:textSize="13sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="normal"
+                            android:gravity="center" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- RecyclerView for Fee Items -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="6dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fee_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:layout_marginHorizontal="0dp"
+                android:layout_marginVertical="6dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_fee" />
+        </LinearLayout>
 
 
             <Button
