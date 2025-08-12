@@ -34,7 +34,7 @@ public class Notice_Section extends AppCompatActivity {
 
     private static final String TAG = "NoticeSection";
     private RecyclerView recyclerView;
-    private TextView emptyView;   // 👈 added
+//    private TextView emptyView;
     private Gson gson;
 
     @Override
@@ -55,7 +55,7 @@ public class Notice_Section extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        emptyView = findViewById(R.id.emptyView);  // 👈 added
+//        emptyView = findViewById(R.id.emptyView);
 
         gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -84,17 +84,17 @@ public class Notice_Section extends AppCompatActivity {
 
                     if (notices.isEmpty()) {
                         recyclerView.setVisibility(View.GONE);
-                        emptyView.setVisibility(View.VISIBLE);
+//                        emptyView.setVisibility(View.VISIBLE);
                     } else {
                         recyclerView.setVisibility(View.VISIBLE);
-                        emptyView.setVisibility(View.GONE);
+//                        emptyView.setVisibility(View.GONE);
                         recyclerView.setAdapter(new NoticeAdapter(Notice_Section.this, notices));
                     }
 
                     Log.d(TAG, "Response JSON:\n" + gson.toJson(response.body()));
                 } else {
                     recyclerView.setVisibility(View.GONE);
-                    emptyView.setVisibility(View.VISIBLE);
+//                    emptyView.setVisibility(View.VISIBLE);
                     Log.e(TAG, "API error - Code: " + response.code());
                 }
             }
@@ -102,7 +102,7 @@ public class Notice_Section extends AppCompatActivity {
             @Override
             public void onFailure(Call<Notice_Reponse> call, Throwable t) {
                 recyclerView.setVisibility(View.GONE);
-                emptyView.setVisibility(View.VISIBLE);
+//                emptyView.setVisibility(View.VISIBLE);
                 Log.e(TAG, "API call failure: " + t.getMessage(), t);
                 Toast.makeText(Notice_Section.this, "No updates", Toast.LENGTH_SHORT).show();
             }

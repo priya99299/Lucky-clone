@@ -24,9 +24,7 @@
         <activity
             android:name=".Msgfromclg.GenralMSG"
             android:exported="false" />
-        <activity
-            android:name=".Msgfromclg.GenralMSG"
-            android:exported="false" />
+
         <activity
             android:name=".Library.Library"
             android:exported="false" />
@@ -81,7 +79,7 @@
             android:name=".Downloads.Downloads"
             android:exported="false" />
         <activity
-            android:name=".calender.Calender"
+            android:name=".calender.acadmicCalender"
             android:exported="false" />
         <activity
             android:name=".LoginActivty.LoginOTPActivity"

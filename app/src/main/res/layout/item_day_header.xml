@@ -1,67 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_table"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="6dp"
-    android:background="#FFFFFF"
-    >
+    android:layout_margin="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:layout_constraintTop_toBottomOf="@id/infoCard"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Day Title e.g. Monday -->
-    <TextView
-        android:id="@+id/tvDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Monday"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="@color/Purple"
-        android:paddingBottom="4dp"
-        android:paddingStart="16dp"
-        />
-
-    <!-- Header row (Subject, Timing, Location, Teacher) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="@color/Purple">
-
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Subject"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:gravity="center" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Timing"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:gravity="center" />
+            <!-- Table Heading -->
+            <TextView
+                android:id="@+id/tvDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Monday"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="#1A237E"
+                android:padding="10dp" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Location"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:gravity="center" />
+            <!-- Table Header Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/Purple"
+                android:padding="8dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Teacher"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:gravity="center" />
-    </LinearLayout>
-</LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:text="Subject"
+                    android:textSize="11sp"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:text="Timing"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:text="Location"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Teacher"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:textStyle="normal"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+</androidx.cardview.widget.CardView>
+
