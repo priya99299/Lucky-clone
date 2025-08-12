@@ -24,7 +24,7 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/fee_amount"
+            android:id="@+id/pay_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
             android:gravity="end" />
 
         <TextView
-            android:id="@+id/pay_in"
+            android:id="@+id/fee_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

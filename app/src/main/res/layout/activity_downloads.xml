@@ -78,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.15"
-                android:text="File"
+                android:text="View"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
                 android:gravity="center"
