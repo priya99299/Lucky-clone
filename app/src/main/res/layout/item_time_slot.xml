@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="DSA"
-            android:textSize="7sp"
+            android:textSize="9sp"
             android:textStyle="bold"
             android:textColor="#212121"
             android:maxLines="1"
