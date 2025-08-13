@@ -66,7 +66,7 @@ public class Time_table extends AppCompatActivity {
         });
 
 
-        tvNoData = findViewById(R.id.tvNoData); // ✅ New line
+        tvNoData = findViewById(R.id.tvNoData);
 
         gson = new GsonBuilder().setPrettyPrinting().create();
 

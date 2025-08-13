@@ -30,6 +30,7 @@ public class Downloads extends AppCompatActivity {
     private RecyclerView downloadRecyclerView;
     private TextView noFileText;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

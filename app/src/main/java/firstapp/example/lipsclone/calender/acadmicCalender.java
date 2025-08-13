@@ -1,5 +1,6 @@
 package firstapp.example.lipsclone.calender;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -63,7 +65,7 @@ public class acadmicCalender extends AppCompatActivity {
         emptyMessage = findViewById(R.id.emptyMessage);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AcademicCalendarAdapter();  // Make sure this uses the correct model import
+        adapter = new AcademicCalendarAdapter();
         recyclerView.setAdapter(adapter);
 
         fetchAcademicCalendar();
@@ -123,6 +125,9 @@ public class acadmicCalender extends AppCompatActivity {
             private void showEmpty(String message) {
                 recyclerView.setVisibility(View.GONE);
                 emptyMessage.setVisibility(View.VISIBLE);
+                emptyMessage.setTypeface(null, Typeface.BOLD);
+                emptyMessage.setTextColor(ContextCompat.getColor(acadmicCalender.this, R.color.gray_888));
+
                 emptyMessage.setText(message);
             }
         });

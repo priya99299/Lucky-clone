@@ -11,6 +11,8 @@
     <color name="light_background">#FAFAFA</color>
     <color name="surface">#F5F5F5</color> <!-- Light background for cards -->
     <color name="on_surface">#1C2526</color>
+    <color name="gray_888">#888888</color>
+
 
     <color name="Purple">#4B3F9C</color>
     <color name="gradient_start">#1976D2</color>
