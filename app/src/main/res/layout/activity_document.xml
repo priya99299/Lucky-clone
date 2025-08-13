@@ -97,13 +97,14 @@
                 android:fontFamily="sans-serif-medium" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="View"
-                android:textSize="14sp"
+                android:layout_weight="1"
+                android:text="VIEW"
+                android:textSize="10sp"
                 android:textColor="#FFFFFF"
-                android:textStyle="normal"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
                 android:gravity="center" />
 
         </LinearLayout>
