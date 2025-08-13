@@ -31,6 +31,7 @@ import firstapp.example.lipsclone.Profile.Profile_module;
 import firstapp.example.lipsclone.calender.acadmicCalender;
 import firstapp.example.lipsclone.complaint.ComplaintSection;
 import firstapp.example.lipsclone.fees.fees_Details;
+import firstapp.example.lipsclone.result.Result;
 import firstapp.example.lipsclone.timeTable.Time_table;
 
 public class dashboard extends AppCompatActivity {
@@ -54,7 +55,7 @@ public class dashboard extends AppCompatActivity {
         ImageView ProfilePic;
         TextView name, Session, year;
         LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice, timetable, Lecturees, contact, attendence, complaint, msg,
-                Library,calender;
+                Library,calender,Result;
         Button btn;
 
         document = findViewById(R.id.document);
@@ -78,6 +79,7 @@ public class dashboard extends AppCompatActivity {
         msg = findViewById(R.id.messageSection);
         Library = findViewById(R.id.Library);
         calender=findViewById(R.id.calender);
+        Result=findViewById(R.id.Result);
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -267,6 +269,13 @@ public class dashboard extends AppCompatActivity {
                 Information.putExtra("session", sessionId);
                 Information.putExtra("f_id", f_id);
                 startActivity(Information);
+            }
+        });
+        Result.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent result = new Intent(dashboard.this, Result.class);
+                startActivity(result);
             }
         });
     }

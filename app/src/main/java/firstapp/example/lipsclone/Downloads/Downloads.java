@@ -52,7 +52,7 @@ public class Downloads extends AppCompatActivity {
         // Get data from Intent
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
-        String class_id = "18"; //  You can make this dynamic if needed
+        String class_id = "18";
         String college = "gdcol1";
 
         Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId);

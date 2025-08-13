@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Attendence.Lecture_wise_Attendence">
+    tools:context=".Attendence.LectureWiseAttendance">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -122,7 +122,7 @@
         android:orientation="vertical"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/cardView"
@@ -132,10 +132,6 @@
 
         <include layout="@layout/attendance_table_header" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/table_divider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/attendanceRecyclerView"

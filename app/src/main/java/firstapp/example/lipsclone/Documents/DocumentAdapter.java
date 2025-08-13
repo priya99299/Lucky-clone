@@ -1,14 +1,11 @@
 package firstapp.example.lipsclone.Documents;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,10 +19,11 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
 
     private final List<DocumentModel> documentList;
     private final Context context;
-
-    public DocumentAdapter(List<DocumentModel> documentList, Context context) {
+    private final String s_id;
+    public DocumentAdapter(List<DocumentModel> documentList, Context context, String s_id) {
         this.documentList = documentList;
         this.context = context;
+        this.s_id = s_id;
     }
 
     @NonNull
@@ -40,18 +38,13 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
         DocumentModel document = documentList.get(position);
         holder.documentTitle.setText(document.getDocname());
         holder.documentType.setText(document.getType());
-        holder.documentStatus.setText( document.getStatus());
+        holder.documentStatus.setText(document.getStatus());
 
         holder.showDocumentButton.setOnClickListener(v -> {
             String fileUrl = document.getFile();
-//            String status = document.getStatus();
-
-
-                String filename = document.getDocname() + ".pdf";
-                DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename);
-
+            String filename = document.getDocname() + ".pdf"; // Base filename
+            DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename, s_id);
         });
-
     }
 
     @Override
@@ -60,7 +53,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
     }
 
     public static class DocumentViewHolder extends RecyclerView.ViewHolder {
-        TextView documentTitle,documentType,documentStatus;
+        TextView documentTitle, documentType, documentStatus;
         ImageButton showDocumentButton;
 
         public DocumentViewHolder(@NonNull View itemView) {

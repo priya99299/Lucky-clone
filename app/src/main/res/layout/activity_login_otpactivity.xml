@@ -19,18 +19,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/logo_image"
+        <!-- Logo with Rounded Card Shape -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/logo_card"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/lips"
-            android:contentDescription="Logo"
-            android:scaleType="centerInside"
+            android:layout_marginTop="40dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
 
+            <ImageView
+                android:id="@+id/logo_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/lips"
+                android:contentDescription="Logo" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Subtitle directly below logo -->
         <TextView
             android:id="@+id/app_subtitle"
             android:layout_width="wrap_content"
@@ -40,10 +53,12 @@
             android:textSize="14sp"
             android:gravity="center"
             android:lineSpacingExtra="2dp"
-            android:textStyle="normal"
-            app:layout_constraintTop_toBottomOf="@id/logo_image"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/logo_card"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Wave Divider -->

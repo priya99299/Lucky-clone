@@ -12,9 +12,19 @@ import java.io.File;
 
 public class DownloadAndOpenPDF {
 
+    // Old version for modules without s_id (e.g., Notes/Downloads module)
     public static void downloadAndOpen(Context context, String fileUrl, String filename) {
+        // Default s_id as "common" so that file names stay unique but not account specific
+        downloadAndOpen(context, fileUrl, filename, "common");
+    }
+
+    // New version for account-specific files (e.g., Student Documents module)
+    public static void downloadAndOpen(Context context, String fileUrl, String filename, String s_id) {
         try {
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
+            // Create unique filename
+            String uniqueFilename = s_id + "_" + filename;
+
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), uniqueFilename);
 
             if (file.exists()) {
                 openPDF(context, file);
@@ -27,11 +37,10 @@ public class DownloadAndOpenPDF {
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
             DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-            long downloadId = dm.enqueue(request);
+            dm.enqueue(request);
 
             Toast.makeText(context, "Downloading... ", Toast.LENGTH_LONG).show();
 
-            // Better UX: register BroadcastReceiver for download complete event
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(context, "Error downloading PDF", Toast.LENGTH_SHORT).show();

@@ -90,9 +90,9 @@ public class Document extends AppCompatActivity {
                         for (DocumentModel doc : documents) {
                             Log.d(TAG, "DocName: " + doc.getDocname() + ", FileURL: " + doc.getFile());
                         }
-
-                        DocumentAdapter adapter = new DocumentAdapter(documents, Document.this);
+                        DocumentAdapter adapter = new DocumentAdapter(documents, Document.this, s_id);
                         recyclerView.setAdapter(adapter);
+
                     } else {
                         Log.e(TAG, "Request failed. Code: " + response.code());
                         if (response.errorBody() != null) {

@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.15"
                 android:text="NAME"
                 android:textSize="10sp"
                 android:textColor="#FFFFFF"
@@ -99,7 +99,7 @@
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:text="VIEW"
                 android:textSize="10sp"
                 android:textColor="#FFFFFF"
