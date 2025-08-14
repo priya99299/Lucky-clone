@@ -36,6 +36,8 @@ import firstapp.example.lipsclone.api.Models.attendence.LectureAttendanceRespons
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceRequest;
 import firstapp.example.lipsclone.api.Models.attendence.LiveAttendanceResponse;
 import firstapp.example.lipsclone.api.Models.attendence.SaveAttendanceRequest;
+import firstapp.example.lipsclone.api.Models.canteen.CanteenMenuRequest;
+import firstapp.example.lipsclone.api.Models.canteen.CanteenResponse;
 import firstapp.example.lipsclone.api.Models.complaint.ComplaintCategoryRequest;
 import firstapp.example.lipsclone.api.Models.complaint.ComplaintCategoryResponse;
 import firstapp.example.lipsclone.api.Models.complaint.ComplaintRequest;
@@ -103,6 +105,9 @@ public interface apiServices {
 
     @POST("api/index.php")
     Call<AcademicCalendarResponse> getAcademicCalendar(@Body AcademicCalendarRequest request);
+    @POST("api/index.php")
+    Call<CanteenResponse> getCanteenMenu(@Body CanteenMenuRequest request);
+
 
 
 
