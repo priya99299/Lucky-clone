@@ -2,6 +2,9 @@ package firstapp.example.lipsclone.Lecture_Performa;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -66,6 +69,7 @@ public class Lecture_Perfrorma extends AppCompatActivity {
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<LectureResponse> call = api.getLectures(request);
+        TextView tvNoData = findViewById(R.id.tv_no_data);
 
         call.enqueue(new Callback<LectureResponse>() {
             @Override
@@ -78,18 +82,26 @@ public class Lecture_Perfrorma extends AppCompatActivity {
                         lectureList.clear();
                         lectureList.addAll(res.response);
                         adapter.notifyDataSetChanged();
+
+                        recyclerView.setVisibility(View.VISIBLE);
+                        tvNoData.setVisibility(View.GONE);
                     } else {
-                        Log.w(TAG, "Empty or failed response from API.");
+                        recyclerView.setVisibility(View.GONE);
+                        tvNoData.setVisibility(View.VISIBLE);
                     }
                 } else {
-                    Log.e(TAG, "Unsuccessful API response");
+                    recyclerView.setVisibility(View.GONE);
+                    tvNoData.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<LectureResponse> call, Throwable t) {
                 Log.e(TAG, "API Failure: " + t.getMessage(), t);
+                recyclerView.setVisibility(View.GONE);
+                tvNoData.setVisibility(View.VISIBLE);
             }
         });
+
     }
 }

@@ -2,6 +2,7 @@ package firstapp.example.lipsclone.Documents;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,45 +33,24 @@ public class Document extends AppCompatActivity {
     private TextView studentIdText, session1;
     private RecyclerView recyclerView;
 
+    private TextView noDataText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-
-        // Add this to catch any uncaught exceptions anywhere in this thread (main UI thread)
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread thread, Throwable e) {
-                Log.e(TAG, "Uncaught exception: ", e);
-            }
-
-        });
-
-
-        Log.d(TAG, "onCreate started");
         setContentView(R.layout.activity_document);
 
-//        studentIdText = findViewById(R.id.apiResponseTextView);
-//        session1 = findViewById(R.id.Session);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        noDataText = findViewById(R.id.noDataText); // bind no data TextView
 
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
         String college = "gdcol1";
 
-        Log.d(TAG, "Received s_id: " + s_id + ", sessionId: " + sessionId);
-
-//        studentIdText.setText("Student ID: " + s_id);
-//        session1.setText("Session: " + sessionId);
-
         StudentDocument request = new StudentDocument("api", "student_document", s_id, sessionId, college);
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String requestJson = gson.toJson(request);
-        Log.d(TAG, "Request JSON: " + requestJson);
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<StudentDocumentResponse> call = api.getDocuments(request);
@@ -80,39 +60,46 @@ public class Document extends AppCompatActivity {
             public void onResponse(Call<StudentDocumentResponse> call, Response<StudentDocumentResponse> response) {
                 try {
                     if (response.isSuccessful() && response.body() != null) {
+
+                        // Log raw payload for debugging
                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
                         String jsonResponse = gson.toJson(response.body());
-                        Log.d(TAG, jsonResponse);
+                        Log.d(TAG, "Full API Response:\n" + jsonResponse);
 
                         List<DocumentModel> documents = response.body().getResponse();
-                        Log.d(TAG, "Documents count: " + documents.size());
 
-                        for (DocumentModel doc : documents) {
-                            Log.d(TAG, "DocName: " + doc.getDocname() + ", FileURL: " + doc.getFile());
+                        if (documents != null && !documents.isEmpty()) {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            noDataText.setVisibility(View.GONE);
+
+                            DocumentAdapter adapter = new DocumentAdapter(documents, Document.this, s_id);
+                            recyclerView.setAdapter(adapter);
+                        } else {
+                            showNoDataMessage();
                         }
-                        DocumentAdapter adapter = new DocumentAdapter(documents, Document.this, s_id);
-                        recyclerView.setAdapter(adapter);
-
                     } else {
-                        Log.e(TAG, "Request failed. Code: " + response.code());
-                        if (response.errorBody() != null) {
-                            Log.e(TAG, "Error body: " + response.errorBody().string());
-                        }
+                        Log.w(TAG, "API returned error: " + response.code() + " - " + response.message());
+                        showNoDataMessage();
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "Exception in onResponse: " + e.getMessage(), e);
+                    showNoDataMessage();
                 }
             }
 
             @Override
             public void onFailure(Call<StudentDocumentResponse> call, Throwable t) {
                 Log.e(TAG, "Network failure or error: " + t.getMessage(), t);
+                showNoDataMessage();
             }
         });
 
-
-        Log.d(TAG, "onCreate finished");
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+    }
+
+    private void showNoDataMessage() {
+        recyclerView.setVisibility(View.GONE);
+        noDataText.setVisibility(View.VISIBLE);
     }
 }

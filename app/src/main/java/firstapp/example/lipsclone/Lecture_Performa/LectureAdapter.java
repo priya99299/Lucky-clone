@@ -59,7 +59,7 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.ViewHold
             intent.putExtra("subject", item.subject);
             intent.putExtra("faculty", item.facultyName);
             intent.putExtra("totalLecture", item.totalLecture);
-            intent.putExtra("p_id", item.action); // or item.p_id if named that
+            intent.putExtra("p_id", item.action);
             intent.putExtra("session", session);
             context.startActivity(intent);
         });

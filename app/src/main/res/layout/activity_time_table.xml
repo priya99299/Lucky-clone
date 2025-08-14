@@ -46,7 +46,6 @@
             android:fontFamily="sans-serif" />
     </androidx.cardview.widget.CardView>
 
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_lectures"
         android:layout_width="0dp"
@@ -56,5 +55,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- No Data Text -->
+    <TextView
+        android:id="@+id/tvNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No timetable available."
+        android:textSize="16sp"
+        android:textColor="#666"
+        android:fontFamily="sans-serif-medium"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/infoCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

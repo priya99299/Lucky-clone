@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.core.content.FileProvider;
 
@@ -12,38 +13,49 @@ import java.io.File;
 
 public class DownloadAndOpenPDF {
 
-    // Old version for modules without s_id (e.g., Notes/Downloads module)
+    // Old version for modules without s_id
     public static void downloadAndOpen(Context context, String fileUrl, String filename) {
-        // Default s_id as "common" so that file names stay unique but not account specific
         downloadAndOpen(context, fileUrl, filename, "common");
     }
 
-    // New version for account-specific files (e.g., Student Documents module)
-    public static void downloadAndOpen(Context context, String fileUrl, String filename, String s_id) {
+    // New version for account-specific files
+    public static long downloadAndOpen(Context context, String fileUrl, String filename, String s_id) {
         try {
-            // Create unique filename
-            String uniqueFilename = s_id + "_" + filename;
+            Log.d("DownloadAndOpenPDF", "fileUrl raw value: '" + fileUrl + "'");
 
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), uniqueFilename);
-
-            if (file.exists()) {
-                openPDF(context, file);
-                return;
+            // Check for empty, null, or placeholder files
+            if (fileUrl == null || fileUrl.trim().isEmpty() ||
+                    fileUrl.equalsIgnoreCase("null") ||
+                    fileUrl.contains("404.jpg") || fileUrl.contains("no-file")) {
+                Toast.makeText(context, "Pending", Toast.LENGTH_SHORT).show();
+                return -1;
             }
 
+            String uniqueFilename = s_id + "_" + filename;
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), uniqueFilename);
+
+            // If already exists, open directly
+            if (file.exists()) {
+                openPDF(context, file);
+                return -1;
+            }
+
+            // Start download
             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl));
             request.setTitle("Downloading PDF...");
             request.setDestinationUri(Uri.fromFile(file));
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
             DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-            dm.enqueue(request);
+            long downloadId = dm.enqueue(request);
 
-            Toast.makeText(context, "Downloading... ", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Downloading..... ", Toast.LENGTH_LONG).show();
+            return downloadId;
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "Error downloading PDF", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Pending.......", Toast.LENGTH_SHORT).show();
+            return -1;
         }
     }
 

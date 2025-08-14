@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -36,13 +38,14 @@ public class Time_table extends AppCompatActivity {
     private Gson gson;
     private SharedPreferences sharedPreferences;
 
+    private TextView tvNoData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
 
         sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -51,6 +54,8 @@ public class Time_table extends AppCompatActivity {
 
         rvSchedule = findViewById(R.id.recyclerView_lectures);
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
+
+        tvNoData = findViewById(R.id.tvNoData); // ✅ New line
 
         gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -89,8 +94,10 @@ public class Time_table extends AppCompatActivity {
                     Log.d(TAG, "Full Response:\n" + gson.toJson(body));
 
                     if (body.success && body.response != null && !body.response.isEmpty()) {
-                        extractAndStoreSemesterInfo(body.response);
+                        tvNoData.setVisibility(View.GONE);
+                        rvSchedule.setVisibility(View.VISIBLE);
 
+                        extractAndStoreSemesterInfo(body.response);
                         List<Object> items = parseTimeTableItems(body.response);
                         Log.d(TAG, "Parsed items count: " + items.size());
 
@@ -98,15 +105,21 @@ public class Time_table extends AppCompatActivity {
                         rvSchedule.setAdapter(adapter);
                     } else {
                         Log.e(TAG, "No timetable data or success=false");
+                        rvSchedule.setVisibility(View.GONE);
+                        tvNoData.setVisibility(View.VISIBLE); // ✅ Show message
                     }
                 } else {
                     Log.e(TAG, "API Error - Code: " + response.code());
+                    rvSchedule.setVisibility(View.GONE);
+                    tvNoData.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<StudentTimeTableResponse> call, Throwable t) {
                 Log.e(TAG, "Network failure: " + t.getMessage(), t);
+                rvSchedule.setVisibility(View.GONE);
+                tvNoData.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -2,6 +2,7 @@ package firstapp.example.lipsclone.Library;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,7 @@ import retrofit2.Response;
 public class Library extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private TextView logText;
+    private TextView logText, emptyTextView;
     private static final String TAG = "LibraryActivity";
 
     @Override
@@ -36,10 +37,10 @@ public class Library extends AppCompatActivity {
         setContentView(R.layout.activity_library);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-
         recyclerView = findViewById(R.id.issuedBooksRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        emptyTextView = findViewById(R.id.emptyTextView);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -65,21 +66,40 @@ public class Library extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null && response.body().response != null) {
                         List<IssuedBook> issuedBooks = response.body().response;
                         log("Received " + issuedBooks.size() + " issued books");
-                        recyclerView.setAdapter(new IssuedBookAdapter(Library.this, issuedBooks));
+
+                        if (issuedBooks.isEmpty()) {
+                            showEmptyMessage();
+                        } else {
+                            showBookList(issuedBooks);
+                        }
                     } else {
                         log("Error: Unexpected response or empty body");
+                        showEmptyMessage();
                     }
                 } catch (Exception e) {
                     log("Exception during parsing: " + e.getMessage());
                     e.printStackTrace();
+                    showEmptyMessage();
                 }
             }
 
             @Override
             public void onFailure(Call<LibraryResponse> call, Throwable t) {
                 log("API Failure: " + t.getMessage());
+                showEmptyMessage();
             }
         });
+    }
+
+    private void showBookList(List<IssuedBook> issuedBooks) {
+        recyclerView.setVisibility(View.VISIBLE);
+        emptyTextView.setVisibility(View.GONE);
+        recyclerView.setAdapter(new IssuedBookAdapter(Library.this, issuedBooks));
+    }
+
+    private void showEmptyMessage() {
+        recyclerView.setVisibility(View.GONE);
+        emptyTextView.setVisibility(View.VISIBLE);
     }
 
     private void log(String msg) {
