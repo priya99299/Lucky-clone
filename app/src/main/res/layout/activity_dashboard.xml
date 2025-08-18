@@ -11,8 +11,7 @@
     <RelativeLayout
         android:id="@+id/header_second_row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="200dp"
+        android:layout_height="220dp"
         android:paddingBottom="16dp"
         android:background="@drawable/wave_background"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +29,7 @@
             android:src="@drawable/lips"
             android:contentDescription="Logo" />
 
-        <!-- College Name - Responsive width -->
+        <!-- College Name -->
         <TextView
             android:id="@+id/college_name"
             android:layout_width="0dp"
@@ -90,7 +89,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:text="Section A"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textColor="@color/white" />
 
         <!-- Year Name -->
@@ -102,11 +101,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="1dp"
             android:text="2023-2024"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textColor="@color/white" />
     </RelativeLayout>
 
-    <!-- Scrollable Dashboard Section -->
+    <!-- Fixed Size Scrollable Dashboard Section -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
@@ -118,537 +117,486 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Responsive Grid using LinearLayouts -->
-        <LinearLayout
+        <!-- Fixed Grid Layout with Consistent Dimensions -->
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:columnCount="3"
+            android:rowCount="5"
+            android:useDefaultMargins="false"
+            android:alignmentMode="alignBounds">
 
             <!-- Row 1 -->
+            <!-- Profile -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="8dp">
+                android:id="@+id/stuProfile"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                <!-- Profile -->
-                <LinearLayout
-                    android:id="@+id/stuProfile"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="@string/Profile"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/profile" />
+            <!-- Documents -->
+            <LinearLayout
+                android:id="@+id/document"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/Profile"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/docum" />
 
-                <!-- Documents -->
-                <LinearLayout
-                    android:id="@+id/document"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="@string/document"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/docum" />
+            <!-- Fees -->
+            <LinearLayout
+                android:id="@+id/fees"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/document"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/fees" />
 
-                <!-- Fees -->
-                <LinearLayout
-                    android:id="@+id/fees"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/fees" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/fees"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                    android:text="@string/fees"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
             </LinearLayout>
 
             <!-- Row 2 -->
+            <!-- Notice Board -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="8dp">
+                android:id="@+id/Notice"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                <!-- Notice Board -->
-                <LinearLayout
-                    android:id="@+id/Notice"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/noticeboard" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="@string/notice"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/noticeboard" />
+            <!-- Attendance -->
+            <LinearLayout
+                android:id="@+id/attendence"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/notice"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/attedence" />
 
-                <!-- Attendance -->
-                <LinearLayout
-                    android:id="@+id/attendence"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="@string/attendance"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/attedence" />
+            <!-- Notes -->
+            <LinearLayout
+                android:id="@+id/notes"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/attendance"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/note" />
 
-                <!-- Notes -->
-                <LinearLayout
-                    android:id="@+id/notes"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/note" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/notes"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                    android:text="@string/notes"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
             </LinearLayout>
 
             <!-- Row 3 -->
+            <!-- Time Table -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="8dp">
+                android:id="@+id/e_learning"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                <!-- Time Table -->
-                <LinearLayout
-                    android:id="@+id/e_learning"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/time_table" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="Time Table"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/time_table" />
+            <!-- Library -->
+            <LinearLayout
+                android:id="@+id/Library"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Time Table"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/booke" />
 
-                <!-- Library -->
-                <LinearLayout
-                    android:id="@+id/Library"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="@string/library"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/booke" />
+            <!-- Lecture Details -->
+            <LinearLayout
+                android:id="@+id/lecture_Details"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/library"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/training" />
 
-                <!-- Lecture Details -->
-                <LinearLayout
-                    android:id="@+id/lecture_Details"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/training" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Lecture Details"
-                        android:textSize="10sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                    android:text="Lecture Details"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
             </LinearLayout>
 
             <!-- Row 4 -->
+            <!-- Canteen -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="8dp">
+                android:id="@+id/canteen"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                <!-- Canteen -->
-                <LinearLayout
-                    android:id="@+id/canteen"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/canteen" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="Canteen"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/canteen" />
+            <!-- Academic Calendar -->
+            <LinearLayout
+                android:id="@+id/calender"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Canteen"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/calendar" />
 
-                <!-- Quiz -->
-                <LinearLayout
-                    android:id="@+id/calender"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:text="@string/academic_calendar"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/calendar" />
+            <!-- Result -->
+            <LinearLayout
+                android:id="@+id/Result"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="@string/academic_calendar"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/result" />
 
-                <!-- Result -->
-                <LinearLayout
-                    android:id="@+id/Result"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/result" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Result"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                    android:text="Result"
+                    android:textSize="13sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
             </LinearLayout>
 
             <!-- Row 5 -->
+            <!-- Message -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="8dp">
+                android:id="@+id/messageSection"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
 
-                <!-- Message -->
-                <LinearLayout
-                    android:id="@+id/messageSection"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/msg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/msg" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Message"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
-
-                <!-- Complaint -->
-                <LinearLayout
-                    android:id="@+id/complaint"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/comments" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Complaint"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
-
-                <!-- Contact Us -->
-                <LinearLayout
-                    android:id="@+id/contact"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:padding="12dp"
-                    android:minHeight="85dp"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/contact" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:gravity="center"
-                        android:text="Contact-US"
-                        android:textSize="11sp"
-                        android:textColor="@color/dark_grey"
-                        android:maxLines="2"
-                        android:ellipsize="end" />
-                </LinearLayout>
+                    android:text="Message"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
             </LinearLayout>
-        </LinearLayout>
+
+            <!-- Complaint -->
+            <LinearLayout
+                android:id="@+id/complaint"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/comments" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Complaint"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+            <!-- Contact Us -->
+            <LinearLayout
+                android:id="@+id/contact"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/contact" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Contact-US"
+                    android:textSize="11sp"
+                    android:textColor="@color/dark_grey"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+        </GridLayout>
     </androidx.core.widget.NestedScrollView>
 
     <!-- Logout Button (Fixed at Bottom) -->

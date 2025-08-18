@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="6dp"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    >
 
     <!-- Day Title e.g. Monday -->
     <TextView
