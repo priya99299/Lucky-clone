@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Academic calender are published in full by june of preceding year to facilitate planning .For more information please contact college adminstration...."
+            android:text="The full academic calendar is published by June each year to help students plan in advance. For more details, please contact the college administration."
             android:textColor="#000000"
             android:textSize="11sp"
             android:fontFamily="sans-serif" />

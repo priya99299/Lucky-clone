@@ -204,9 +204,7 @@ public class Attendence_module extends AppCompatActivity {
         });
     }
 
-    /**
-     * Logs raw error or body string for debugging empty or invalid responses
-     */
+
     private void logRawResponse(Response<?> response) {
         try {
             ResponseBody errorBody = response.errorBody();
@@ -222,9 +220,7 @@ public class Attendence_module extends AppCompatActivity {
         }
     }
 
-    /**
-     * Calls save attendance API on button click
-     */
+
     private void saveAttendance() {
         if (a_id == null || a_id.isEmpty()) {
             Toast.makeText(this, "Attendance not available to mark.", Toast.LENGTH_SHORT).show();

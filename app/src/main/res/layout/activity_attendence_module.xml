@@ -23,7 +23,7 @@
         app:navigationIconTint="@color/white"
         app:title="Attendence"
         app:titleTextColor="@color/white"
-        app:menu="@menu/refresh_menu" />
+        />
 
     <!-- Rounded Card Info Message -->
     <androidx.cardview.widget.CardView

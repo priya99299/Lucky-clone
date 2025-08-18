@@ -1,74 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@android:color/white"
-    android:elevation="4dp"
-    android:padding="9dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:background="@android:color/white">
 
-    <!-- Header Row -->
-
-
-
-
-    <!-- Data Row -->
-    <LinearLayout
-        android:id="@+id/dataRow"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:padding="9dp">
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/docName"
+        <!-- Data Row -->
+        <LinearLayout
+            android:id="@+id/dataRow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="Sample Name"
-            android:textSize="10sp"
-            android:textColor="#000000"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:fontFamily="sans-serif-medium" />
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            android:paddingStart="13dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-<!--        <TextView-->
-<!--            android:id="@+id/docType"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.2"-->
-<!--            android:text="PDF"-->
-<!--            android:textSize="9sp"-->
-<!--            android:textColor="#000000"-->
-<!--            android:fontFamily="sans-serif" />-->
+            <TextView
+                android:id="@+id/docName"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Sample Name"
+                android:textSize="10sp"
+                android:textColor="#000000"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:fontFamily="sans-serif-medium" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/docStatus"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.2"-->
-<!--            android:text="Active"-->
-<!--            android:textSize="9sp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:fontFamily="sans-serif" />-->
+            <ImageButton
+                android:id="@+id/fileUrl"
+                android:layout_width="1dp"
+                android:layout_height="18dp"
+                android:layout_weight="0.3"
+                android:src="@drawable/visible"
+                android:contentDescription="@string/visibility"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/fileUrl"
-            android:layout_width="0dp"
-            android:layout_height="18dp"
-            android:layout_weight="0.3"
-            android:src="@drawable/visible"
-            android:contentDescription="@string/visibility"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

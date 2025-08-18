@@ -2,6 +2,7 @@ package firstapp.example.lipsclone.timeTable;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,16 @@ public class Time_table extends AppCompatActivity {
 
         rvSchedule = findViewById(R.id.recyclerView_lectures);
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
+
+// ✅ Add spacing between items
+        rvSchedule.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.bottom = 16;
+            }
+        });
+
 
         tvNoData = findViewById(R.id.tvNoData); // ✅ New line
 

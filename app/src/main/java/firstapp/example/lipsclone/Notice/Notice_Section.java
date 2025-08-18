@@ -2,6 +2,8 @@ package firstapp.example.lipsclone.Notice;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -32,6 +34,7 @@ public class Notice_Section extends AppCompatActivity {
 
     private static final String TAG = "NoticeSection";
     private RecyclerView recyclerView;
+    private TextView emptyView;   // 👈 added
     private Gson gson;
 
     @Override
@@ -49,9 +52,10 @@ public class Notice_Section extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        recyclerView = findViewById(R.id.recyclerView); // <-- make sure RecyclerView exists in your layout
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        emptyView = findViewById(R.id.emptyView);  // 👈 added
 
         gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -72,29 +76,35 @@ public class Notice_Section extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-
         call.enqueue(new Callback<Notice_Reponse>() {
             @Override
             public void onResponse(Call<Notice_Reponse> call, Response<Notice_Reponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().response != null) {
                     List<Notice_Reponse.Notice> notices = response.body().response;
-                    recyclerView.setAdapter(new NoticeAdapter(Notice_Section.this, notices));
+
+                    if (notices.isEmpty()) {
+                        recyclerView.setVisibility(View.GONE);
+                        emptyView.setVisibility(View.VISIBLE);
+                    } else {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        emptyView.setVisibility(View.GONE);
+                        recyclerView.setAdapter(new NoticeAdapter(Notice_Section.this, notices));
+                    }
+
                     Log.d(TAG, "Response JSON:\n" + gson.toJson(response.body()));
                 } else {
+                    recyclerView.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
                     Log.e(TAG, "API error - Code: " + response.code());
-                    try {
-                        if (response.errorBody() != null)
-                            Log.e(TAG, "Error body: " + response.errorBody().string());
-                    } catch (Exception e) {
-                        Log.e(TAG, "Error reading errorBody", e);
-                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Notice_Reponse> call, Throwable t) {
+                recyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
                 Log.e(TAG, "API call failure: " + t.getMessage(), t);
-                Toast.makeText(Notice_Section.this, "Failed to load notices", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Notice_Section.this, "No updates", Toast.LENGTH_SHORT).show();
             }
         });
     }
