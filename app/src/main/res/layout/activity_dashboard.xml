@@ -11,29 +11,30 @@
     <RelativeLayout
         android:id="@+id/header_second_row"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="222dp"
         android:paddingBottom="16dp"
         android:background="@drawable/wave_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- Logo Top-Left -->
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/college_logo"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="46dp"
+            android:layout_height="42dp"
             android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/lips"
-            android:contentDescription="Logo" />
+            android:contentDescription="Logo"
+            app:shapeAppearanceOverlay="@style/CircleImage"/>
+
 
         <!-- College Name -->
         <TextView
             android:id="@+id/college_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_toEndOf="@id/college_logo"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/college_logo"
@@ -41,8 +42,9 @@
             android:layout_marginEnd="16dp"
             android:text="Lucky Institute of Professional Study"
             android:textColor="@android:color/white"
+            android:layout_marginTop="7dp"
             android:textSize="13sp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             android:maxLines="2"
             android:ellipsize="end" />
 
@@ -52,7 +54,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="60dp"
             app:cardCornerRadius="35dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="@android:color/white">
