@@ -1,15 +1,18 @@
     package firstapp.example.lipsclone.Documents;
 
     import android.content.Context;
+    import android.os.Environment;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
     import android.widget.ImageButton;
     import android.widget.TextView;
+    import android.widget.Toast;
 
     import androidx.annotation.NonNull;
     import androidx.recyclerview.widget.RecyclerView;
 
+    import java.io.File;
     import java.util.List;
 
     import firstapp.example.lipsclone.R;
@@ -41,10 +44,27 @@
             holder.documentStatus.setText(document.getStatus());
 
             holder.showDocumentButton.setOnClickListener(v -> {
+                String status = document.getStatus();
+
+                if ("Pending".equalsIgnoreCase(status)) {
+                    Toast.makeText(context, "Pending ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String fileUrl = document.getFile();
                 String filename = document.getDocname() + ".pdf";
-                DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename, s_id);
+                File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), s_id + "_" + filename);
+
+                if (file.exists()) {
+
+                    DownloadAndOpenPDF.openPDF(context, file);
+                } else {
+
+                    DownloadAndOpenPDF.openDirectly(context, fileUrl);
+                    DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename, s_id);
+                }
             });
+
         }
 
         @Override

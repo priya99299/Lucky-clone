@@ -104,7 +104,7 @@ public class Notice_Section extends AppCompatActivity {
                 recyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
                 Log.e(TAG, "API call failure: " + t.getMessage(), t);
-                Toast.makeText(Notice_Section.this, "No updates", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Notice_Section.this, "No updates", Toast.LENGTH_SHORT).show();
             }
         });
     }

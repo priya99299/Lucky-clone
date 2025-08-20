@@ -40,7 +40,6 @@
             android:fontFamily="sans-serif" />
 
     </androidx.cardview.widget.CardView>
-    <!-- Message Text if no data -->
     <TextView
         android:id="@+id/emptyMessage"
         android:layout_width="wrap_content"
@@ -48,11 +47,12 @@
         android:text="Loading..."
         android:textColor="@android:color/holo_red_dark"
         android:textSize="14sp"
-        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/infoCard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- RecyclerView to show academic events -->
     <androidx.recyclerview.widget.RecyclerView

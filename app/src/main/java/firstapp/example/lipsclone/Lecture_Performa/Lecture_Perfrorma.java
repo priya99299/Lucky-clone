@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +43,7 @@ public class Lecture_Perfrorma extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        CardView cardTable = findViewById(R.id.card_table);
 
         recyclerView = findViewById(R.id.recyclerView_lectures);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -85,13 +87,16 @@ public class Lecture_Perfrorma extends AppCompatActivity {
 
                         recyclerView.setVisibility(View.VISIBLE);
                         tvNoData.setVisibility(View.GONE);
+                        cardTable.setVisibility(View.VISIBLE);
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         tvNoData.setVisibility(View.VISIBLE);
+                        cardTable.setVisibility(View.GONE);
                     }
                 } else {
                     recyclerView.setVisibility(View.GONE);
                     tvNoData.setVisibility(View.VISIBLE);
+                    cardTable.setVisibility(View.GONE);
                 }
             }
 
@@ -100,8 +105,10 @@ public class Lecture_Perfrorma extends AppCompatActivity {
                 Log.e(TAG, "API Failure: " + t.getMessage(), t);
                 recyclerView.setVisibility(View.GONE);
                 tvNoData.setVisibility(View.VISIBLE);
+                cardTable.setVisibility(View.GONE);
             }
         });
+
 
     }
 }

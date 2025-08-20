@@ -44,9 +44,9 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.Attendan
         if (position == 0) {
 
 
-            holder.tvSubject.setTextColor(Color.WHITE);
-            holder.tvTotal.setTextColor(Color.WHITE);
-            holder.tvAttd.setTextColor(Color.WHITE);
+            holder.tvSubject.setTextColor(Color.BLACK);
+            holder.tvTotal.setTextColor(Color.BLACK);
+            holder.tvAttd.setTextColor(Color.BLACK);
 
 
         } else {
@@ -55,11 +55,11 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.Attendan
             holder.tvTotal.setTypeface(null, Typeface.NORMAL);
             holder.tvAttd.setTypeface(null, Typeface.NORMAL);
 
-            holder.tvSubject.setTextColor(Color.BLACK);
-            holder.tvTotal.setTextColor(Color.BLACK);
-            holder.tvAttd.setTextColor(Color.BLACK);
-
-            holder.itemView.setBackgroundColor(Color.WHITE);
+//            holder.tvSubject.setTextColor(Color.BLACK);
+//            holder.tvTotal.setTextColor(Color.BLACK);
+//            holder.tvAttd.setTextColor(Color.BLACK);
+//
+//            holder.itemView.setBackgroundColor(Color.WHITE);
         }
     }
 

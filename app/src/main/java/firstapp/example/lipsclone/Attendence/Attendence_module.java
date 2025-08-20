@@ -132,7 +132,7 @@ public class Attendence_module extends AppCompatActivity {
      * Calls the live attendance API to enable/disable button
      */
     private void fetchLiveAttendance() {
-        Log.d(TAG, "Starting fetchLiveAttendance...");
+        Log.d(TAG, "Starting fetchLiveAttendance");
 
         apiServices api = apiclient.getClient().create(apiServices.class);
 
@@ -190,7 +190,7 @@ public class Attendence_module extends AppCompatActivity {
                     Log.e(TAG, "API call unsuccessful. Response code: " + response.code());
                     logRawResponse(response);
                     disableButton();
-                    Toast.makeText(Attendence_module.this, "Failed to fetch attendance status", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Attendence_module.this, "Failed to fetch attendance", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -199,7 +199,7 @@ public class Attendence_module extends AppCompatActivity {
                 Log.d(TAG, "Attendence api not called/ not lived");
                 t.printStackTrace();
                 disableButton();
-                Toast.makeText(Attendence_module.this, "Please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Attendence_module.this, "Please try again", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -2,7 +2,10 @@ package firstapp.example.lipsclone.complaint;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,8 @@ public class TrackComplaintActivity extends AppCompatActivity {
     private static final String TAG = "ComplaintLog11";
 
     ListView complaintListView;
+    TextView tvNoComplaints, tableMainHeader;
+    LinearLayout tableHeader;
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
@@ -38,17 +43,22 @@ public class TrackComplaintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_track_complaint);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        // Bind views
+        tvNoComplaints = findViewById(R.id.tv_no_complaints);
+        tableHeader = findViewById(R.id.tableHeader);
+        tableMainHeader = findViewById(R.id.tableMainHeader);
+        complaintListView = findViewById(R.id.complaintListView);
 
+        // Toolbar
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
-        complaintListView = findViewById(R.id.complaintListView);
 
         fetchComplaints();
     }
 
     private void fetchComplaints() {
-        String s_id,sessionId,f_id,college,semester;
+        String s_id, sessionId, f_id, college, semester;
+
         // Intent Data
         s_id = getIntent().getStringExtra("s_id");
         sessionId = getIntent().getStringExtra("session");
@@ -77,25 +87,44 @@ public class TrackComplaintActivity extends AppCompatActivity {
             public void onResponse(Call<ComplaintResponse> call, Response<ComplaintResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Complaint> complaintList = response.body().getResponse();
-                    ComplaintAdapter adapter = new ComplaintAdapter(TrackComplaintActivity.this, complaintList);
-                    complaintListView.setAdapter(adapter);
+
+                    if (complaintList != null && !complaintList.isEmpty()) {
+                        ComplaintAdapter adapter = new ComplaintAdapter(TrackComplaintActivity.this, complaintList);
+                        complaintListView.setAdapter(adapter);
+
+                        // Show headers + list
+                        complaintListView.setVisibility(View.VISIBLE);
+                        tableHeader.setVisibility(View.VISIBLE);
+                        tableMainHeader.setVisibility(View.VISIBLE);
+                        tvNoComplaints.setVisibility(View.GONE);
+
+                    } else {
+                        // Hide headers + list, show "No complaints"
+                        complaintListView.setVisibility(View.GONE);
+                        tableHeader.setVisibility(View.GONE);
+                        tableMainHeader.setVisibility(View.GONE);
+                        tvNoComplaints.setVisibility(View.VISIBLE);
+                    }
+
                     Log.d(TAG, "Complaint Fetch - API Response:\n" + gson.toJson(response.body()));
                 } else {
-                    Toast.makeText(TrackComplaintActivity.this, "No complaints found", Toast.LENGTH_SHORT).show();
-                    try {
-                        if (response.errorBody() != null) {
-                            Log.e(TAG, "Complaint Fetch - Error Body:\n" + response.errorBody().string());
-                        }
-                    } catch (IOException e) {
-                        Log.e(TAG, "Complaint Fetch - Error parsing body", e);
-                    }
+                    complaintListView.setVisibility(View.GONE);
+                    tableHeader.setVisibility(View.GONE);
+                    tableMainHeader.setVisibility(View.GONE);
+                    tvNoComplaints.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<ComplaintResponse> call, Throwable t) {
                 Log.e(TAG, "Complaint Fetch - API Failure: " + t.getMessage(), t);
+
+                complaintListView.setVisibility(View.GONE);
+                tableHeader.setVisibility(View.GONE);
+                tableMainHeader.setVisibility(View.GONE);
+                tvNoComplaints.setVisibility(View.VISIBLE);
             }
         });
+
     }
 }

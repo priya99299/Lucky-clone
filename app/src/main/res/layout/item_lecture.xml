@@ -24,7 +24,7 @@
             android:text="Subject Name"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:textSize="11sp"
+            android:textSize="9sp"
             android:textColor="#424242" />
 
         <TextView

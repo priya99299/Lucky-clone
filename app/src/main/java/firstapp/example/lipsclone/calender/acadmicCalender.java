@@ -3,6 +3,7 @@ package firstapp.example.lipsclone.calender;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -127,6 +128,8 @@ public class acadmicCalender extends AppCompatActivity {
                 emptyMessage.setVisibility(View.VISIBLE);
                 emptyMessage.setTypeface(null, Typeface.BOLD);
                 emptyMessage.setTextColor(ContextCompat.getColor(acadmicCalender.this, R.color.gray_888));
+                emptyMessage.setGravity(Gravity.CENTER);
+
 
                 emptyMessage.setText(message);
             }

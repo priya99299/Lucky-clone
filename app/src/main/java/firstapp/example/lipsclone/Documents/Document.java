@@ -46,6 +46,8 @@ public class Document extends AppCompatActivity {
 
         noDataText = findViewById(R.id.noDataText); // bind no data TextView
 
+        findViewById(R.id.headerRow).setVisibility(View.GONE);
+
         String s_id = getIntent().getStringExtra("s_id");
         String sessionId = getIntent().getStringExtra("session");
         String college = "gdcol1";
@@ -101,5 +103,9 @@ public class Document extends AppCompatActivity {
     private void showNoDataMessage() {
         recyclerView.setVisibility(View.GONE);
         noDataText.setVisibility(View.VISIBLE);
+
+        findViewById(R.id.headerRow).setVisibility(View.GONE);
+
+        findViewById(R.id.divider).setVisibility(View.GONE);
     }
 }
