@@ -50,7 +50,7 @@ public class MsgfromClg extends AppCompatActivity {
 
         LinearLayout infoCard,Director;
         Director = findViewById(R.id.Director);
-        infoCard = findViewById(R.id.Gerneral);
+//        infoCard = findViewById(R.id.Gerneral);
 
 
         Director.setOnClickListener(new View.OnClickListener() {
@@ -63,15 +63,15 @@ public class MsgfromClg extends AppCompatActivity {
             }
         });
 
-        infoCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent GernalMsg= new Intent(MsgfromClg.this, GenralMSG.class);
-                GernalMsg.putExtra("s_id", s_id);
-                GernalMsg.putExtra("session", sessionId);
-                startActivity(GernalMsg);
-            }
-        });
+//        infoCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent GernalMsg= new Intent(MsgfromClg.this, GenralMSG.class);
+//                GernalMsg.putExtra("s_id", s_id);
+//                GernalMsg.putExtra("session", sessionId);
+//                startActivity(GernalMsg);
+//            }
+//        });
 
 
 

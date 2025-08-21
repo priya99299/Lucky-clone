@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
-                android:text="GO ->"
+                android:text="GO "
                 android:backgroundTint="#5E35B1"
                 android:textSize="13sp"
                 android:textColor="@android:color/white" />

@@ -2,6 +2,7 @@ package firstapp.example.lipsclone.Msgfromclg;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ import java.util.List;
 import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.Messages.DirectorMessageItem;
 import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
-import firstapp.example.lipsclone.api.Models.Messages.MessageToDirectorRequest;
 import firstapp.example.lipsclone.api.Models.Messages.Messages;
 import firstapp.example.lipsclone.api.Models.Messages.MsgToAllRequest;
 import firstapp.example.lipsclone.api.Models.Messages.MsgToAllResponse;
@@ -36,6 +37,7 @@ public class DirectorMsg extends AppCompatActivity {
     RecyclerView recyclerView;
     DirectorMsgAdapter adapter;
     TextInputEditText messageEditText;
+    TextInputLayout messageInputLayout;
     Button sendButton;
 
     List<DirectorMessageItem> messageList = new ArrayList<>();
@@ -53,6 +55,7 @@ public class DirectorMsg extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         messageEditText = findViewById(R.id.messageEditText);
+        messageInputLayout = findViewById(R.id.messageInputLayout);
         sendButton = findViewById(R.id.sendButton);
 
         s_id = getIntent().getStringExtra("s_id");
@@ -62,6 +65,16 @@ public class DirectorMsg extends AppCompatActivity {
         sendButton.setOnClickListener(v -> {
             String remark = messageEditText.getText().toString().trim();
             if (!remark.isEmpty()) {
+                // Clear input immediately
+                messageEditText.setText("");
+                messageInputLayout.setError(null);
+                messageInputLayout.setHelperText(null);
+
+                // Optionally hide keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(messageEditText.getWindowToken(), 0);
+
+                // Send message to server
                 sendMessage(remark);
             } else {
                 Log.w(TAG, "Message is empty, not sending.");
@@ -82,22 +95,20 @@ public class DirectorMsg extends AppCompatActivity {
                     messageList = response.body().getResponse();
                     adapter = new DirectorMsgAdapter(messageList);
                     recyclerView.setAdapter(adapter);
-
-                    Log.d(TAG, " Fetch Response: " + new Gson().toJson(response.body()));
+                    Log.d(TAG, "Fetch Response: " + new Gson().toJson(response.body()));
                 } else {
-                    Log.e(TAG, " Fetch API Error: Code = " + response.code());
+                    Log.e(TAG, "Fetch API Error: Code = " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
-                Log.e(TAG, " Fetch API Failure: " + t.getMessage());
+                Log.e(TAG, "Fetch API Failure: " + t.getMessage());
             }
         });
     }
 
     private void sendMessage(String remark) {
-        // ✅ Correct Request Model
         MsgToAllRequest request = new MsgToAllRequest(
                 "api",
                 "msg_toall",
@@ -115,13 +126,9 @@ public class DirectorMsg extends AppCompatActivity {
             public void onResponse(Call<MsgToAllResponse> call, Response<MsgToAllResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     MsgToAllResponse res = response.body();
-
                     Log.d("Send API Response", new Gson().toJson(res));
-//
-//                    Toast.makeText(DirectorMsg.this,
-//                            "Server: " + res.getMessage(),
-//                            Toast.LENGTH_SHORT).show();
 
+                    // Add new message to RecyclerView
                     DirectorMessageItem item = new DirectorMessageItem();
                     item.setMsg(remark);
                     item.setCdate("Now");
@@ -131,7 +138,19 @@ public class DirectorMsg extends AppCompatActivity {
                     adapter.notifyItemInserted(0);
                     recyclerView.scrollToPosition(0);
 
-                    messageEditText.setText(""); // clear input
+                    // After adding new message to the list
+                    messageList.add(0, item);
+                    adapter.notifyItemInserted(0);
+                    recyclerView.scrollToPosition(0);
+
+// Clear input safely
+                    messageEditText.post(() -> {
+                        messageEditText.setText("");                // Clear text
+                        messageInputLayout.setError(null);          // Clear error if any
+                        messageInputLayout.setHelperText(null);    // Clear helper text if any
+                    });
+
+
                 } else {
                     Toast.makeText(DirectorMsg.this, "Failed: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -139,12 +158,8 @@ public class DirectorMsg extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MsgToAllResponse> call, Throwable t) {
-                Toast.makeText(DirectorMsg.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(DirectorMsg.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-
-
 }
