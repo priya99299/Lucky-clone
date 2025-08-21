@@ -71,7 +71,7 @@ public class Lecture_Perfrorma extends AppCompatActivity {
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<LectureResponse> call = api.getLectures(request);
-        TextView tvNoData = findViewById(R.id.tv_no_data);
+        TextView tvNoData = findViewById(R.id.noFileText);
 
         call.enqueue(new Callback<LectureResponse>() {
             @Override

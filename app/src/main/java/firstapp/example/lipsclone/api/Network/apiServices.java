@@ -17,6 +17,8 @@ import firstapp.example.lipsclone.api.Models.Lecture.LectureResponse;
 import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
 import firstapp.example.lipsclone.api.Models.Messages.MessageToDirectorRequest;
 import firstapp.example.lipsclone.api.Models.Messages.Messages;
+import firstapp.example.lipsclone.api.Models.Messages.MsgToAllRequest;
+import firstapp.example.lipsclone.api.Models.Messages.MsgToAllResponse;
 import firstapp.example.lipsclone.api.Models.Notice.NoticeRequest ;
 import firstapp.example.lipsclone.api.Models.Notice.Notice_Reponse;
 import firstapp.example.lipsclone.api.Models.Documents.StudentDocument;
@@ -102,6 +104,9 @@ public interface apiServices {
 
     @POST("api/index.php")
     Call<MessageResponse> sendMessageToDirector(@Body MessageToDirectorRequest request);
+
+    @POST("api/index.php")
+    Call<MsgToAllResponse> sendMsgToAll(@Body MsgToAllRequest request);
 
     @POST("api/index.php")
     Call<AcademicCalendarResponse> getAcademicCalendar(@Body AcademicCalendarRequest request);

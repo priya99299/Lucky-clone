@@ -2,7 +2,6 @@ package firstapp.example.lipsclone.Msgfromclg;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -22,9 +21,10 @@ import firstapp.example.lipsclone.api.Models.Messages.DirectorMessageItem;
 import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
 import firstapp.example.lipsclone.api.Models.Messages.MessageToDirectorRequest;
 import firstapp.example.lipsclone.api.Models.Messages.Messages;
+import firstapp.example.lipsclone.api.Models.Messages.MsgToAllRequest;
+import firstapp.example.lipsclone.api.Models.Messages.MsgToAllResponse;
 import firstapp.example.lipsclone.api.Network.apiServices;
 import firstapp.example.lipsclone.api.Network.apiclient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,7 +59,6 @@ public class DirectorMsg extends AppCompatActivity {
         session = getIntent().getStringExtra("session");
 
         fetchMessages();
-
         sendButton.setOnClickListener(v -> {
             String remark = messageEditText.getText().toString().trim();
             if (!remark.isEmpty()) {
@@ -68,6 +67,7 @@ public class DirectorMsg extends AppCompatActivity {
                 Log.w(TAG, "Message is empty, not sending.");
             }
         });
+
     }
 
     private void fetchMessages() {
@@ -97,34 +97,53 @@ public class DirectorMsg extends AppCompatActivity {
     }
 
     private void sendMessage(String remark) {
-        MessageToDirectorRequest request = new MessageToDirectorRequest(s_id, session, college, remark);
-        Log.d(TAG, " Send Request Payload: " + new Gson().toJson(request));
+        // ✅ Correct Request Model
+        MsgToAllRequest request = new MsgToAllRequest(
+                "api",
+                "msg_toall",
+                s_id,
+                session,
+                college,
+                remark
+        );
 
         apiServices api = apiclient.getClient().create(apiServices.class);
-        api.sendMessageToDirector(request).enqueue(new Callback<MessageResponse>() {
+        Call<MsgToAllResponse> call = api.sendMsgToAll(request);
+
+        call.enqueue(new Callback<MsgToAllResponse>() {
             @Override
-            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+            public void onResponse(Call<MsgToAllResponse> call, Response<MsgToAllResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, " Send Response: " + new Gson().toJson(response.body()));
+                    MsgToAllResponse res = response.body();
 
-                    Toast.makeText(DirectorMsg.this, "Message sent successfully!", Toast.LENGTH_SHORT).show();
-                    messageEditText.setText("");
+                    Log.d("Send API Response", new Gson().toJson(res));
+//
+//                    Toast.makeText(DirectorMsg.this,
+//                            "Server: " + res.getMessage(),
+//                            Toast.LENGTH_SHORT).show();
 
-                    // Delay before re-fetching messages
-                    new android.os.Handler().postDelayed(() -> fetchMessages(), 1000);
+                    DirectorMessageItem item = new DirectorMessageItem();
+                    item.setMsg(remark);
+                    item.setCdate("Now");
+                    item.setCtime("");
+
+                    messageList.add(0, item);
+                    adapter.notifyItemInserted(0);
+                    recyclerView.scrollToPosition(0);
+
+                    messageEditText.setText(""); // clear input
                 } else {
-                    Log.e(TAG, " Send API Error: Code = " + response.code());
-                    Toast.makeText(DirectorMsg.this, " Error sending message", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DirectorMsg.this, "Failed: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<MessageResponse> call, Throwable t) {
-                Log.e(TAG, " Send API Failure: " + t.getMessage());
-                Toast.makeText(DirectorMsg.this, " Network error", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<MsgToAllResponse> call, Throwable t) {
+                Toast.makeText(DirectorMsg.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
 
 
