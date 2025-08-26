@@ -56,7 +56,10 @@
             EdgeToEdge.enable(this);
             setContentView(R.layout.activity_dashboard);
 
-            //check for update when app starts
+
+            appUpdateManager = AppUpdateManagerFactory.create(this);
+
+            // check for update when app starts
             checkForUpdate();
 
             ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

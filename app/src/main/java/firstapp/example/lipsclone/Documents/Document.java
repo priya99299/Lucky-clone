@@ -44,7 +44,7 @@ public class Document extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        noDataText = findViewById(R.id.noDataText); // bind no data TextView
+        noDataText = findViewById(R.id.noDataText);
 
         findViewById(R.id.headerRow).setVisibility(View.GONE);
 
