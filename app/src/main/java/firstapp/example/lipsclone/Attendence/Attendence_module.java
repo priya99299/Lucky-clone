@@ -223,7 +223,7 @@ public class Attendence_module extends AppCompatActivity {
 
     private void saveAttendance() {
         if (a_id == null || a_id.isEmpty()) {
-//            Toast.makeText(this, "Attendance not available to mark.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Attendance not available to mark.", Toast.LENGTH_SHORT).show();
             return;
         }
 

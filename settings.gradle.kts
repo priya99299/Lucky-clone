@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -21,4 +22,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Lips clone"
 include(":app")
- 

@@ -31,6 +31,8 @@
     import com.google.android.play.core.install.model.UpdateAvailability;
 
     import org.osmdroid.library.BuildConfig;
+    import org.osmdroid.library.BuildConfig;
+
 
     import firstapp.example.lipsclone.Attendence.Attendence_module;
     import firstapp.example.lipsclone.Canteen.Canteen;
@@ -303,42 +305,40 @@
         }
 
         private void checkForUpdate() {
-            appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+            appUpdateManager
+                    .getAppUpdateInfo()
+                    .addOnSuccessListener(appUpdateInfo -> {
+                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
 
-                    int currentVersionCode = BuildConfig.VERSION_CODE;
-                    int latestVersionCode = appUpdateInfo.availableVersionCode();
+                            // Just check which update type is allowed
+                            if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                                try {
+                                    appUpdateManager.startUpdateFlowForResult(
+                                            appUpdateInfo,
+                                            AppUpdateType.IMMEDIATE,
+                                            this,
+                                            UPDATE_REQUEST_CODE
+                                    );
+                                } catch (IntentSender.SendIntentException e) {
+                                    e.printStackTrace();
+                                }
+                            } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                                try {
+                                    appUpdateManager.startUpdateFlowForResult(
+                                            appUpdateInfo,
+                                            AppUpdateType.FLEXIBLE,
+                                            this,
+                                            UPDATE_REQUEST_CODE
+                                    );
+                                } catch (IntentSender.SendIntentException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
-                    if ((latestVersionCode - currentVersionCode) >= 2
-                            && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                        // Bahut purana version → FORCE update
-                        try {
-                            appUpdateManager.startUpdateFlowForResult(
-                                    appUpdateInfo,
-                                    AppUpdateType.IMMEDIATE,
-                                    this,
-                                    UPDATE_REQUEST_CODE
-                            );
-                        } catch (IntentSender.SendIntentException e) {
-                            e.printStackTrace();
+                        } else {
+                            Log.d("UpdateFlow", "No update available");
                         }
-                    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
-                        // Minor update → FLEXIBLE update
-                        try {
-                            appUpdateManager.startUpdateFlowForResult(
-                                    appUpdateInfo,
-                                    AppUpdateType.FLEXIBLE,
-                                    this,
-                                    UPDATE_REQUEST_CODE
-                            );
-                        } catch (IntentSender.SendIntentException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    Log.d("UpdateFlow", "No update available");
-                }
-            });
+                    });
         }
 
 

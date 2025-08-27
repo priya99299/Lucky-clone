@@ -4,16 +4,20 @@ plugins {
 
 android {
     namespace = "firstapp.example.lipsclone"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "firstapp.example.lipsclone"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("int", "VERSION_CODE", versionCode.toString())
+        buildConfigField("String", "VERSION_NAME", "\"${versionName}\"")
+
     }
 
     buildTypes {
@@ -25,14 +29,18 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
+
 
 dependencies {
 
@@ -54,6 +62,10 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
     implementation ("org.osmdroid:osmdroid-android:6.1.11")
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.16")
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
 
 
 
