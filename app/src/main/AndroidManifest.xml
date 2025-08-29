@@ -47,9 +47,7 @@
             android:exported="false" />
         <activity
             android:name=".Attendence.LectureWiseAttendance"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".Attendence.LectureWiseAttendance" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
         <activity
             android:name=".Attendence.Monthly_Attendence"
             android:exported="false" />
@@ -96,6 +94,12 @@
         <activity
             android:name=".Msgfromclg.DirectorMsg"
             android:exported="false" />
+
+        <activity
+            android:name=".Msgfromclg.GenralMSG"
+            android:exported="false" />
+
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true"

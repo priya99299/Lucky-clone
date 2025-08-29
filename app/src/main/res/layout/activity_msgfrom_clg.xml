@@ -88,14 +88,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Message to Director"
+                        android:text="Message to General"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginStart="16dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- General Message Card -->
+
 <!--            <androidx.cardview.widget.CardView-->
 
 <!--                android:layout_width="match_parent"-->
@@ -124,7 +124,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="General Message"-->
+<!--                        android:text=" Message To Director"-->
 <!--                        android:textSize="16sp"-->
 <!--                        android:textStyle="bold"-->
 <!--                        android:layout_marginStart="16dp" />-->

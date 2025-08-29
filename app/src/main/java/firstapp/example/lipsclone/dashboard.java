@@ -30,6 +30,8 @@
     import com.google.android.play.core.install.model.InstallStatus;
     import com.google.android.play.core.install.model.UpdateAvailability;
 
+    import org.osmdroid.library.BuildConfig;
+
     import firstapp.example.lipsclone.Attendence.Attendence_module;
     import firstapp.example.lipsclone.Canteen.Canteen;
     import firstapp.example.lipsclone.Contact_us.Contact_us;
@@ -304,8 +306,12 @@
             appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
                 if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
 
-                    // Agar immediate update allowed hai
-                    if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                    int currentVersionCode = BuildConfig.VERSION_CODE;
+                    int latestVersionCode = appUpdateInfo.availableVersionCode();
+
+                    if ((latestVersionCode - currentVersionCode) >= 2
+                            && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                        // Bahut purana version → FORCE update
                         try {
                             appUpdateManager.startUpdateFlowForResult(
                                     appUpdateInfo,
@@ -316,9 +322,8 @@
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();
                         }
-                    }
-
-                    else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                    } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                        // Minor update → FLEXIBLE update
                         try {
                             appUpdateManager.startUpdateFlowForResult(
                                     appUpdateInfo,
@@ -353,12 +358,11 @@
         protected void onResume() {
             super.onResume();
 
-            // Check agar koi update in-progress hai
             appUpdateManager.getAppUpdateInfo()
                     .addOnSuccessListener(appUpdateInfo -> {
                         if (appUpdateInfo.updateAvailability()
                                 == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                            // Resume karo agar Immediate update chal raha ho
+
                             try {
                                 appUpdateManager.startUpdateFlowForResult(
                                         appUpdateInfo,
@@ -378,7 +382,7 @@
 
         private final InstallStateUpdatedListener installStateUpdatedListener = state -> {
             if (state.installStatus() == InstallStatus.DOWNLOADED) {
-                // Update notification show
+
 
                 Toast.makeText(this, "Update downloaded", Toast.LENGTH_LONG).show();
 

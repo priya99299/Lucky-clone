@@ -1,17 +1,14 @@
 package firstapp.example.lipsclone.api.Models.Messages;
 
-
 public class MsgToAllRequest {
-    private String action= "api";
-    private String page="msg_director";
+    private String action = "api";
+    private String page = "msg_director";
     private String s_id;
     private String session;
     private String college;
     private String remark;
 
-    public MsgToAllRequest(String action, String page, String s_id, String session, String college, String remark) {
-        this.action = action;
-        this.page = page;
+    public MsgToAllRequest(String s_id, String session, String college, String remark) {
         this.s_id = s_id;
         this.session = session;
         this.college = college;
@@ -26,4 +23,3 @@ public class MsgToAllRequest {
     public String getCollege() { return college; }
     public String getRemark() { return remark; }
 }
-

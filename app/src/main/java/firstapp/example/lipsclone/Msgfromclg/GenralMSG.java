@@ -1,35 +1,159 @@
 package firstapp.example.lipsclone.Msgfromclg;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import firstapp.example.lipsclone.R;
+import firstapp.example.lipsclone.api.Models.Messages.DirectorMessageItem;
+import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
+import firstapp.example.lipsclone.api.Models.Messages.MessageTogenralRequest;
+import firstapp.example.lipsclone.api.Models.Messages.Messages;
+import firstapp.example.lipsclone.api.Models.Messages.MsgToAllRequest;
+import firstapp.example.lipsclone.api.Models.Messages.MsgToAllResponse;
+import firstapp.example.lipsclone.api.Network.apiServices;
+import firstapp.example.lipsclone.api.Network.apiclient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GenralMSG extends AppCompatActivity {
+
+    private static final String TAG = "GenralMSG";
+
+    RecyclerView recyclerView;
+    DirectorMsgAdapter adapter; // same adapter use hoga
+    TextInputEditText messageEditText;
+    TextInputLayout messageInputLayout;
+    Button sendButton;
+
+    List<DirectorMessageItem> messageList = new ArrayList<>();
+    String s_id, session, college = "gdcol1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_genral_msg);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        String s_id = getIntent().getStringExtra("s_id");
-        String session = getIntent().getStringExtra("session");
-        String college = "gdcol1";
 
+        recyclerView = findViewById(R.id.generalMsgRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        messageEditText = findViewById(R.id.messageEditText);
+        messageInputLayout = findViewById(R.id.messageInputLayout);
+        sendButton = findViewById(R.id.sendButton);
+
+        s_id = getIntent().getStringExtra("s_id");
+        session = getIntent().getStringExtra("session");
+
+        fetchMessages();
+
+        sendButton.setOnClickListener(v -> {
+            String remark = messageEditText.getText().toString().trim();
+            if (!remark.isEmpty()) {
+                messageEditText.setText("");
+                messageInputLayout.setError(null);
+                messageInputLayout.setHelperText(null);
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(messageEditText.getWindowToken(), 0);
+
+                sendMessage(remark);
+            } else {
+                Log.w(TAG, "Message is empty, not sending.");
+            }
+        });
     }
+
+    private void fetchMessages() {
+        // General messages ke liye type "3"
+        Messages request = new Messages(s_id, session, college, "", "3");
+        Log.d(TAG, "Fetch Request Payload: " + new Gson().toJson(request));
+
+        apiServices api = apiclient.getClient().create(apiServices.class);
+        api.getStudentMessages(request).enqueue(new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    messageList = response.body().getResponse();
+                    adapter = new DirectorMsgAdapter(messageList);
+                    recyclerView.setAdapter(adapter);
+                    Log.d(TAG, "Fetch Response: " + new Gson().toJson(response.body()));
+                } else {
+                    Log.e(TAG, "Fetch API Error: Code = " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+                Log.e(TAG, "Fetch API Failure: " + t.getMessage());
+            }
+        });
+    }
+    private void sendMessage(String remark) {
+        MessageTogenralRequest request = new MessageTogenralRequest(
+                "api",
+                "msg_toall",
+                s_id,
+                session,
+                college,
+                remark
+        );
+
+        apiServices api = apiclient.getClient().create(apiServices.class);
+        Call<MessageResponse> call = api.sendMessageToDirector(request); // Use MessageResponse
+
+        call.enqueue(new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MessageResponse res = response.body();
+                    Log.d("Send API Response", new Gson().toJson(res));
+
+                    // UI update
+                    DirectorMessageItem item = new DirectorMessageItem();
+                    item.setMsg(remark);
+                    item.setCdate("Now");
+                    item.setCtime("");
+
+                    messageList.add(0, item);
+                    adapter.notifyItemInserted(0);
+                    recyclerView.scrollToPosition(0);
+
+                    messageEditText.post(() -> {
+                        messageEditText.setText("");
+                        messageInputLayout.setError(null);
+                        messageInputLayout.setHelperText(null);
+                    });
+
+                } else {
+                    Toast.makeText(GenralMSG.this, "Failed: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+                Log.e(TAG, "Send API Failure: " + t.getMessage());
+            }
+        });
+    }
+
+
+
 }

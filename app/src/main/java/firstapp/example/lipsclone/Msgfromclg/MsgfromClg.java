@@ -62,7 +62,7 @@ public class MsgfromClg extends AppCompatActivity {
                 startActivity(DirectorMsg);
             }
         });
-
+//
 //        infoCard.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
