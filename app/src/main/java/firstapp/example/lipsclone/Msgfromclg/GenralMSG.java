@@ -21,7 +21,6 @@ import java.util.List;
 import firstapp.example.lipsclone.R;
 import firstapp.example.lipsclone.api.Models.Messages.DirectorMessageItem;
 import firstapp.example.lipsclone.api.Models.Messages.MessageResponse;
-import firstapp.example.lipsclone.api.Models.Messages.MessageTogenralRequest;
 import firstapp.example.lipsclone.api.Models.Messages.Messages;
 import firstapp.example.lipsclone.api.Models.Messages.MsgToAllRequest;
 import firstapp.example.lipsclone.api.Models.Messages.MsgToAllResponse;
@@ -106,10 +105,11 @@ public class GenralMSG extends AppCompatActivity {
             }
         });
     }
+
     private void sendMessage(String remark) {
-        MessageTogenralRequest request = new MessageTogenralRequest(
-                "api",
-                "msg_toall",
+        // MsgToAllRequest use karo, MessageTogenralRequest nahi
+        MsgToAllRequest request = new MsgToAllRequest(
+
                 s_id,
                 session,
                 college,
@@ -117,16 +117,15 @@ public class GenralMSG extends AppCompatActivity {
         );
 
         apiServices api = apiclient.getClient().create(apiServices.class);
-        Call<MessageResponse> call = api.sendMessageToDirector(request); // Use MessageResponse
+        Call<MsgToAllResponse> call = api.sendMsgToAll(request);
 
-        call.enqueue(new Callback<MessageResponse>() {
+        call.enqueue(new Callback<MsgToAllResponse>() {
             @Override
-            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+            public void onResponse(Call<MsgToAllResponse> call, Response<MsgToAllResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    MessageResponse res = response.body();
+                    MsgToAllResponse res = response.body();
                     Log.d("Send API Response", new Gson().toJson(res));
 
-                    // UI update
                     DirectorMessageItem item = new DirectorMessageItem();
                     item.setMsg(remark);
                     item.setCdate("Now");
@@ -148,12 +147,9 @@ public class GenralMSG extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<MessageResponse> call, Throwable t) {
+            public void onFailure(Call<MsgToAllResponse> call, Throwable t) {
                 Log.e(TAG, "Send API Failure: " + t.getMessage());
             }
         });
     }
-
-
-
 }

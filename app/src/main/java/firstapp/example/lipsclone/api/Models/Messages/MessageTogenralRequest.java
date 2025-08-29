@@ -2,7 +2,7 @@ package firstapp.example.lipsclone.api.Models.Messages;
 
 public class MessageTogenralRequest {
     private String action="api";
-    private String page="msg_general";
+    private String page="msg_director";
     private String s_id;
     private String session;
     private String college;
