@@ -25,7 +25,9 @@
     import com.google.android.play.core.appupdate.AppUpdateManager;
     import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
     import com.google.android.play.core.appupdate.AppUpdateOptions;
+    import com.google.android.play.core.install.InstallStateUpdatedListener;
     import com.google.android.play.core.install.model.AppUpdateType;
+    import com.google.android.play.core.install.model.InstallStatus;
     import com.google.android.play.core.install.model.UpdateAvailability;
 
     import firstapp.example.lipsclone.Attendence.Attendence_module;
@@ -300,27 +302,40 @@
 
         private void checkForUpdate() {
             appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                        && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
 
-                    Log.d("UpdateFlow", "Immediate update available!");
+                    // Agar immediate update allowed hai
+                    if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                        try {
+                            appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    AppUpdateType.IMMEDIATE,
+                                    this,
+                                    UPDATE_REQUEST_CODE
+                            );
+                        } catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(
-                                appUpdateInfo,
-                                AppUpdateType.IMMEDIATE,
-                                this,
-                                UPDATE_REQUEST_CODE
-                        );
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
-                        Toast.makeText(this, "Update flow failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                        try {
+                            appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    AppUpdateType.FLEXIBLE,
+                                    this,
+                                    UPDATE_REQUEST_CODE
+                            );
+                        } catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
+                        }
                     }
                 } else {
-                    Log.d("UpdateFlow", "No immediate update available");
+                    Log.d("UpdateFlow", "No update available");
                 }
             });
         }
+
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -338,12 +353,12 @@
         protected void onResume() {
             super.onResume();
 
-            // Agar update in-progress hai to resume kar do
-            appUpdateManager
-                    .getAppUpdateInfo()
+            // Check agar koi update in-progress hai
+            appUpdateManager.getAppUpdateInfo()
                     .addOnSuccessListener(appUpdateInfo -> {
                         if (appUpdateInfo.updateAvailability()
                                 == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                            // Resume karo agar Immediate update chal raha ho
                             try {
                                 appUpdateManager.startUpdateFlowForResult(
                                         appUpdateInfo,
@@ -356,5 +371,27 @@
                             }
                         }
                     });
+
+
+            appUpdateManager.registerListener(installStateUpdatedListener);
         }
+
+        private final InstallStateUpdatedListener installStateUpdatedListener = state -> {
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                // Update notification show
+
+                Toast.makeText(this, "Update downloaded", Toast.LENGTH_LONG).show();
+
+
+                appUpdateManager.completeUpdate();
+            }
+        };
+
+        @Override
+        protected void onStop() {
+            super.onStop();
+      
+            appUpdateManager.unregisterListener(installStateUpdatedListener);
+        }
+
     }
