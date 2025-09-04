@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".result.Result">
 
-    <!-- Top AppBar with Refresh Button -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -21,7 +20,7 @@
         app:navigationIconTint="@color/white"
         app:title="Result-Section"
         app:titleTextColor="@color/white"
-        app:menu="@menu/refresh_menu" />
+        />
 
     <!-- Always visible No Result Found Text -->
     <TextView

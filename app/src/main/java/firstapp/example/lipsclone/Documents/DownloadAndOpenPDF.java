@@ -16,13 +16,7 @@ import java.io.File;
 
 public class DownloadAndOpenPDF {
 
-    // Old version
-    public static void downloadAndOpen(Context context, String fileUrl, String filename) {
-        downloadAndOpen(context, fileUrl, filename, "common");
-    }
-
-    // New version
-    public static long downloadAndOpen(Context context, String fileUrl, String filename, String s_id) {
+    public static long downloadAndOpen(Context context, String fileUrl, String filename, String folderTag) {
         try {
             Log.d("DownloadAndOpenPDF", "fileUrl raw value: '" + fileUrl + "'");
             if (fileUrl == null || fileUrl.trim().isEmpty()) {
@@ -30,18 +24,16 @@ public class DownloadAndOpenPDF {
                 return -1;
             }
 
-            String uniqueFilename = s_id + "_" + filename;
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), uniqueFilename);
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+
 
             if (file.exists()) {
-                // Already downloaded → open directly
                 openPDF(context, file);
                 return -1;
             } else {
-                // First time → download + auto open when complete
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl));
                 request.setTitle("Downloading PDF...");
-                request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, uniqueFilename);
+                request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
                 DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
@@ -49,7 +41,7 @@ public class DownloadAndOpenPDF {
 
                 Toast.makeText(context, "Downloading...", Toast.LENGTH_LONG).show();
 
-                // Receiver for auto-open after download completes
+                // Auto-open after download completes
                 BroadcastReceiver onComplete = new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context ctx, Intent intent) {
@@ -69,15 +61,14 @@ public class DownloadAndOpenPDF {
                 return downloadId;
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "Pending.......", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show();
             return -1;
         }
     }
 
-    //  Direct open from URL (first click)
+    // Direct open from URL
     public static void openDirectly(Context context, String fileUrl) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -89,19 +80,23 @@ public class DownloadAndOpenPDF {
         }
     }
 
+    // Open local PDF
     public static void openPDF(Context context, File file) {
-        Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(uri, "application/pdf");
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NO_HISTORY);
-
         try {
-            context.startActivity(intent);
+            Uri uri = FileProvider.getUriForFile(
+                    context,
+                    context.getPackageName() + ".provider",
+                    file
+            );
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            context.startActivity(Intent.createChooser(intent, "Open PDF"));
         } catch (Exception e) {
-            Toast.makeText(context, "No PDF app found. Please install a PDF viewer.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "No PDF app found", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-
     }
-
 }

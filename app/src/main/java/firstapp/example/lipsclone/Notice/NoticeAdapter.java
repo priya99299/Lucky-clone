@@ -60,7 +60,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             }
 
             String filename = notice.title.replaceAll("\\s+", "_") + ".pdf";
-            DownloadAndOpenPDF.downloadAndOpen(context, url, filename);
+            DownloadAndOpenPDF.downloadAndOpen(context, url, filename, "notice");
+
         });
 
     }

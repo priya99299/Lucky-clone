@@ -28,16 +28,18 @@
         <activity
             android:name=".Library.Library"
             android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+
+
 
         <activity
             android:name=".complaint.TrackComplaintActivity"
@@ -76,9 +78,7 @@
         <activity
             android:name=".Downloads.Downloads"
             android:exported="false" />
-        <activity
-            android:name=".calender.acadmicCalender"
-            android:exported="false" />
+
         <activity
             android:name=".LoginActivty.LoginOTPActivity"
             android:exported="false" />
@@ -95,11 +95,8 @@
             android:name=".Msgfromclg.DirectorMsg"
             android:exported="false" />
 
-        <activity
-            android:name=".Msgfromclg.GenralMSG"
-            android:exported="false" />
 
-        >
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -48,9 +48,9 @@ public class MsgfromClg extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        LinearLayout infoCard,Director;
+        LinearLayout msg,Director;
         Director = findViewById(R.id.Director);
-//        infoCard = findViewById(R.id.Gerneral);
+        msg = findViewById(R.id.msg);
 
 
         Director.setOnClickListener(new View.OnClickListener() {
@@ -62,16 +62,16 @@ public class MsgfromClg extends AppCompatActivity {
                 startActivity(DirectorMsg);
             }
         });
-//
-//        infoCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent GernalMsg= new Intent(MsgfromClg.this, GenralMSG.class);
-//                GernalMsg.putExtra("s_id", s_id);
-//                GernalMsg.putExtra("session", sessionId);
-//                startActivity(GernalMsg);
-//            }
-//        });
+
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GernalMsg= new Intent(MsgfromClg.this, GenralMSG.class);
+                GernalMsg.putExtra("s_id", s_id);
+                GernalMsg.putExtra("session", sessionId);
+                startActivity(GernalMsg);
+            }
+        });
 
 
 
