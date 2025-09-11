@@ -48,28 +48,28 @@ public class MsgfromClg extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        LinearLayout msg,Director;
-        Director = findViewById(R.id.Director);
-        msg = findViewById(R.id.msg);
+        LinearLayout Dmsg,Genral;
+        Genral = findViewById(R.id.Genral);
+        Dmsg = findViewById(R.id.Dmsg);
 
 
-        Director.setOnClickListener(new View.OnClickListener() {
+        Genral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent DirectorMsg= new Intent(MsgfromClg.this,DirectorMsg.class);
-                DirectorMsg.putExtra("s_id", s_id);
-                DirectorMsg.putExtra("session", sessionId);
-                startActivity(DirectorMsg);
-            }
-        });
-
-        msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent GernalMsg= new Intent(MsgfromClg.this, GenralMSG.class);
+                Intent GernalMsg= new Intent(MsgfromClg.this,GenralMSG.class);
                 GernalMsg.putExtra("s_id", s_id);
                 GernalMsg.putExtra("session", sessionId);
                 startActivity(GernalMsg);
+            }
+        });
+
+        Dmsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent DirectorMsg= new Intent(MsgfromClg.this, DirectorMsg.class);
+                DirectorMsg.putExtra("s_id", s_id);
+                DirectorMsg.putExtra("session", sessionId);
+                startActivity(DirectorMsg);
             }
         });
 

@@ -35,7 +35,7 @@ public class GenralMSG extends AppCompatActivity {
     private static final String TAG = "GenralMSG";
 
     RecyclerView recyclerView;
-    DirectorMsgAdapter adapter; // same adapter use hoga
+    DirectorMsgAdapter adapter;
     TextInputEditText messageEditText;
     TextInputLayout messageInputLayout;
     Button sendButton;
@@ -53,6 +53,10 @@ public class GenralMSG extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.generalMsgRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // ✅ Adapter ko pehle initialize karna hamesha
+        adapter = new DirectorMsgAdapter(messageList);
+        recyclerView.setAdapter(adapter);
 
         messageEditText = findViewById(R.id.messageEditText);
         messageInputLayout = findViewById(R.id.messageInputLayout);
@@ -81,7 +85,7 @@ public class GenralMSG extends AppCompatActivity {
     }
 
     private void fetchMessages() {
-        // General messages ke liye type "3"
+        // General messages ke liye type = "3"
         Messages request = new Messages(s_id, session, college, "", "3");
         Log.d(TAG, "Fetch Request Payload: " + new Gson().toJson(request));
 
@@ -90,9 +94,9 @@ public class GenralMSG extends AppCompatActivity {
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                    messageList = response.body().getResponse();
-                    adapter = new DirectorMsgAdapter(messageList);
-                    recyclerView.setAdapter(adapter);
+                    messageList.clear();
+                    messageList.addAll(response.body().getResponse());
+                    adapter.notifyDataSetChanged();
                     Log.d(TAG, "Fetch Response: " + new Gson().toJson(response.body()));
                 } else {
                     Log.e(TAG, "Fetch API Error: Code = " + response.code());
@@ -107,14 +111,7 @@ public class GenralMSG extends AppCompatActivity {
     }
 
     private void sendMessage(String remark) {
-        // MsgToAllRequest use karo, MessageTogenralRequest nahi
-        MsgToAllRequest request = new MsgToAllRequest(
-
-                s_id,
-                session,
-                college,
-                remark
-        );
+        MsgToAllRequest request = new MsgToAllRequest(s_id, session, college, remark);
 
         apiServices api = apiclient.getClient().create(apiServices.class);
         Call<MsgToAllResponse> call = api.sendMsgToAll(request);
@@ -131,6 +128,7 @@ public class GenralMSG extends AppCompatActivity {
                     item.setCdate("Now");
                     item.setCtime("");
 
+                    // ✅ list me add karo aur UI refresh karo
                     messageList.add(0, item);
                     adapter.notifyItemInserted(0);
                     recyclerView.scrollToPosition(0);

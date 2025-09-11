@@ -73,7 +73,7 @@
                 android:layout_marginBottom="16dp">
 
                 <LinearLayout
-                    android:id="@+id/Director"
+                    android:id="@+id/Genral"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Message to General"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                         android:layout_marginStart="16dp" />
                 </LinearLayout>
@@ -108,7 +108,7 @@
                 app:cardElevation="4dp">
 
                 <LinearLayout
-                    android:id="@+id/msg"
+                    android:id="@+id/Dmsg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -125,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Message To Director"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginStart="16dp" />
                 </LinearLayout>

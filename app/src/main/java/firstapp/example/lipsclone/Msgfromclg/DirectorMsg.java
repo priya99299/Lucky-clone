@@ -54,7 +54,7 @@ public class DirectorMsg extends AppCompatActivity {
         recyclerView = findViewById(R.id.directorMsgRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // ✅ Initialize adapter immediately to avoid crash
+        // Initialize adapter immediately to avoid crash
         adapter = new DirectorMsgAdapter(messageList);
         recyclerView.setAdapter(adapter);
 

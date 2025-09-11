@@ -136,7 +136,7 @@ public class LoginOTPActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<AppConfigResponse> call, Throwable t) {
-                        Toast.makeText(LoginOTPActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginOTPActivity.this, "Please Try Again ", Toast.LENGTH_LONG).show();
                     }
                 });
 

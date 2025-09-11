@@ -21,9 +21,7 @@
         <activity
             android:name=".calender.acadmicCalender"
             android:exported="false" />
-        <activity
-            android:name=".Msgfromclg.GenralMSG"
-            android:exported="false" />
+
 
         <activity
             android:name=".Library.Library"
@@ -93,8 +91,16 @@
             android:exported="false" />
         <activity
             android:name=".Msgfromclg.DirectorMsg"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:exported="false" />
+        <activity
+            android:name=".Msgfromclg.GenralMSG"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             android:exported="false" />
 
+<!--        <activity-->
+<!--            android:name=".Msgfromclg.GenralMSG"-->
+<!--            android:exported="false" />-->
 
 
         <activity
