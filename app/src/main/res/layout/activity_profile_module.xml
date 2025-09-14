@@ -136,15 +136,13 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
 
+
+                android:layout_marginTop="20dp"
 
                 app:cardBackgroundColor="@color/white"
-
+                android:layout_marginBottom="10dp"
                 app:strokeColor="@color/grey_200"
-
-
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -289,29 +287,28 @@
                         android:id="@+id/contact_info_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
                         android:text="Contact Information"
                         android:textColor="@color/black_87"
-                        android:textSize="11sp"
-                        android:paddingBottom="8dp" />
+                        android:textSize="11sp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/grey_200"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/grey_200" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingVertical="8dp"
-                        android:gravity="center_vertical">
+                        android:paddingVertical="8dp">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/contact"
-                            />
+                            android:src="@drawable/contact" />
 
                         <TextView
                             android:id="@+id/contact"
@@ -328,15 +325,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingVertical="8dp"
-                        android:gravity="center_vertical">
+                        android:paddingVertical="8dp">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/location"
-                            />
+                            android:src="@drawable/location" />
 
                         <TextView
                             android:id="@+id/address"
