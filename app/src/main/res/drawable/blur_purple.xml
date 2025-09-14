@@ -9,7 +9,7 @@
 
     <!-- Optional subtle border -->
     <stroke
-        android:width="3dp"
-        android:color="#efefff"/>
+        android:width="2.5dp"
+        android:color="#dadaff"/>
 
 </shape>
