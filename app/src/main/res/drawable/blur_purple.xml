@@ -10,6 +10,6 @@
     <!-- Optional subtle border -->
     <stroke
         android:width="4dp"
-        android:color="#CFCFFF"/>
+        android:color="#F2F2FF"/>
 
 </shape>
