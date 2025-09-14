@@ -24,21 +24,24 @@ public class DownloadAndOpenPDF {
                 return -1;
             }
 
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+            // Use consistent download folder
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
 
-
-            if (file.exists()) {
+            if (file.exists() && file.length() > 0) {
+                // File exists → open immediately
                 openPDF(context, file);
                 return -1;
             } else {
+                // File does not exist → download
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl));
-                request.setTitle("Downloading PDF...");
+                request.setTitle("Downloading " + filename + "...");
                 request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
                 DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
                 long downloadId = dm.enqueue(request);
 
+                // Only show toast for new download
                 Toast.makeText(context, "Downloading...", Toast.LENGTH_LONG).show();
 
                 // Auto-open after download completes
@@ -67,6 +70,7 @@ public class DownloadAndOpenPDF {
             return -1;
         }
     }
+
 
     // Direct open from URL
     public static void openDirectly(Context context, String fileUrl) {

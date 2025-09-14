@@ -199,7 +199,7 @@ public class Attendence_module extends AppCompatActivity {
                 Log.d(TAG, "Attendence api not called/ not lived");
                 t.printStackTrace();
                 disableButton();
-//                Toast.makeText(Attendence_module.this, "Please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Attendence_module.this, "Please try again", Toast.LENGTH_SHORT).show();
             }
         });
     }
