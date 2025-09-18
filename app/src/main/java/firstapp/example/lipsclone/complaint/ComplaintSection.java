@@ -157,7 +157,7 @@ public class ComplaintSection extends AppCompatActivity {
             @Override
             public void onFailure(Call<ComplaintSubmitResponse> call, Throwable t) {
                 Log.e(TAG, "Complaint Submit Failed: " + t.getMessage(), t);
-                Toast.makeText(ComplaintSection.this, "Network error", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ComplaintSection.this, "Network error", Toast.LENGTH_SHORT).show();
             }
         });
     }

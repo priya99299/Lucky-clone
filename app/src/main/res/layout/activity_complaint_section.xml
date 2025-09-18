@@ -214,33 +214,7 @@
                             android:maxLength="500" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Attachment -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:orientation="horizontal">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/attachFileButton"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Attach File"
-                            app:cornerRadius="12dp"
-                            app:icon="@drawable/ic_attach_file_24" />
-
-                        <TextView
-                            android:id="@+id/attachmentCountText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:text="0 files"
-                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                            android:textColor="@color/text_secondary" />
-                    </LinearLayout>
 
                     <!-- Submit Button -->
                     <com.google.android.material.button.MaterialButton
