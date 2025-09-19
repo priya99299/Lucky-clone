@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".dashboard">
 
     <!-- Fixed Header with Wave Background -->
@@ -146,6 +147,7 @@
                 <ImageView
                     android:layout_width="38dp"
                     android:layout_height="32dp"
+                    android:contentDescription="TODO"
                     android:src="@drawable/profile" />
 
                 <TextView
