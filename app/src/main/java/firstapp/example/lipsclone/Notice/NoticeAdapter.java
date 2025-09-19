@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
 import java.util.List;
 
 import firstapp.example.lipsclone.Documents.DownloadAndOpenPDF;
@@ -45,7 +47,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         Log.d(TAG, "Binding notice: " + notice.title + " -> " + notice.description);
 
         holder.title.setText(notice.title);
-
         holder.icon.setOnClickListener(v -> {
             String url = notice.description;
 
@@ -60,9 +61,23 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             }
 
             String filename = notice.title.replaceAll("\\s+", "_") + ".pdf";
-            DownloadAndOpenPDF.downloadAndOpen(context, url, filename, "notice");
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
 
+            try {
+                if (file.exists()) {
+                    // File exists → open directly
+                    DownloadAndOpenPDF.openPDF(context, file);
+                } else {
+                    // File doesn't exist → open via URL first, then download
+                    DownloadAndOpenPDF.openDirectly(context, url);
+                    DownloadAndOpenPDF.downloadAndOpen(context, url, filename, "notice");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Error opening file", Toast.LENGTH_SHORT).show();
+            }
         });
+
 
     }
 
