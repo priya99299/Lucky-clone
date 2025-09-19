@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_background"
+    android:background="#F6f5ff"
     tools:context=".calender.acadmicCalender">
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
