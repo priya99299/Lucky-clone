@@ -74,7 +74,9 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+
+       >
 
             <TextView
                 android:layout_width="0dp"
@@ -83,7 +85,8 @@
                 android:text="NAME"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
-                android:gravity="center"
+                android:paddingStart="24dp"
+
                 android:fontFamily="sans-serif-medium" />
 
             <TextView
@@ -93,8 +96,9 @@
                 android:text="View"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:fontFamily="sans-serif-medium" />
+                android:paddingStart="22dp"
+
+               android:fontFamily="sans-serif-medium" />
 
 
         </LinearLayout>
