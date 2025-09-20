@@ -1,0 +1,15 @@
+<!-- res/drawable/blur_purple.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#CFCFFF"/>
+
+    <!-- Rounded corners -->
+    <corners android:radius="16dp"/>
+
+    <!-- Optional subtle border -->
+    <stroke
+        android:width="4dp"
+        android:color="#CFCFFF"/>
+
+</shape>
