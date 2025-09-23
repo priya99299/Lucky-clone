@@ -3,6 +3,7 @@
     import android.content.Intent;
     import android.content.IntentSender;
     import android.content.SharedPreferences;
+    import android.net.Uri;
     import android.os.Bundle;
     import android.util.Log;
     import android.view.View;
@@ -78,7 +79,7 @@
             ImageView ProfilePic;
             TextView name, Session, year;
             LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice, timetable, Lecturees, contact, attendence, complaint, msg,
-                    Library,calender,Result;
+                    Library,calender,Result,Events;
             Button btn;
 
             document = findViewById(R.id.document);
@@ -102,7 +103,8 @@
             msg = findViewById(R.id.messageSection);
             Library = findViewById(R.id.Library);
             calender=findViewById(R.id.calender);
-            Result=findViewById(R.id.Result);
+//            Result=findViewById(R.id.Result);
+            Events=findViewById(R.id.Events);
             // SharedPreferences
             SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -294,11 +296,20 @@
                     startActivity(Information);
                 }
             });
-            Result.setOnClickListener(new View.OnClickListener() {
+//            Result.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent result = new Intent(dashboard.this, Result.class);
+//                    startActivity(result);
+//                }
+//            });
+
+            Events.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent result = new Intent(dashboard.this, Result.class);
-                    startActivity(result);
+                    String url = "https://erp.luckyinstitute.org/api/mobileApp/moreMenu/index.php?sid=10707";
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
                 }
             });
 

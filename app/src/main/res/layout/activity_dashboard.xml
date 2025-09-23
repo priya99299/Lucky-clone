@@ -478,7 +478,7 @@
 
             <!-- Result -->
             <LinearLayout
-                android:id="@+id/Result"
+                android:id="@+id/Events"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_columnWeight="1"
@@ -493,19 +493,50 @@
                 <ImageView
                     android:layout_width="38dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/result" />
+                    android:src="@drawable/event" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Result"
+                    android:text="More"
                     android:textSize="13sp"
                     android:textColor="@color/dark_grey"
                     android:maxLines="2"
                     android:ellipsize="end" />
             </LinearLayout>
+
+<!--            &lt;!&ndash; Result &ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/Result"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_margin="6dp"-->
+<!--                android:padding="8dp"-->
+<!--                android:orientation="vertical"-->
+<!--                android:gravity="center"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:background="?android:attr/selectableItemBackground">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="38dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:src="@drawable/result" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="Result"-->
+<!--                    android:textSize="13sp"-->
+<!--                    android:textColor="@color/dark_grey"-->
+<!--                    android:maxLines="2"-->
+<!--                    android:ellipsize="end" />-->
+<!--            </LinearLayout>-->
 
             <!-- Row 5 -->
             <!-- Message -->
