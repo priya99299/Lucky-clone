@@ -67,20 +67,17 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DownloadItem item = documentList.get(position);
-        holder.docName.setText(item.getTitle()); // Set the document title
+        holder.docName.setText(item.getTitle());
 
-        // Set an OnClickListener for the download/open button
         holder.fileUrl.setOnClickListener(v -> {
-            String fileUrl = item.getFile(); // Get the URL of the file
+            String fileUrl = item.getFile();
             if (fileUrl == null || fileUrl.trim().isEmpty()) {
                 Toast.makeText(context, "File not uploaded yet", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             String lowerUrl = fileUrl.toLowerCase();
-            // Sanitize filename
             String filename = item.getTitle().replaceAll("[^a-zA-Z0-9.-]", "_");
-
             File file;
             String mimeType;
 
@@ -103,28 +100,27 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                     mimeType = getMimeType(filename);
 
                 } else {
-                    Toast.makeText(context, "Unsupported file type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Please try again", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // ---------- NEW LOGIC ----------
+                // ✅ Always check & open immediately if already downloaded
                 if (file.exists() && file.length() > 0) {
-                    // File exists → open immediately
                     openFile(file);
                 } else {
-                    // File doesn't exist → download & auto-open after completion
+                    // Download first, then auto-open via BroadcastReceiver
                     long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
-                    downloadMap.put(downloadId, file); // Track this download
+                    downloadMap.put(downloadId, file);
                     Toast.makeText(context, "Downloading file...", Toast.LENGTH_SHORT).show();
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Error processing file: " + e.getMessage(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Error processing file: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
+
 
     /**
      * Handles opening an existing file or initiating a download if the file doesn't exist locally.
