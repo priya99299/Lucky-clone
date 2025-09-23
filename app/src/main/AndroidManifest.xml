@@ -16,16 +16,19 @@
         android:theme="@style/Theme.LipsClone"
         tools:targetApi="31">
         <activity
+            android:name=".events.Events"
+            android:exported="false"
+            android:theme="@style/Theme.LipsClone" />
+        <activity
             android:name=".result.Result"
             android:exported="false" />
         <activity
             android:name=".calender.acadmicCalender"
             android:exported="false" />
-
-
         <activity
             android:name=".Library.Library"
             android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -35,9 +38,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
-
 
         <activity
             android:name=".complaint.TrackComplaintActivity"
@@ -76,7 +76,6 @@
         <activity
             android:name=".Downloads.Downloads"
             android:exported="false" />
-
         <activity
             android:name=".LoginActivty.LoginOTPActivity"
             android:exported="false" />
@@ -91,18 +90,14 @@
             android:exported="false" />
         <activity
             android:name=".Msgfromclg.DirectorMsg"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".Msgfromclg.GenralMSG"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:exported="false" />
-
-<!--        <activity-->
-<!--            android:name=".Msgfromclg.GenralMSG"-->
-<!--            android:exported="false" />-->
-
-
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" /> <!-- <activity -->
+        <!-- android:name=".Msgfromclg.GenralMSG" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -46,6 +46,7 @@
     import firstapp.example.lipsclone.Profile.Profile_module;
     import firstapp.example.lipsclone.calender.acadmicCalender;
     import firstapp.example.lipsclone.complaint.ComplaintSection;
+    import firstapp.example.lipsclone.events.Events;
     import firstapp.example.lipsclone.fees.fees_Details;
     import firstapp.example.lipsclone.result.Result;
     import firstapp.example.lipsclone.timeTable.Time_table;
@@ -79,7 +80,7 @@
             ImageView ProfilePic;
             TextView name, Session, year;
             LinearLayout profile, Stuattendence, document, notes, canteenn, feesDetails, Notice, timetable, Lecturees, contact, attendence, complaint, msg,
-                    Library,calender,Result,Events;
+                    Library,calender,Result,Event;
             Button btn;
 
             document = findViewById(R.id.document);
@@ -104,7 +105,7 @@
             Library = findViewById(R.id.Library);
             calender=findViewById(R.id.calender);
 //            Result=findViewById(R.id.Result);
-            Events=findViewById(R.id.Events);
+            Event=findViewById(R.id.Events);
             // SharedPreferences
             SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -304,12 +305,19 @@
 //                }
 //            });
 
-            Events.setOnClickListener(new View.OnClickListener() {
+            Event.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String url = "https://erp.luckyinstitute.org/api/mobileApp/moreMenu/index.php?sid=10707";
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent);
+//                    String url = "https://erp.luckyinstitute.org/api/mobileApp/moreMenu/index.php";
+//
+//
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//
+//                    startActivity(intent);
+                    Intent Info = new Intent(dashboard.this, Events.class);
+                    Info.putExtra("s_id",studentId );
+                    startActivity(Info);
+
                 }
             });
 

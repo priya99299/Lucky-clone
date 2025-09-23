@@ -4,5 +4,10 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorOnPrimary">@color/black</item>
     </style>
+  <!-- Base application theme. -->
+    <style name="Base.Theme.LipsClone" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
 
 </resources>
