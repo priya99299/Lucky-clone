@@ -53,6 +53,6 @@ public class Events extends AppCompatActivity {
 
         }
 
-//        Log.d(TAG, "Intent  " + url);
+
     }
 }
