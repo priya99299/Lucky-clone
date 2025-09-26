@@ -41,12 +41,12 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         return new NoticeViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull NoticeViewHolder holder, int position) {
         Notice_Reponse.Notice notice = noticeList.get(position);
-        Log.d(TAG, "Binding notice: " + notice.title + " -> " + notice.description);
-
         holder.title.setText(notice.title);
+
         holder.icon.setOnClickListener(v -> {
             String url = notice.description;
 
@@ -60,26 +60,33 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
                 return;
             }
 
-            String filename = notice.title.replaceAll("\\s+", "_") + ".pdf";
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
+            // filename को safe बनाओ
+            String filename = notice.title.replaceAll("[^a-zA-Z0-9_]", "_") + ".pdf";
+            File file = new File(
+                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                    filename
+            );
 
             try {
                 if (file.exists()) {
-                    // File exists → open directly
+                    // 👉 Already downloaded → open directly
                     DownloadAndOpenPDF.openPDF(context, file);
                 } else {
-                    // File doesn't exist → open via URL first, then download
+                    // 👉 First open immediately from URL
                     DownloadAndOpenPDF.openDirectly(context, url);
+
+                    // 👉 Then download for offline use next time
                     DownloadAndOpenPDF.downloadAndOpen(context, url, filename, "notice");
                 }
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(context, "No app found to open PDF", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Error opening file", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error opening notice", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
+
 
     @Override
     public int getItemCount() {

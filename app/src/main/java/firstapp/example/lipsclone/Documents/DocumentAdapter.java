@@ -47,23 +47,29 @@
                 String status = document.getStatus();
 
                 if ("Pending".equalsIgnoreCase(status)) {
-                    Toast.makeText(context, "Pending ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Pending", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 String fileUrl = document.getFile();
                 String filename = document.getDocname() + ".pdf";
-                File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), s_id + "_" + filename);
+                File file = new File(
+                        context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                        s_id + "_" + filename
+                );
 
                 if (file.exists()) {
-
+                    //  If already downloaded → open local file
                     DownloadAndOpenPDF.openPDF(context, file);
                 } else {
-
+                    //  First open directly (URL), so user sees immediately
                     DownloadAndOpenPDF.openDirectly(context, fileUrl);
+
+                    //  Start background download for next time
                     DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename, s_id);
                 }
             });
+
 
         }
 
