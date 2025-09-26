@@ -104,15 +104,16 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                     return;
                 }
 
-                // ✅ Always check & open immediately if already downloaded
                 if (file.exists() && file.length() > 0) {
                     openFile(file);
                 } else {
-                    // Download first, then auto-open via BroadcastReceiver
+
                     long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
                     downloadMap.put(downloadId, file);
-                    Toast.makeText(context, "Downloading file...", Toast.LENGTH_SHORT).show();
+
+
                 }
+
 
             } catch (Exception e) {
                 e.printStackTrace();
