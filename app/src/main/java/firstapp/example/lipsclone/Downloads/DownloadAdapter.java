@@ -111,13 +111,27 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                 } else {
                     // 🔹 For PDF/Images → can open immediately from URL
                     if (mimeType.equals("application/pdf") || mimeType.startsWith("image/")) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.parse(fileUrl), mimeType);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        files are opening on single click and opening with dialog
+//                        String mimeType = getMimeType(file.getName());
+                        Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
 
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, mimeType);
+                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                        // Wrap the intent in a chooser to show "Open with" dialog
                         Intent chooser = Intent.createChooser(intent, "Open with");
                         chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(chooser);
+
+
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        intent.setDataAndType(Uri.parse(fileUrl), mimeType);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                        Intent chooser = Intent.createChooser(intent, "Open with");
+//                        chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        context.startActivity(chooser);
 
                         // Start download in background
                         long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
@@ -125,6 +139,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                         Toast.makeText(context, "Downloading in background...", Toast.LENGTH_SHORT).show();
 
                     } else {
+
                         // 🔹 For Office files → download first
                         long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
                         downloadMap.put(downloadId, file);
@@ -135,7 +150,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
