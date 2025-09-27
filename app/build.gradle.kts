@@ -9,6 +9,7 @@ android {
     defaultConfig {
         applicationId = "firstapp.example.lipsclone"
         minSdk = 28
+        //noinspection OldTargetApi
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -50,25 +51,28 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation ("androidx.gridlayout:gridlayout:1.0.0")
-    implementation ("com.google.android.material:material:1.12.0")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
-    implementation ("org.osmdroid:osmdroid-android:6.1.11")
+    implementation(libs.cardview)
+    //noinspection UseTomlInstead
+    implementation ("androidx.constraintlayout:constraintlayout:2.2.1")
+    implementation (libs.gridlayout)
+    implementation (libs.material.v1130)
+    //noinspection UseTomlInstead
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation (libs.logging.interceptor)
+    implementation (libs.glide)
+    implementation (libs.play.services.maps)
+    implementation (libs.osmdroid.android)
 
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("org.osmdroid:osmdroid-android:6.1.16")
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation(libs.okhttp)
+    implementation(libs.osmdroid.android)
+    implementation (libs.play.services.maps)
 
 
 
+    //noinspection UseTomlInstead
     implementation ("com.google.android.play:app-update:2.1.0")
 
 

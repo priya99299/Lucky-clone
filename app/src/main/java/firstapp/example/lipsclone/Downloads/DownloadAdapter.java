@@ -64,6 +64,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DownloadItem item = documentList.get(position);
@@ -100,27 +101,45 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                     mimeType = getMimeType(filename);
 
                 } else {
-                    Toast.makeText(context, "Please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Unsupported file type", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (file.exists() && file.length() > 0) {
+                    // 🔹 Already downloaded → open directly
                     openFile(file);
                 } else {
+                    // 🔹 For PDF/Images → can open immediately from URL
+                    if (mimeType.equals("application/pdf") || mimeType.startsWith("image/")) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(Uri.parse(fileUrl), mimeType);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                    long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
-                    downloadMap.put(downloadId, file);
+                        Intent chooser = Intent.createChooser(intent, "Open with");
+                        chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(chooser);
 
+                        // Start download in background
+                        long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
+                        downloadMap.put(downloadId, file);
+                        Toast.makeText(context, "Downloading in background...", Toast.LENGTH_SHORT).show();
 
+                    } else {
+                        // 🔹 For Office files → download first
+                        long downloadId = downloadFile(fileUrl, filename, getDirectory(file));
+                        downloadMap.put(downloadId, file);
+                        Toast.makeText(context, "Downloading file...", Toast.LENGTH_SHORT).show();
+                        // Will auto-open after download via BroadcastReceiver
+                    }
                 }
-
 
             } catch (Exception e) {
                 e.printStackTrace();
-//                Toast.makeText(context, "Error processing file: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
+
 
 
     /**
