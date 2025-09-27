@@ -1,5 +1,6 @@
     package firstapp.example.lipsclone.Documents;
 
+    import android.content.ActivityNotFoundException;
     import android.content.Context;
     import android.os.Environment;
     import android.view.LayoutInflater;
@@ -58,16 +59,28 @@
                         s_id + "_" + filename
                 );
 
+                try {
+
                 if (file.exists()) {
                     //  If already downloaded → open local file
                     DownloadAndOpenPDF.openPDF(context, file);
                 } else {
+
                     //  First open directly (URL), so user sees immediately
-                    DownloadAndOpenPDF.openDirectly(context, fileUrl);
+                    DownloadAndOpenPDF.openDirectlyDocuments(context, file, fileUrl);
 
                     //  Start background download for next time
-                    DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename, s_id);
+                    DownloadAndOpenPDF.downloadAndOpen(context, fileUrl, filename,"documents");
+
+//                    DownloadAndOpenPDF.openPDF(context, file);
+
                 }
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(context, "No app found to open PDF", Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+//                Toast.makeText(context, "Error opening notice", Toast.LENGTH_SHORT).show();
+            }
             });
 
 

@@ -73,7 +73,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
                     DownloadAndOpenPDF.openPDF(context, file);
                 } else {
                     // 👉 First open immediately from URL
-                    DownloadAndOpenPDF.openDirectly(context, url);
+                    DownloadAndOpenPDF.openDirectlyNotice(context, file);
 
                     // 👉 Then download for offline use next time
                     DownloadAndOpenPDF.downloadAndOpen(context, url, filename, "notice");

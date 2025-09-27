@@ -71,17 +71,61 @@ public class DownloadAndOpenPDF {
         }
     }
 
-
-    // Direct open from URL
-    public static void openDirectly(Context context, String fileUrl) {
+    public static void openDirectlyNotice(Context context, File file) {
         try {
+            Uri uri = FileProvider.getUriForFile(
+                    context,
+                    context.getPackageName() + ".provider",
+                    file
+            );
+
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse(fileUrl), "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            context.startActivity(intent);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            context.startActivity(Intent.createChooser(intent, "Open PDF"));
+
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setDataAndType(Uri.parse(fileUrl), "application/pdf");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            context.startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(context, "No PDF app found. Please install a PDF viewer.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    // Direct open from URL
+    public static void openDirectlyDocuments(Context context, File file, String fileUrl) {
+        try {
+            Uri uri = FileProvider.getUriForFile(
+                    context,
+                    context.getPackageName() + ".provider",
+                    file
+            );
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(Intent.createChooser(intent, "Open PDF"));
+//            context.startActivity(intent);
+
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setDataAndType(Uri.parse(fileUrl), "application/pdf");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "No PDF app found. Please install a PDF viewer.", Toast.LENGTH_LONG).show();
+        }
+
+//        try {
+//
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setDataAndType(Uri.parse(fileUrl), "application/pdf");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            context.startActivity(Intent.createChooser(intent, "Open PDF"));
+////            context.startActivity(intent);
+//        } catch (Exception e) {
+//            Toast.makeText(context, "No PDF app found. Please install a PDF viewer.", Toast.LENGTH_LONG).show();
+//        }
     }
 
     // Open local PDF
